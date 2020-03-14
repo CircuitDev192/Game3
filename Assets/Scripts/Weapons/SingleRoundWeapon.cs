@@ -6,26 +6,19 @@ public class SingleRoundWeapon : WeaponBase
 {
     public LineRenderer lineRenderer;
 
-    public override IEnumerator Fire()
+    public override IEnumerator Fire(Transform directionTransform)
     {
         yield return new WaitForSeconds(fireAnimationStartDelay);
 
         roundsInCurrentMag--;
         EventManager.TriggerAmmoCountChanged(roundsInCurrentMag);
 
-        Vector3 angles = shotOrigin.eulerAngles;
-        angles.x = 0;
-        angles.z = 0;
-        shotOrigin.eulerAngles = angles;
-
-        Vector3 direction = shotOrigin.forward;
-
         RaycastHit hitInfo;
 
         float distance = range;
 
         // Did we hit anything?
-        if (Physics.Raycast(shotOrigin.position, direction, out hitInfo))
+        if (Physics.Raycast(directionTransform.position, directionTransform.forward, out hitInfo))
         {
             if (hitInfo.distance < range)
             {
@@ -49,12 +42,14 @@ public class SingleRoundWeapon : WeaponBase
             }
         }
 
+        Vector3 newDirection = (hitInfo.point - shotOrigin.position).normalized;
+
         // Calculate the random position of the bullet trail
         float trailStartOffsetDistance = Random.Range(0, distance - distance / 4f);
-        Vector3 trailStart = shotOrigin.position + direction * trailStartOffsetDistance;
+        Vector3 trailStart = shotOrigin.position + newDirection * trailStartOffsetDistance;
 
         float trailEndOffsetDistance = Random.Range(distance / 4f, Mathf.Min(distance / 2f, distance - trailStartOffsetDistance));
-        Vector3 trailEnd = trailStart + direction * trailEndOffsetDistance;
+        Vector3 trailEnd = trailStart + newDirection * trailEndOffsetDistance;
 
         lineRenderer.SetPosition(0, trailStart);
         lineRenderer.SetPosition(1, trailEnd);
