@@ -5,9 +5,8 @@ using UnityEngine;
 public class MultiRoundWeapon : WeaponBase
 {
     public LineRenderer[] lineRenderers;
-    public float spreadAngle;
     public float variance = 1f;
-    public float distance = 10f;
+    public float varaianceDistance = 10f;
 
     public override IEnumerator Fire(Transform directionTransform)
     {
@@ -21,7 +20,7 @@ public class MultiRoundWeapon : WeaponBase
             Vector3 offset = Random.Range(0f, variance) * directionTransform.up;
             offset = Quaternion.AngleAxis(Random.Range(0f, 360f), directionTransform.forward) * offset;
 
-            Vector3 point = directionTransform.forward * this.distance + offset;
+            Vector3 point = directionTransform.position + directionTransform.forward * this.varaianceDistance + offset;
 
             Vector3 newDirection = (point - directionTransform.position).normalized;
 
