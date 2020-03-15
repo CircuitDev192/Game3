@@ -68,7 +68,7 @@ public abstract class WeaponBase : MonoBehaviour
     public int totalAmmo;
     public FireMode currentFireMode;
 
-    public abstract IEnumerator Fire();
+    public abstract IEnumerator Fire(Transform directionTransform);
     
     public void Reload()
     {

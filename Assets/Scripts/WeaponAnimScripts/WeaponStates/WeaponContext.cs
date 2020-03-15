@@ -24,10 +24,14 @@ public class WeaponContext : Context<WeaponContext>
 
     public float currentScrollDelta;
 
+    public Camera mainCamera;
+
     #endregion
 
     public override void InitializeContext()
     {
+        mainCamera = Camera.main;
+
         currentState = idleState;
         currentState.EnterState(this);
 

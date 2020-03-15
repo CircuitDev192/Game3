@@ -31,7 +31,7 @@ public class WeaponFireState : WeaponBaseState
             if (weapon.roundsInCurrentMag > 0)
             {
                 // Delegate firing to the weapon
-                context.StartCoroutine(weapon.Fire());
+                context.StartCoroutine(weapon.Fire(context.mainCamera.transform));
                 nextShotTime = Time.time + weapon.fireRate;
             }
             // No ammo in mag, reload

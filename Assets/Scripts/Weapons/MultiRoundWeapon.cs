@@ -5,35 +5,31 @@ using UnityEngine;
 public class MultiRoundWeapon : WeaponBase
 {
     public LineRenderer[] lineRenderers;
-    public float spreadAngle;
+    public float variance = 1f;
+    public float varaianceDistance = 10f;
 
-    public override IEnumerator Fire()
+    public override IEnumerator Fire(Transform directionTransform)
     {
         yield return new WaitForSeconds(fireAnimationStartDelay);
 
         roundsInCurrentMag--;
         EventManager.TriggerAmmoCountChanged(roundsInCurrentMag);
 
-        Vector3 angles = shotOrigin.eulerAngles;
-        angles.x = 0;
-        angles.z = 0;
-        shotOrigin.eulerAngles = angles;
-
-        float anglePerPellet = spreadAngle / lineRenderers.Length;
-        float pelletAngleOffset = angles.y - spreadAngle / 2f;
-
         for(int i = 0; i < lineRenderers.Length; i++)
         {
-            float angle = pelletAngleOffset + i * anglePerPellet;
+            Vector3 offset = Random.Range(0f, variance) * directionTransform.up;
+            offset = Quaternion.AngleAxis(Random.Range(0f, 360f), directionTransform.forward) * offset;
 
-            Vector3 direction = Quaternion.AngleAxis(angle, Vector3.up) * Vector3.forward;
+            Vector3 point = directionTransform.position + directionTransform.forward * this.varaianceDistance + offset;
+
+            Vector3 newDirection = (point - directionTransform.position).normalized;
 
             RaycastHit hitInfo;
 
             float distance = range;
 
             // Did we hit anything?
-            if (Physics.Raycast(shotOrigin.position, direction, out hitInfo))
+            if (Physics.Raycast(directionTransform.position, newDirection, out hitInfo))
             {
                 if (hitInfo.distance < range)
                 {
@@ -57,14 +53,16 @@ public class MultiRoundWeapon : WeaponBase
                 }
             }
 
+            Vector3 directionFromGun = (hitInfo.point - shotOrigin.position).normalized;
+
             LineRenderer lineRenderer = lineRenderers[i];
 
             // Calculate the random position of the bullet trail
             float trailStartOffsetDistance = Random.Range(0, distance - distance / 4f);
-            Vector3 trailStart = shotOrigin.position + direction * trailStartOffsetDistance;
+            Vector3 trailStart = shotOrigin.position + directionFromGun * trailStartOffsetDistance;
 
             float trailEndOffsetDistance = Random.Range(distance / 4f, Mathf.Min(distance / 2f, distance - trailStartOffsetDistance));
-            Vector3 trailEnd = trailStart + direction * trailEndOffsetDistance;
+            Vector3 trailEnd = trailStart + directionFromGun * trailEndOffsetDistance;
 
             lineRenderer.SetPosition(0, trailStart);
             lineRenderer.SetPosition(1, trailEnd);
