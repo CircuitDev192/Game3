@@ -43,6 +43,9 @@ public class FirstPersonMovement : MonoBehaviour
     private AudioSource m_AudioSource;
     private PlayerSoundSync playerSoundSync;
 
+    [SerializeField]
+    private Transform headJoint;
+
     // Use this for initialization
     private void Start()
     {
@@ -83,6 +86,9 @@ public class FirstPersonMovement : MonoBehaviour
         }
 
         m_PreviouslyGrounded = m_CharacterController.isGrounded;
+
+        //Keep Camera located above the head joint of the player
+        m_Camera.transform.position = headJoint.position + new Vector3(0, 0.5f, 0);
     }
 
 
