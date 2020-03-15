@@ -33,7 +33,7 @@ public class PlayerAnimFSM : MonoBehaviour
     {
         cameraAngle = playerCam.transform.rotation.eulerAngles.x;
         cameraAngle = (cameraAngle > 180) ? (cameraAngle - 360)/90f : cameraAngle/90f;
-        playerAnimator.SetFloat("Head_Vertical_f", -cameraAngle);
+        playerAnimator.SetFloat("Body_Vertical_f", -cameraAngle);
 
         currentState.Update(this);
     }

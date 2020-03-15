@@ -95,9 +95,10 @@ public abstract class WeaponBase : MonoBehaviour
     public void SetIdleValues(Animator playerAnimator)
     {
         playerAnimator.SetFloat("Head_Horizontal_f", idleHeadHorizontal);
+        playerAnimator.SetFloat("Head_Vertical_f", idleHeadVertical);
 
         playerAnimator.SetFloat("Body_Horizontal_f", idleBodyHorizontal);
-        playerAnimator.SetFloat("Body_Vertical_f", idleBodyVertical);
+        //playerAnimator.SetFloat("Body_Vertical_f", idleBodyVertical);
 
         playerAnimator.SetBool("FullAuto_b", fullAuto);
     }
@@ -105,9 +106,10 @@ public abstract class WeaponBase : MonoBehaviour
     public void SetWalkValues(Animator playerAnimator)
     {
         playerAnimator.SetFloat("Head_Horizontal_f", walkHeadHorizontal);
+        playerAnimator.SetFloat("Head_Vertical_f", walkHeadVertical);
 
         playerAnimator.SetFloat("Body_Horizontal_f", walkBodyHorizontal);
-        playerAnimator.SetFloat("Body_Vertical_f", walkBodyVertical);
+        //playerAnimator.SetFloat("Body_Vertical_f", walkBodyVertical);
 
         playerAnimator.SetBool("FullAuto_b", fullAuto);
     }
@@ -115,9 +117,10 @@ public abstract class WeaponBase : MonoBehaviour
     public void SetRunValues(Animator playerAnimator)
     {
         playerAnimator.SetFloat("Head_Horizontal_f", runHeadHorizontal);
+        playerAnimator.SetFloat("Head_Vertical_f", runHeadVertical);
 
         playerAnimator.SetFloat("Body_Horizontal_f", runBodyHorizontal);
-        playerAnimator.SetFloat("Body_Vertical_f", runBodyVertical);
+        //playerAnimator.SetFloat("Body_Vertical_f", runBodyVertical);
 
         playerAnimator.SetBool("FullAuto_b", fullAuto);
     }
