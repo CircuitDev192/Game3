@@ -60,7 +60,6 @@ public abstract class WeaponBase : MonoBehaviour
 
     #endregion
 
-    public WeaponSoundSync weaponSoundSync;
     public AudioSource audioSource;
     public AudioClip[] audioClips;
 
@@ -86,7 +85,6 @@ public abstract class WeaponBase : MonoBehaviour
         //}
 
         audioSource.PlayOneShot(audioClips[1], 0.25f);
-        //weaponSoundSync.PlaySound(1);
         roundsInCurrentMag = roundsPerMag;
 
         EventManager.TriggerAmmoCountChanged(roundsInCurrentMag);

@@ -7,7 +7,6 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(AudioSource))]
-[RequireComponent(typeof(PlayerSoundSync))]
 public class FirstPersonMovement : MonoBehaviour
 {
     [SerializeField] private bool m_IsWalking;
@@ -41,7 +40,6 @@ public class FirstPersonMovement : MonoBehaviour
     private float m_NextStep;
     private bool m_Jumping;
     private AudioSource m_AudioSource;
-    private PlayerSoundSync playerSoundSync;
 
     [SerializeField]
     private Transform headJoint;
@@ -59,7 +57,6 @@ public class FirstPersonMovement : MonoBehaviour
         m_Jumping = false;
         m_AudioSource = GetComponent<AudioSource>();
         m_MouseLook.Init(transform, m_Camera.transform);
-        playerSoundSync = GetComponent<PlayerSoundSync>();
     }
 
 
@@ -95,8 +92,7 @@ public class FirstPersonMovement : MonoBehaviour
     private void PlayLandingSound()
     {
         m_AudioSource.clip = m_LandSound;
-        //m_AudioSource.Play();
-        playerSoundSync.PlayLanding();
+        m_AudioSource.Play();
         m_NextStep = m_StepCycle + .5f;
     }
 
@@ -146,8 +142,7 @@ public class FirstPersonMovement : MonoBehaviour
     private void PlayJumpSound()
     {
         m_AudioSource.clip = m_JumpSound;
-        //m_AudioSource.Play();
-        playerSoundSync.PlayJumping();
+        m_AudioSource.Play();
     }
 
 
@@ -180,8 +175,7 @@ public class FirstPersonMovement : MonoBehaviour
         // excluding sound at index 0
         int n = Random.Range(1, m_FootstepSounds.Length);
         m_AudioSource.clip = m_FootstepSounds[n];
-        //m_AudioSource.PlayOneShot(m_AudioSource.clip, 0.2f);
-        playerSoundSync.PlayFootStep(n);
+        m_AudioSource.PlayOneShot(m_AudioSource.clip, 0.2f);
 
         // move picked sound to index 0 so it's not picked next time
         m_FootstepSounds[n] = m_FootstepSounds[0];
