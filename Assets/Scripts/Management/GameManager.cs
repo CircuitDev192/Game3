@@ -5,35 +5,37 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private Texture2D cursor;
+    #region Fields
 
-    private int zombiesEliminated;
+    [SerializeField] private GameObject[] managerPrefabs;
+    private List<GameObject> managers;
+
+    #endregion
+
+    private void Awake()
+    {
+        managers = new List<GameObject>();
+
+        foreach (GameObject manager in managerPrefabs)
+        {
+            managers.Add(Instantiate(manager));
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.SetCursor(cursor, new Vector2(cursor.width / 2f, cursor.height / 2f), CursorMode.Auto);
-        zombiesEliminated = 0;
 
-        EventManager.ZombieKilled += ZombieEliminated;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
     {
-        
-    }
 
-    private void ZombieEliminated()
-    {
-        zombiesEliminated++;
-        EventManager.TriggerScoreChanged(zombiesEliminated);
     }
 }
