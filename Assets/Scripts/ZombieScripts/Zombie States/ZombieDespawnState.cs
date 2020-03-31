@@ -6,6 +6,7 @@ public class ZombieDespawnState : ZombieBaseState
 {
     public override void EnterState(ZombieContext context)
     {
+        Debug.Log("Zombie entered Despawn state!");
         EventManager.TriggerZombieShouldDespawn(context.gameObject);
     }
 

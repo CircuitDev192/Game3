@@ -43,7 +43,7 @@ public class SpawnManager : MonoBehaviour
 
     private void HandleSpawning()
     {
-        Debug.Log("Zombies: " + zombies.Count.ToString());
+        //Debug.Log("Zombies: " + zombies.Count.ToString());
         if (zombies.Count >= maxZombies) return;
 
         List<GameObject> validSpawns = new List<GameObject>();
@@ -57,7 +57,7 @@ public class SpawnManager : MonoBehaviour
 
         if (validSpawns.Count == 0)
         {
-            Debug.Log("No valid spawns found!");
+            //Debug.Log("No valid spawns found!");
             return;
         }
 
@@ -72,7 +72,7 @@ public class SpawnManager : MonoBehaviour
 
         Vector3 spawnLoc = validSpawns[index].transform.position;
         spawnLoc.x += xOffset;
-        spawnLoc.y += 0.5f;
+        //spawnLoc.y += 0.5f;
         spawnLoc.z += zOffset;
 
         //NavMeshHit hitInfo;
@@ -82,11 +82,11 @@ public class SpawnManager : MonoBehaviour
 
         if (Physics.CheckBox(spawnLoc, new Vector3(0.25f, 0.5f, 0.25f)))
         {
-            Debug.Log("Physics check failed for spawn!");
+            //Debug.Log("Physics check failed for spawn!");
             return;
         }
 
         zombies.Add(Instantiate(zombiePrefabs[Random.Range(0, zombiePrefabs.Length)], spawnLoc, Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0)));
-        Debug.Log("Zombie spawned successfully!");
+        //Debug.Log("Zombie spawned successfully!");
     }
 }

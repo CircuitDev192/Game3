@@ -22,6 +22,7 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
 
     // Movement variables
     public NavMeshAgent zombieNavMeshAgent;
+    public float epsilon = 0.1f;
     public float walkSpeed;
     public float minimumRunSpeed;
     public float maximumRunSpeed;
