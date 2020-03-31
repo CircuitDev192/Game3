@@ -25,6 +25,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
+        player = PlayerManager.instance.player;
         EventManager.zombieShouldDespawn += DespawnZombie;
     }
 
@@ -47,38 +48,45 @@ public class SpawnManager : MonoBehaviour
 
         List<GameObject> validSpawns = new List<GameObject>();
 
-        foreach(GameObject spawnPoint in spawnPoints)
+        foreach (GameObject spawnPoint in spawnPoints)
         {
             float dist = Vector3.Distance(player.transform.position, spawnPoint.transform.position);
 
             if (dist > minSpawnDistance && dist < maxSpawnDistance) validSpawns.Add(spawnPoint);
         }
 
-        if (validSpawns.Count == 0) return;
+        if (validSpawns.Count == 0)
+        {
+            Debug.Log("No valid spawns found!");
+            return;
+        }
 
         int index = 0;
         float xOffset = 0;
         float zOffset = 0;
 
-        while(zombies.Count < maxZombies)
+
+        index = Random.Range(0, validSpawns.Count);
+        xOffset = Random.Range(-spawnRadius, spawnRadius);
+        zOffset = Random.Range(-spawnRadius, spawnRadius);
+
+        Vector3 spawnLoc = validSpawns[index].transform.position;
+        spawnLoc.x += xOffset;
+        spawnLoc.y += 0.5f;
+        spawnLoc.z += zOffset;
+
+        //NavMeshHit hitInfo;
+        //if (!NavMesh.SamplePosition(spawnLoc, out hitInfo, spawnRadius, NavMesh.AllAreas)) continue;
+
+        //spawnLoc = hitInfo.position;
+
+        if (Physics.CheckBox(spawnLoc, new Vector3(0.25f, 0.5f, 0.25f)))
         {
-            index = Random.Range(0, validSpawns.Count);
-            xOffset = Random.Range(-spawnRadius, spawnRadius);
-            zOffset = Random.Range(-spawnRadius, spawnRadius);
-
-            Vector3 spawnLoc = validSpawns[index].transform.position;
-            spawnLoc.x += xOffset;
-            spawnLoc.y += 0.5f;
-            spawnLoc.z += zOffset;
-
-            //NavMeshHit hitInfo;
-            //if (!NavMesh.SamplePosition(spawnLoc, out hitInfo, spawnRadius, NavMesh.AllAreas)) continue;
-
-            //spawnLoc = hitInfo.position;
-
-            if (Physics.CheckBox(spawnLoc, new Vector3(0.25f, 0.5f, 0.25f))) continue;
-
-            zombies.Add(Instantiate(zombiePrefabs[Random.Range(0, zombiePrefabs.Length)], spawnLoc, Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0)));
+            Debug.Log("Physics check failed for spawn!");
+            return;
         }
+
+        zombies.Add(Instantiate(zombiePrefabs[Random.Range(0, zombiePrefabs.Length)], spawnLoc, Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0)));
+        Debug.Log("Zombie spawned successfully!");
     }
 }
