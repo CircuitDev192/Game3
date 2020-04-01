@@ -19,6 +19,7 @@ public class WeaponContext : Context<WeaponContext>
     public WeaponBase[] weaponPrefabs;
     public List<WeaponBase> weapons;
     public int currentWeaponIndex;
+    public bool flashlightOn = false;
 
     public float weaponSwapTime;
 

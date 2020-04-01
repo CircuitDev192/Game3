@@ -1102,6 +1102,7 @@ MonoBehaviour:
   impactForce: 50
   fullAuto: 0
   shotVolume: 0
+  flashlightOn: 0
   weaponAnimation: 4
   fireAnimationStartDelay: 0
   reloadTime: 0.58
@@ -1127,7 +1128,7 @@ MonoBehaviour:
     type: 3}
   weaponRenderer: {fileID: 6132034752448678912}
   flashlightRenderer: {fileID: 6132034752448675000}
-  weaponSoundSync: {fileID: 0}
+  opticRenderer: {fileID: 6132034752448678030}
   audioSource: {fileID: 3856031629462493671}
   audioClips:
   - {fileID: 8300000, guid: 928932d277a7fef4081dce583075c438, type: 3}
@@ -1416,7 +1417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6132034752450402340
 Transform:
   m_ObjectHideFlags: 0

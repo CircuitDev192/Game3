@@ -21,6 +21,7 @@ public abstract class WeaponBase : MonoBehaviour
     public float impactForce;
     public bool fullAuto;
     public float shotVolume;
+    public bool flashlightOn;
 
     #endregion
 
@@ -57,6 +58,7 @@ public abstract class WeaponBase : MonoBehaviour
     public GameObject bloodSplatter;
     public Renderer weaponRenderer;
     public Renderer flashlightRenderer;
+    public Renderer opticRenderer;
 
     #endregion
 
