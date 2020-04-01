@@ -9,6 +9,7 @@ public class ZombieIdleState : ZombieBaseState
 
     public override void EnterState(ZombieContext context)
     {
+        Debug.Log("Zombie entered Idle state!");
         context.zombieNavMeshAgent.enabled = false;
         context.zombieAnimator.SetFloat("Speed_f", 0f);
 
