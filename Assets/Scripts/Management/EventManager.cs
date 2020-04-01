@@ -26,4 +26,12 @@ public static class EventManager
     // Player killed event
     public static Action PlayerKilled;
     public static void TriggerPlayerKilled() { PlayerKilled?.Invoke(); }
+
+    // Scene Loaded Event
+    public static Action<string> SceneLoaded;
+    public static void TriggerSceneLoaded(string sceneName) { SceneLoaded?.Invoke(sceneName); }
+
+    // Scene UnLoadedEvent
+    public static Action<string> SceneUnLoaded;
+    public static void TriggerSceneUnLoaded(string sceneName) { SceneUnLoaded?.Invoke(sceneName); }
 }

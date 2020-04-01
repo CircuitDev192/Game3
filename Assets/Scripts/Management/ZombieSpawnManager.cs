@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SpawnManager : MonoBehaviour
+public class ZombieSpawnManager : MonoBehaviour
 {
     [SerializeField]
     private int maxZombies = 50;
