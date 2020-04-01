@@ -569,7 +569,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -654,7 +654,6 @@ MonoBehaviour:
     type: 3}
   weaponRenderer: {fileID: 8527565352044655475}
   flashlightRenderer: {fileID: 8527565352044581529}
-  weaponSoundSync: {fileID: 0}
   audioSource: {fileID: 82313318778815940}
   audioClips:
   - {fileID: 8300000, guid: 0d0640256413f124ea5df50c4ad59fad, type: 3}
