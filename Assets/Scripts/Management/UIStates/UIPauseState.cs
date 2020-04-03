@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIPauseState : MonoBehaviour
+public class UIPauseState : UIBaseState
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void EnterState(UIManager context)
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void ExitState(UIManager context)
     {
-        
+        throw new System.NotImplementedException();
+    }
+
+    public override BaseState<UIManager> UpdateState(UIManager context)
+    {
+        throw new System.NotImplementedException();
     }
 }

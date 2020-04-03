@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameCreditsState : MonoBehaviour
+public class GameCreditsState : GameBaseState
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void EnterState(GameManager context)
     {
-        
+        EventManager.TriggerGameStateChanged(GameState.Credits);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void ExitState(GameManager context)
     {
-        
+        throw new System.NotImplementedException();
+    }
+
+    public override BaseState<GameManager> UpdateState(GameManager context)
+    {
+        throw new System.NotImplementedException();
     }
 }

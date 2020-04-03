@@ -3,8 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum GameState
+{
+    MainMenu,
+    Play,
+    Paused,
+    Credits
+}
+
 public class GameManager : Context<GameManager>
 {
+    #region States
+
+    public GameMenuState menuState = new GameMenuState();
+    public GamePlayState playState = new GamePlayState();
+    public GamePauseState pauseState = new GamePauseState();
+    public GameCreditsState creditsState = new GameCreditsState();
+
+    #endregion
+
     #region Fields
 
     public static GameManager instance;
@@ -29,11 +46,18 @@ public class GameManager : Context<GameManager>
         }
 
         DontDestroyOnLoad(this);
+        InitializeContext();
+    }
+
+    private void Update()
+    {
+        ManageState(this);
     }
 
     public override void InitializeContext()
     {
-        throw new System.NotImplementedException();
+        currentState = playState;
+        currentState.EnterState(this);
     }
 
     public void LoadScene(string sceneName)

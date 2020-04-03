@@ -2,17 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GamePlayState : MonoBehaviour
+public class GamePlayState : GameBaseState
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void EnterState(GameManager context)
+    {
+        EventManager.TriggerGameStateChanged(GameState.Play);
+        //context.UnLoadScene("Menu");
+        //context.LoadScene("Game");
+    }
+
+    public override void ExitState(GameManager context)
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public override BaseState<GameManager> UpdateState(GameManager context)
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape)) return context.pauseState;
+
+        return this;
     }
 }
