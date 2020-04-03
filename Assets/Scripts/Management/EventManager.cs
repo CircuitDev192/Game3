@@ -26,4 +26,8 @@ public static class EventManager
     // Player killed event
     public static Action PlayerKilled;
     public static void TriggerPlayerKilled() { PlayerKilled?.Invoke(); }
+
+    // Sound Generated Event
+    public static Action<Vector3, float> SoundGenerated;
+    public static void TriggerSoundGenerated(Vector3 location, float audibleDistance) { SoundGenerated?.Invoke(location, audibleDistance); }
 }

@@ -20,6 +20,14 @@ public abstract class ZombieBaseState : BaseState<ZombieContext>
         if (distance > context.visionDistance) return false;
 
         Vector3 directionToPlayer = (playerPosition - zombiePosition).normalized;
+        Ray ray = new Ray(context.transform.position + directionToPlayer * 1f, directionToPlayer);
+
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(ray, out hitInfo))
+        {
+            if (hitInfo.collider.gameObject.tag != "Player" && hitInfo.collider.gameObject.tag != "Zombie") return false;
+        }
 
         // Calculate the angle between the direction the zombie is facing and the player
         float angle = Mathf.Abs(Vector3.Angle(context.transform.forward, directionToPlayer));

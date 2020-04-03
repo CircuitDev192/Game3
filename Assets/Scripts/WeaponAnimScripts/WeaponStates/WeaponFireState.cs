@@ -9,6 +9,8 @@ public class WeaponFireState : WeaponBaseState
     {
         Debug.Log("Weapon entered fire state.");
 
+        EventManager.TriggerSoundGenerated(context.transform.position, context.weapons[context.currentWeaponIndex].audibleDistance);
+
         context.playerAnimator.SetBool("Shoot_b", true);
         nextShotTime = (nextShotTime > Time.time) ? nextShotTime : Time.time;
     }
