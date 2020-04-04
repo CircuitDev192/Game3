@@ -2,17 +2,52 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Context<UIManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    #region States
+
+    public UIMenuState menuState = new UIMenuState();
+    public UIGameState gameState = new UIGameState();
+    public UIPauseState pauseState = new UIPauseState();
+    public UICreditsState creditsState = new UICreditsState();
+
+    #endregion
+
+    private void Awake()
     {
-        
+        EventManager.GameStateChanged += GameStateChanged;
+        InitializeContext();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void InitializeContext()
     {
-        
+        currentState = menuState;
+        currentState.EnterState(this);
+    }
+
+    private void GameStateChanged(GameState gameState)
+    {
+        currentState.ExitState(this);
+
+        switch(gameState)
+        {
+            case GameState.MainMenu:
+                currentState = menuState;
+                break;
+
+            case GameState.Play:
+                currentState = this.gameState;
+                break;
+
+            case GameState.Paused:
+                currentState = pauseState;
+                break;
+
+            case GameState.Credits:
+                currentState = creditsState;
+                break;
+        }
+
+        currentState.EnterState(this);
     }
 }

@@ -3,6 +3,22 @@ using UnityEngine;
 
 public static class EventManager
 {
+    #region Game Manager Events
+
+    // Game State Changed Event
+    public static Action<GameState> GameStateChanged;
+    public static void TriggerGameStateChanged(GameState gameState) { GameStateChanged?.Invoke(gameState); }
+
+    // Scene Loaded Event
+    public static Action<string> SceneLoaded;
+    public static void TriggerSceneLoaded(string sceneName) { SceneLoaded?.Invoke(sceneName); }
+
+    // Scene UnLoadedEvent
+    public static Action<string> SceneUnLoaded;
+    public static void TriggerSceneUnLoaded(string sceneName) { SceneUnLoaded?.Invoke(sceneName); }
+
+    #endregion
+
     // Weapon ammo count changed event
     public static Action<int> AmmoCountChanged;
     public static void TriggerAmmoCountChanged(int ammoCount) { AmmoCountChanged?.Invoke(ammoCount); }
