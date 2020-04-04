@@ -8,6 +8,7 @@ public class ZombieDespawnState : ZombieBaseState
     {
         Debug.Log("Zombie entered Despawn state!");
         EventManager.TriggerZombieShouldDespawn(context.gameObject);
+        EventManager.SoundGenerated -= context.SoundGenerated;
     }
 
     public override void ExitState(ZombieContext context)
