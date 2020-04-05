@@ -3,6 +3,18 @@ using UnityEngine;
 
 public static class EventManager
 {
+
+    #region UIEvents
+
+    // Game should resume
+    public static Action UIResumeClicked;
+    public static void TriggerUIResumeClicked() { UIResumeClicked?.Invoke(); }
+
+    // Game should quit
+    public static Action UIQuitClicked;
+    public static void TriggerUIQuitClicked() { UIQuitClicked?.Invoke(); }
+
+    #endregion
     // Weapon ammo count changed event
     public static Action<int> AmmoCountChanged;
     public static void TriggerAmmoCountChanged(int ammoCount) { AmmoCountChanged?.Invoke(ammoCount); }
