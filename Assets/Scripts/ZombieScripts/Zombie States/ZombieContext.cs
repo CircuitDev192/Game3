@@ -11,6 +11,7 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
 
     public ZombieIdleState idleState = new ZombieIdleState();
     public ZombiePatrollingState patrolState = new ZombiePatrollingState();
+    public ZombieInvestigateState investigateState = new ZombieInvestigateState();
     public ZombieChasingState chaseState = new ZombieChasingState();
     public ZombieAttackingState attackState = new ZombieAttackingState();
     public ZombieDeadState deadState = new ZombieDeadState();
@@ -42,7 +43,6 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
     // Calculation distance values
     public float fieldOfView;
     public float visionDistance;
-    public float hearingDistance;
     public float deadDespawnDistance;
     public float livingDespawnDistance;
 
@@ -54,7 +54,9 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
     public Transform playerTransform;
     public Vector3 currentTarget;
 
-    public bool playerDead;
+    public bool playerDead = false;
+    public bool heardSound = false;
+    public Vector3 soundLocation;
 
     #endregion
 
@@ -77,6 +79,8 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         runSpeed = Random.Range(minimumRunSpeed, maximumRunSpeed);
         health = Random.Range(minimumHealth, maximumHealth);
         damage = Random.Range(minimumDamage, maximumDamage);
+
+        EventManager.SoundGenerated += SoundGenerated;
 
         currentState = idleState;
         idleState.EnterState(this);
@@ -123,5 +127,13 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
     private void PlayerKilled()
     {
         playerDead = true;
+    }
+
+    public void SoundGenerated(Vector3 location, float audibleDistance)
+    {
+        if (Vector3.Distance(this.transform.position, location) > audibleDistance) return;
+
+        heardSound = true;
+        soundLocation = location;
     }
 }

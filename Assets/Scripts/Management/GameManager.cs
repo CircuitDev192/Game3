@@ -3,39 +3,84 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public enum GameState
 {
+    MainMenu,
+    Play,
+    Paused,
+    Credits
+}
+
+public class GameManager : Context<GameManager>
+{
+    #region States
+
+    public GameMenuState menuState = new GameMenuState();
+    public GamePlayState playState = new GamePlayState();
+    public GamePauseState pauseState = new GamePauseState();
+    public GameCreditsState creditsState = new GameCreditsState();
+
+    #endregion
+
     #region Fields
+
+    public static GameManager instance;
 
     [SerializeField] private GameObject[] managerPrefabs;
     private List<GameObject> managers;
+
+    private string sceneToLoad;
+    private string sceneToUnLoad;
 
     #endregion
 
     private void Awake()
     {
+        instance = this;
+
         managers = new List<GameObject>();
 
         foreach (GameObject manager in managerPrefabs)
         {
-            managers.Add(Instantiate(manager));
+            managers.Add(Instantiate(manager, this.transform));
         }
+
+        DontDestroyOnLoad(this);
+        InitializeContext();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-
+        ManageState(this);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void InitializeContext()
     {
-
+        currentState = playState;
+        currentState.EnterState(this);
     }
 
-    private void FixedUpdate()
+    public void LoadScene(string sceneName)
     {
+        sceneToLoad = sceneName;
+        AsyncOperation loadOp = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        loadOp.completed += SceneLoadCompleted;
+    }
 
+    private void SceneLoadCompleted(AsyncOperation obj)
+    {
+        EventManager.TriggerSceneLoaded(sceneToLoad);
+    }
+
+    public void UnLoadScene(string sceneName)
+    {
+        sceneToUnLoad = sceneName;
+        AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(sceneName);
+        unloadOp.completed += SceneUnLoadCompleted;
+    }
+
+    private void SceneUnLoadCompleted(AsyncOperation obj)
+    {
+        EventManager.TriggerSceneUnLoaded(sceneToUnLoad);
     }
 }
