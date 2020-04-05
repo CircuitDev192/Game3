@@ -14,6 +14,8 @@ public class WeaponIdleState : WeaponBaseState
 
     public override BaseState<WeaponContext> UpdateState(WeaponContext context)
     {
+        if (context.gameState == GameState.Paused) return this;
+
         WeaponBase weapon = context.weapons[context.currentWeaponIndex];
 
         // Weapon should fire or reload

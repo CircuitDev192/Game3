@@ -26,6 +26,8 @@ public class WeaponContext : Context<WeaponContext>
 
     public Camera mainCamera;
 
+    public GameState gameState;
+
     #endregion
 
     public override void InitializeContext()
@@ -44,5 +46,12 @@ public class WeaponContext : Context<WeaponContext>
 
         currentWeaponIndex = 0;
         weapons[currentWeaponIndex].enabled = true;
+
+        EventManager.GameStateChanged += GameStateChanged;
+    }
+
+    private void GameStateChanged(GameState gameState)
+    {
+        this.gameState = gameState;
     }
 }
