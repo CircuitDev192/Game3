@@ -18,6 +18,7 @@ public class WeaponSwapState : WeaponBaseState
         weapon.enabled = true;
 
         context.playerAnimator.SetInteger("WeaponType_int", weapon.weaponAnimation);
+        context.playerAnimator.SetInteger("MeleeType_int", weapon.meleeType);
         timeToFinishSwap = Time.time + context.weaponSwapTime;
     }
 

@@ -28,6 +28,7 @@ public abstract class WeaponBase : MonoBehaviour
     #region Animation Values
 
     public int weaponAnimation;
+    public int meleeType;
     public float fireAnimationStartDelay;
     public float reloadTime;
 
