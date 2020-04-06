@@ -79,10 +79,11 @@ public class SingleRoundWeapon : WeaponBase
     protected override void OnEnable()
     {
         weaponRenderer.enabled = true;
+        opticRenderer.enabled = true;
         lineRenderer.enabled = false;
         muzzleFlashRenderer.enabled = false;
         muzzleFlashLight.enabled = false;
-        flashLight.enabled = true;
+        flashLight.enabled = flashlightOn;
         flashlightRenderer.enabled = true;
 
         EventManager.TriggerWeaponChanged(name);
@@ -92,6 +93,7 @@ public class SingleRoundWeapon : WeaponBase
     protected override void OnDisable()
     {
         weaponRenderer.enabled = false;
+        opticRenderer.enabled = false;
         lineRenderer.enabled = false;
         muzzleFlashRenderer.enabled = false;
         muzzleFlashLight.enabled = false;

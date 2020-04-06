@@ -20,6 +20,7 @@ public abstract class WeaponBase : MonoBehaviour
     public float range;
     public float impactForce;
     public bool fullAuto;
+    public bool flashlightOn;
     public float audibleDistance;
 
     #endregion
@@ -27,6 +28,7 @@ public abstract class WeaponBase : MonoBehaviour
     #region Animation Values
 
     public int weaponAnimation;
+    public int meleeType;
     public float fireAnimationStartDelay;
     public float reloadTime;
 
@@ -57,6 +59,7 @@ public abstract class WeaponBase : MonoBehaviour
     public GameObject bloodSplatter;
     public Renderer weaponRenderer;
     public Renderer flashlightRenderer;
+    public Renderer opticRenderer;
 
     #endregion
 

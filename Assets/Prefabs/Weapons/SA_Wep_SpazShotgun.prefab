@@ -1077,7 +1077,7 @@ MeshCollider:
   m_GameObject: {fileID: 6132034752450696460}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
@@ -1127,6 +1127,7 @@ MonoBehaviour:
     type: 3}
   weaponRenderer: {fileID: 6132034752448678912}
   flashlightRenderer: {fileID: 6132034752448675000}
+  opticRenderer: {fileID: 6132034752448678030}
   audioSource: {fileID: 3856031629462493671}
   audioClips:
   - {fileID: 8300000, guid: 928932d277a7fef4081dce583075c438, type: 3}
@@ -1415,7 +1416,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6132034752450402340
 Transform:
   m_ObjectHideFlags: 0

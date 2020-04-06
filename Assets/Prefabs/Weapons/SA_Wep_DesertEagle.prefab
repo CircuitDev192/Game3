@@ -508,7 +508,7 @@ MeshCollider:
   m_GameObject: {fileID: 8527565352046566267}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
@@ -654,6 +654,7 @@ MonoBehaviour:
     type: 3}
   weaponRenderer: {fileID: 8527565352044655475}
   flashlightRenderer: {fileID: 8527565352044581529}
+  opticRenderer: {fileID: 8527565352044573545}
   audioSource: {fileID: 82313318778815940}
   audioClips:
   - {fileID: 8300000, guid: 0d0640256413f124ea5df50c4ad59fad, type: 3}

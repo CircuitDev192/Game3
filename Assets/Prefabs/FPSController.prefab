@@ -6415,8 +6415,12 @@ MonoBehaviour:
   - {fileID: -1127146355948526244, guid: 87b620f1dc834ec498b57cd476e5d89c, type: 3}
   - {fileID: 799428311574423752, guid: 4226a54658385e946b62fa8882e8f798, type: 3}
   - {fileID: 65264894889758074, guid: 4d0463a185c782b4f83578cee3221993, type: 3}
+  - {fileID: 7801393464093590516, guid: d32cf9afe7195294e8af3651b2653832, type: 3}
+  - {fileID: 4624678529073616633, guid: 0aec694b0c0c3a446acbce119be443f0, type: 3}
+  - {fileID: 572241145689354226, guid: d7d16aafc56e8104badde3d4a6fe87ae, type: 3}
   weapons: []
   currentWeaponIndex: 0
+  flashlightOn: 0
   weaponSwapTime: 0.5
   currentScrollDelta: 0
   mainCamera: {fileID: 0}
