@@ -24,6 +24,10 @@ public class UIPlayerInfoController : MonoBehaviour
 
         EventManager.WeaponChanged += WeaponNameChanged;
         EventManager.AmmoCountChanged += RoundsInMagChanged;
+        EventManager.TotalAmmoChanged += TotalAmmoChanged;
+
+        EventManager.FlashLightPowerChanged += FlashLightPowerChanged;
+        EventManager.SuppressorDurabilityChanged += SuppressorDurabilityChanged;
     }
 
     private void PlayerHealthChanged(float health)
@@ -45,7 +49,7 @@ public class UIPlayerInfoController : MonoBehaviour
 
     private void TotalAmmoChanged(int totalAmmo)
     {
-        this.totalAmmo.text = "/" + totalAmmo.ToString();
+        this.totalAmmo.text = "/" + totalAmmo.ToString("D2");
     }
 
     #endregion
@@ -54,12 +58,12 @@ public class UIPlayerInfoController : MonoBehaviour
 
     private void FlashLightPowerChanged(float power)
     {
-        flashlightPowerBar.transform.localScale = new Vector3(power / 100f, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+        flashlightPowerBar.transform.localScale = new Vector3(flashlightPowerBar.transform.localScale.x, power / 100f, flashlightPowerBar.transform.localScale.z);
     }
 
     private void SuppressorDurabilityChanged(float durability)
     {
-        suppressorDurabilityBar.transform.localScale = new Vector3(durability / 100f, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+        suppressorDurabilityBar.transform.localScale = new Vector3(suppressorDurabilityBar.transform.localScale.x, durability / 100f, suppressorDurabilityBar.transform.localScale.z);
     }
 
     #endregion
