@@ -379,9 +379,10 @@ MonoBehaviour:
   range: 50
   impactForce: 90
   fullAuto: 1
-  shotVolume: 0
   flashlightOn: 0
+  audibleDistance: 100
   weaponAnimation: 2
+  meleeType: 0
   fireAnimationStartDelay: 0.03
   reloadTime: 1.59
   idleBodyHorizontal: 0.6
