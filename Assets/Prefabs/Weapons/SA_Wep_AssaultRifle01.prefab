@@ -320,7 +320,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -379,8 +379,7 @@ MonoBehaviour:
   range: 30
   impactForce: 75
   fullAuto: 1
-  shotVolume: 0
-  flashlightOn: 0
+  audibleDistance: 100
   weaponAnimation: 2
   fireAnimationStartDelay: 0.03
   reloadTime: 1.59

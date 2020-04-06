@@ -20,8 +20,7 @@ public abstract class WeaponBase : MonoBehaviour
     public float range;
     public float impactForce;
     public bool fullAuto;
-    public float shotVolume;
-    public bool flashlightOn;
+    public float audibleDistance;
 
     #endregion
 
