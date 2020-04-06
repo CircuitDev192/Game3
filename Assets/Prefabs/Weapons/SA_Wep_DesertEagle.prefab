@@ -621,7 +621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67cc2b510bafc934a8ef9e5098a0fbaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Desert Eagle
+  name: Deagle
   damage: 125
   fireRate: 0.56
   roundsPerMag: 8
