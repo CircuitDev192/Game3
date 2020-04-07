@@ -24,6 +24,8 @@ public class ZombieInvestigateState : ZombieBaseState
         if (base.ShouldDie(context)) return context.deadState;
 
         if (base.SeesPlayer(context)) return context.chaseState;
+        
+        base.PlayTimedSound(context, this);
 
         if (context.zombieNavMeshAgent.remainingDistance <= context.zombieNavMeshAgent.stoppingDistance) return context.idleState;
 

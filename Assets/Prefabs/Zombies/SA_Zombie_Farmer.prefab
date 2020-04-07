@@ -6291,7 +6291,6 @@ MonoBehaviour:
   damage: 0
   fieldOfView: 90
   visionDistance: 30
-  hearingDistance: 0
   deadDespawnDistance: 40
   livingDespawnDistance: 125
   minimumIdleTime: 0
@@ -6299,6 +6298,18 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   currentTarget: {x: 0, y: 0, z: 0}
   playerDead: 0
+  heardSound: 0
+  soundLocation: {x: 0, y: 0, z: 0}
+  idleSounds:
+  - {fileID: 8300000, guid: 90d342cf6f89440b9aa6c6ef4af6af88, type: 3}
+  - {fileID: 8300000, guid: 8c8b4012f639545b2a1f70a2082307b3, type: 3}
+  attackSounds:
+  - {fileID: 8300000, guid: 2628db55e50fe41cc9879051d359847a, type: 3}
+  - {fileID: 8300000, guid: 94e452828af664292a97c95ec9452126, type: 3}
+  minTimeBetweenSounds: 2
+  maxTimeBetweenSounds: 5
+  nextSoundTime: 0
+  audioSource: {fileID: 0}
 --- !u!195 &195570940181768128
 NavMeshAgent:
   m_ObjectHideFlags: 0

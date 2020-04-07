@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(AudioSource))]
+
 public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
 {
     #region Fields
@@ -57,11 +59,23 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
     public bool playerDead = false;
     public bool heardSound = false;
     public Vector3 soundLocation;
+    
+    // Sound effects
+    public AudioClip[] idleSounds;
+    public AudioClip[] attackSounds;
+
+    public float minTimeBetweenSounds;
+    public float maxTimeBetweenSounds;
+    public float nextSoundTime;
+
+    public AudioSource audioSource;
 
     #endregion
 
     public override void InitializeContext()
     {
+        audioSource = gameObject.AddComponent<AudioSource>();
+
         zombieNavMeshAgent.enabled = true;
         if (!zombieNavMeshAgent.isOnNavMesh)
         {
@@ -79,6 +93,8 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         runSpeed = Random.Range(minimumRunSpeed, maximumRunSpeed);
         health = Random.Range(minimumHealth, maximumHealth);
         damage = Random.Range(minimumDamage, maximumDamage);
+        
+        nextSoundTime = Time.time + Random.Range(minTimeBetweenSounds, maxTimeBetweenSounds);
 
         EventManager.SoundGenerated += SoundGenerated;
 
