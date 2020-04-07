@@ -13,6 +13,10 @@ public class UIManager : Context<UIManager>
 
     #endregion
 
+    public GameObject MenuUI;
+    public GameObject GameUI;
+    public GameObject PauseUI;
+
     private void Awake()
     {
         EventManager.GameStateChanged += GameStateChanged;

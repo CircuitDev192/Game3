@@ -6,16 +6,16 @@ public class UIGameState : UIBaseState
 {
     public override void EnterState(UIManager context)
     {
-        throw new System.NotImplementedException();
+        context.GameUI.SetActive(true);
     }
 
     public override void ExitState(UIManager context)
     {
-        throw new System.NotImplementedException();
+        context.GameUI.SetActive(false);
     }
 
     public override BaseState<UIManager> UpdateState(UIManager context)
     {
-        throw new System.NotImplementedException();
+        return this;
     }
 }

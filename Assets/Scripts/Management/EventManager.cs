@@ -3,6 +3,18 @@ using UnityEngine;
 
 public static class EventManager
 {
+    #region UIEvents
+
+    // Game should resume
+    public static Action UIResumeClicked;
+    public static void TriggerUIResumeClicked() { UIResumeClicked?.Invoke(); }
+
+    // Game should quit
+    public static Action UIQuitClicked;
+    public static void TriggerUIQuitClicked() { UIQuitClicked?.Invoke(); }
+
+    #endregion
+
     #region Game Manager Events
 
     // Game State Changed Event
@@ -19,21 +31,15 @@ public static class EventManager
 
     #endregion
 
-    // Weapon ammo count changed event
-    public static Action<int> AmmoCountChanged;
-    public static void TriggerAmmoCountChanged(int ammoCount) { AmmoCountChanged?.Invoke(ammoCount); }
+    #region Mission Events
 
-    // Weapon changed event
-    public static Action<string> WeaponChanged;
-    public static void TriggerWeaponChanged(string weapon) { WeaponChanged?.Invoke(weapon); }
+    // Mission changed event
+    public static Action<string, string> MissionChanged;
+    public static void TriggerMissionChanged(string missionTitle, string missionDescription) { MissionChanged?.Invoke(missionTitle, missionDescription); }
 
-    // Zombie killed event
-    public static Action ZombieKilled;
-    public static void TriggerZombieKilled() { ZombieKilled?.Invoke(); }
+    #endregion
 
-    // Zombie should despawn event
-    public static Action<GameObject> zombieShouldDespawn;
-    public static void TriggerZombieShouldDespawn(GameObject zombie) { zombieShouldDespawn?.Invoke(zombie); }
+    #region Player Info Events
 
     // Player health changed event
     public static Action<float> PlayerHealthChanged;
@@ -42,6 +48,36 @@ public static class EventManager
     // Player killed event
     public static Action PlayerKilled;
     public static void TriggerPlayerKilled() { PlayerKilled?.Invoke(); }
+
+    // Weapon ammo count changed event
+    public static Action<int> AmmoCountChanged;
+    public static void TriggerAmmoCountChanged(int ammoCount) { AmmoCountChanged?.Invoke(ammoCount); }
+
+    // Total ammo count changed event
+    public static Action<int> TotalAmmoChanged;
+    public static void TriggerTotalAmmoChanged(int totalAmmo) { TotalAmmoChanged?.Invoke(totalAmmo); }
+
+    // Weapon changed event
+    public static Action<string> WeaponChanged;
+    public static void TriggerWeaponChanged(string weapon) { WeaponChanged?.Invoke(weapon); }
+
+    // Flashlight power changed event
+    public static Action<float> FlashLightPowerChanged;
+    public static void TriggerFlashLightPowerChanged(float power) { FlashLightPowerChanged?.Invoke(power); }
+
+    // Suppressor durability changed event
+    public static Action<float> SuppressorDurabilityChanged;
+    public static void TriggerSuppressorDurabilityChanged(float durability) { SuppressorDurabilityChanged?.Invoke(durability); }
+
+    #endregion
+
+    // Zombie killed event
+    public static Action ZombieKilled;
+    public static void TriggerZombieKilled() { ZombieKilled?.Invoke(); }
+
+    // Zombie should despawn event
+    public static Action<GameObject> zombieShouldDespawn;
+    public static void TriggerZombieShouldDespawn(GameObject zombie) { zombieShouldDespawn?.Invoke(zombie); }    
 
     // Sound Generated Event
     public static Action<Vector3, float> SoundGenerated;

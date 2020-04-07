@@ -47,6 +47,9 @@ public class GameManager : Context<GameManager>
 
         DontDestroyOnLoad(this);
         InitializeContext();
+
+        EventManager.UIResumeClicked += UIResumeClicked;
+        EventManager.UIQuitClicked += UIQuitClicked;
     }
 
     private void Update()
@@ -59,6 +62,8 @@ public class GameManager : Context<GameManager>
         currentState = playState;
         currentState.EnterState(this);
     }
+
+    #region Scene Methods
 
     public void LoadScene(string sceneName)
     {
@@ -83,4 +88,23 @@ public class GameManager : Context<GameManager>
     {
         EventManager.TriggerSceneUnLoaded(sceneToUnLoad);
     }
+
+    #endregion
+
+    #region UIEvents
+
+    private void UIResumeClicked()
+    {
+        currentState.ExitState(this);
+
+        currentState = playState;
+        currentState.EnterState(this);
+    }
+
+    private void UIQuitClicked()
+    {
+        Application.Quit();
+    }
+
+    #endregion
 }
