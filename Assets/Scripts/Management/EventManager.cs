@@ -78,8 +78,8 @@ public static class EventManager
     public static void TriggerPlayerLeftPickup() { PlayerLeftPickup?.Invoke(); }
 
     // Player picked up a weapon
-    public static Action PlayerPickedUpWeapon;
-    public static void TriggerPlayerPickedUpWeapon() { PlayerPickedUpWeapon?.Invoke(); }
+    public static Action<string> PlayerPickedUpWeapon;
+    public static void TriggerPlayerPickedUpWeapon(string previousWeaponName) { PlayerPickedUpWeapon?.Invoke(previousWeaponName); }
 
     #endregion
 

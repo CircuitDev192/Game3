@@ -83,6 +83,8 @@ public class WeaponContext : Context<WeaponContext>
             {
                 if (weapon.name == weaponName)
                 {
+                    EventManager.TriggerPlayerPickedUpWeapon(weapons[weapon.weaponTypeInt].name);
+
                     Destroy(weapons[weapon.weaponTypeInt].gameObject);
                     WeaponBase weap = Instantiate(weapon, weaponRoot);
                     weapons[weapon.weaponTypeInt] = weap;
@@ -99,7 +101,6 @@ public class WeaponContext : Context<WeaponContext>
                     break;
                 }
             }
-            EventManager.TriggerPlayerPickedUpWeapon();
         }
     }
 

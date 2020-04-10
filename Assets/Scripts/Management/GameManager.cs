@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -28,6 +29,8 @@ public class GameManager : Context<GameManager>
 
     [SerializeField] private GameObject[] managerPrefabs;
     private List<GameObject> managers;
+    [SerializeField] private GameObject[] weaponPickupPrefabs;
+    [SerializeField] private GameObject player;
 
     private string sceneToLoad;
     private string sceneToUnLoad;
@@ -50,6 +53,7 @@ public class GameManager : Context<GameManager>
 
         EventManager.UIResumeClicked += UIResumeClicked;
         EventManager.UIQuitClicked += UIQuitClicked;
+        EventManager.PlayerPickedUpWeapon += PlayerPickedUpWeapon;
     }
 
     private void Update()
@@ -61,6 +65,21 @@ public class GameManager : Context<GameManager>
     {
         currentState = playState;
         currentState.EnterState(this);
+    }
+
+    private void PlayerPickedUpWeapon(string previousWeaponName)
+    {
+        Debug.Log("Game Manager sees the pickup");
+        foreach (GameObject pickup in weaponPickupPrefabs)
+        {
+            if (pickup.GetComponentInChildren<WeaponPickup>().weaponName == previousWeaponName)
+            {
+                Debug.Log("Game Manager created the pickup");
+                Vector3 offset = new Vector3(0, -1f, 0);
+                Instantiate(pickup, player.transform.position + offset, Quaternion.identity);
+                break;
+            }
+        }
     }
 
     #region Scene Methods

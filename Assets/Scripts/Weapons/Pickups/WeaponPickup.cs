@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class WeaponPickup : MonoBehaviour
 {
-    [SerializeField]
-    private string weaponName; // Must match the name variable of the weapon prefab exactly
+    public string weaponName; // Must match the name variable of the weapon prefab exactly
     [SerializeField]
     private GameObject _pointA, _pointB;
     // Start is called before the first frame update
@@ -43,7 +42,7 @@ public class WeaponPickup : MonoBehaviour
         }
     }
 
-    void PlayerPickedUpWeapon()
+    void PlayerPickedUpWeapon(string previousWeaponName)
     {
         EventManager.PlayerPickedUpWeapon -= PlayerPickedUpWeapon;
         Destroy(this.gameObject.transform.parent.gameObject);
