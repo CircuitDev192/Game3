@@ -84,19 +84,19 @@ public class WeaponContext : Context<WeaponContext>
                 if (weapon.name == weaponName)
                 {
                     EventManager.TriggerPlayerPickedUpWeapon(weapons[weapon.weaponTypeInt].name);
-
                     Destroy(weapons[weapon.weaponTypeInt].gameObject);
                     WeaponBase weap = Instantiate(weapon, weaponRoot);
                     weapons[weapon.weaponTypeInt] = weap;
+
                     if (currentWeaponIndex != weapon.weaponTypeInt)
                     {
                         weap.enabled = false;
                     }
                     else
                     {
-                        weap.enabled = true;
-                        playerAnimator.SetInteger("WeaponType_int", weapon.weaponAnimation);
-                        playerAnimator.SetInteger("MeleeType_int", weapon.meleeType);
+                        currentState.ExitState(this);
+                        currentState = swapState;
+                        currentState.EnterState(this);
                     }
                     break;
                 }

@@ -413,7 +413,7 @@ MonoBehaviour:
   audioClips:
   - {fileID: 8300000, guid: 1425c5c8f171c6c4d975e03903fc9aa8, type: 3}
   - {fileID: 8300000, guid: 5da41b04974cf5b4a94b6f262ce6542c, type: 3}
-  roundsInCurrentMag: 18
+  roundsInCurrentMag: 30
   totalAmmo: 1
   currentFireMode: 2
   lineRenderer: {fileID: 7485656062715143805}
