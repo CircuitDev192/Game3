@@ -51,8 +51,6 @@ public class MeleeWeapon : WeaponBase
     {
         weaponRenderer.enabled = true;
 
-        EventManager.TriggerWeaponChanged(name);
-        EventManager.TriggerAmmoCountChanged(roundsInCurrentMag);
     }
 
     protected override void OnDisable()

@@ -69,12 +69,10 @@ public class GameManager : Context<GameManager>
 
     private void PlayerPickedUpWeapon(string previousWeaponName)
     {
-        Debug.Log("Game Manager sees the pickup");
         foreach (GameObject pickup in weaponPickupPrefabs)
         {
             if (pickup.GetComponentInChildren<WeaponPickup>().weaponName == previousWeaponName)
             {
-                Debug.Log("Game Manager created the pickup");
                 Vector3 offset = new Vector3(0, -1f, 0);
                 Instantiate(pickup, player.transform.position + offset, Quaternion.identity);
                 break;

@@ -17,6 +17,9 @@ public class WeaponSwapState : WeaponBaseState
         weapon.flashlightOn = context.flashlightOn;
         weapon.enabled = true;
 
+        EventManager.TriggerWeaponChanged(weapon.name);
+        EventManager.TriggerAmmoCountChanged(weapon.roundsInCurrentMag);
+
         context.playerAnimator.SetInteger("WeaponType_int", weapon.weaponAnimation);
         context.playerAnimator.SetInteger("MeleeType_int", weapon.meleeType);
         timeToFinishSwap = Time.time + context.weaponSwapTime;
