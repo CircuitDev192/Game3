@@ -11,11 +11,17 @@ public class WeaponSwapState : WeaponBaseState
         WeaponBase weapon = context.weapons[context.currentWeaponIndex];
         weapon.enabled = false;
 
-        context.currentWeaponIndex = (context.currentWeaponIndex + 1) % context.weapons.Count;
+        if (context.currentScrollDelta != 0)
+        {
+            context.currentWeaponIndex = (context.currentWeaponIndex - 1 * (int)Mathf.Sign(context.currentScrollDelta) + context.weapons.Count) % context.weapons.Count;
+        }
 
         weapon = context.weapons[context.currentWeaponIndex];
         weapon.flashlightOn = context.flashlightOn;
         weapon.enabled = true;
+
+        EventManager.TriggerWeaponChanged(weapon.name);
+        EventManager.TriggerAmmoCountChanged(weapon.roundsInCurrentMag);
 
         context.playerAnimator.SetInteger("WeaponType_int", weapon.weaponAnimation);
         context.playerAnimator.SetInteger("MeleeType_int", weapon.meleeType);

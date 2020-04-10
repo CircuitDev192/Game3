@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Katana
+  weaponTypeInt: 2
   damage: 150
   fireRate: 1.5
   roundsPerMag: 1

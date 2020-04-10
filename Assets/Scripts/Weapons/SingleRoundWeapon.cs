@@ -86,8 +86,6 @@ public class SingleRoundWeapon : WeaponBase
         flashLight.enabled = flashlightOn;
         flashlightRenderer.enabled = true;
 
-        EventManager.TriggerWeaponChanged(name);
-        EventManager.TriggerAmmoCountChanged(roundsInCurrentMag);
     }
 
     protected override void OnDisable()

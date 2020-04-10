@@ -35,6 +35,7 @@ public class WeaponIdleState : WeaponBaseState
         // Swap weapon
         if (context.currentScrollDelta != 0) return context.swapState;
 
+        // Enable Flashlight
         if (Input.GetKeyDown(KeyCode.F))
         {
             context.flashlightOn = !context.flashlightOn;

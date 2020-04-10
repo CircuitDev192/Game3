@@ -40,8 +40,6 @@ public class ThrowableWeapon : WeaponBase
     {
         weaponRenderer.enabled = true;
 
-        EventManager.TriggerWeaponChanged(name);
-        EventManager.TriggerAmmoCountChanged(roundsInCurrentMag);
     }
 
     protected override void OnDisable()
