@@ -29,7 +29,7 @@ public class ZombieChasingState : ZombieBaseState
     {
         if (base.ShouldDie(context)) return context.deadState;
         
-        base.PlayTimedSound(context, this);
+        context.PlayTimedSound(this);
 
         context.currentTarget = context.playerTransform.position;
 

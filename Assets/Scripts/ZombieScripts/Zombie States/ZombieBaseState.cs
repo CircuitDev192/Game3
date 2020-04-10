@@ -6,33 +6,6 @@ using UnityEngine;
 
 public abstract class ZombieBaseState : BaseState<ZombieContext>
 {
-    public void PlayTimedSound(ZombieContext context, ZombieBaseState state)
-    {
-        float distance = Vector3.Distance(context.transform.position, context.playerTransform.position);
-        if (distance > context.visionDistance) return;
-
-        if (Time.time < context.nextSoundTime) return;
-
-        if (state == context.idleState || state == context.patrolState || state == context.investigateState)
-        {
-            Debug.LogWarning("Played idle sound.");
-            PlaySound(context, context.idleSounds);
-        }
-        else
-        {
-            Debug.LogWarning("Played attack sound.");
-            PlaySound(context, context.attackSounds);
-        }
-
-        context.nextSoundTime = Time.time + Random.Range(context.minTimeBetweenSounds, context.maxTimeBetweenSounds);
-    }
-
-    public void PlaySound(ZombieContext context, AudioClip[] clipArray){
-        int index = Random.Range(0, clipArray.Length);
-        AudioClip clipToPlay = clipArray[index];
-
-        AudioSource.PlayClipAtPoint(clipToPlay, context.transform.position);
-    }
 
     public bool ShouldDie(ZombieContext context)
     {        

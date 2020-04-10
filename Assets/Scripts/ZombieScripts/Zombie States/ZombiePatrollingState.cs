@@ -43,7 +43,7 @@ public class ZombiePatrollingState : ZombieBaseState
 
         if (base.SeesPlayer(context)) return context.chaseState;
         
-        base.PlayTimedSound(context, this);
+        context.PlayTimedSound(this);
         
         if (context.zombieNavMeshAgent.remainingDistance <= context.zombieNavMeshAgent.stoppingDistance) return context.idleState;
 

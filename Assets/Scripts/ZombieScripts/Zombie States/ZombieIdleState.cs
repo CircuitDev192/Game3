@@ -36,7 +36,7 @@ public class ZombieIdleState : ZombieBaseState
 
         if (Time.time > timeToPatrol) return context.patrolState;
         
-        base.PlayTimedSound(context, this);
+        context.PlayTimedSound(this);
 
         return this;
     }
