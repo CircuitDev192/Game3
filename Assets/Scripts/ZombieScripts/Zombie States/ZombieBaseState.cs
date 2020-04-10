@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
 public abstract class ZombieBaseState : BaseState<ZombieContext>
 {
+
     public bool ShouldDie(ZombieContext context)
     {        
         return (context.health <= 0);

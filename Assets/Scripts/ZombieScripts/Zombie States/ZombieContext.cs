@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(AudioSource))]
+
 public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
 {
     #region Fields
@@ -57,11 +59,25 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
     public bool playerDead = false;
     public bool heardSound = false;
     public Vector3 soundLocation;
+    
+    // Sound effects
+    public AudioClip[] idleSounds;
+    public AudioClip[] attackSounds;
+    public AudioClip[] hurtSounds;
+    public AudioClip[] deathSounds;
+
+    public float minTimeBetweenSounds;
+    public float maxTimeBetweenSounds;
+    public float nextSoundTime;
+
+    public AudioSource audioSource;
 
     #endregion
 
     public override void InitializeContext()
     {
+        audioSource = gameObject.AddComponent<AudioSource>();
+
         zombieNavMeshAgent.enabled = true;
         if (!zombieNavMeshAgent.isOnNavMesh)
         {
@@ -79,6 +95,8 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         runSpeed = Random.Range(minimumRunSpeed, maximumRunSpeed);
         health = Random.Range(minimumHealth, maximumHealth);
         damage = Random.Range(minimumDamage, maximumDamage);
+        
+        nextSoundTime = Time.time + Random.Range(minTimeBetweenSounds, maxTimeBetweenSounds);
 
         EventManager.SoundGenerated += SoundGenerated;
 
@@ -92,9 +110,16 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
 
         health -= damage;
 
-        if (health <= 0) currentState = deadState;
-
-        else currentState = chaseState;
+        if (health <= 0){
+            Debug.LogWarning("Played death sound.");
+            this.PlaySound(deathSounds);
+            currentState = deadState;
+        }
+        else{
+            Debug.LogWarning("Played hurt sound.");
+            this.PlaySound(hurtSounds);
+            currentState = chaseState;
+        }
 
         currentState.EnterState(this);
     }
@@ -135,5 +160,36 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
 
         heardSound = true;
         soundLocation = location;
+    }
+    
+    public void PlayTimedSound(ZombieBaseState state)
+    {
+        float distance = Vector3.Distance(this.transform.position, this.playerTransform.position);
+        if (distance > this.visionDistance) return;
+
+        if (Time.time < this.nextSoundTime) return;
+
+        float pauseScale = 1.0F;
+
+        if (state == this.idleState || state == this.patrolState || state == this.investigateState)
+        {
+            Debug.LogWarning("Played idle sound.");
+            PlaySound(this.idleSounds);
+            pauseScale = 2.5F;
+        }
+        else if(state == this.chaseState)
+        {
+            Debug.LogWarning("Played chase sound.");
+            PlaySound(this.attackSounds);
+        }
+
+        this.nextSoundTime = Time.time + Random.Range(this.minTimeBetweenSounds, this.maxTimeBetweenSounds) * pauseScale;
+    }
+
+    public void PlaySound(AudioClip[] clipArray){
+        int index = Random.Range(0, clipArray.Length);
+        AudioClip clipToPlay = clipArray[index];
+
+        AudioSource.PlayClipAtPoint(clipToPlay, this.transform.position);
     }
 }
