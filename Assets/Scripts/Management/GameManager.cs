@@ -30,7 +30,7 @@ public class GameManager : Context<GameManager>
     [SerializeField] private GameObject[] managerPrefabs;
     private List<GameObject> managers;
     [SerializeField] private GameObject[] weaponPickupPrefabs;
-    [SerializeField] private GameObject player;
+    private GameObject player;
 
     private string sceneToLoad;
     private string sceneToUnLoad;
@@ -54,6 +54,11 @@ public class GameManager : Context<GameManager>
         EventManager.UIResumeClicked += UIResumeClicked;
         EventManager.UIQuitClicked += UIQuitClicked;
         EventManager.PlayerPickedUpWeapon += PlayerPickedUpWeapon;
+    }
+
+    private void Start()
+    {
+        player = PlayerManager.instance.player;
     }
 
     private void Update()
