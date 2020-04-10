@@ -17,11 +17,11 @@ public class WeaponPickup : MonoBehaviour
     void Update()
     {
         //Smooth Sin Wave Version
-        transform.position = Vector3.Lerp(_pointA.transform.position, _pointB.transform.position, (Mathf.Sin(2f * Time.time) + 1.0f) / 2.0f);
+        //transform.position = Vector3.Lerp(_pointA.transform.position, _pointB.transform.position, (Mathf.Sin(2f * Time.time) + 1.0f) / 2.0f);
         //PingPong - Harsh Start/Stop Version
         //transform.position = Vector3.Lerp(_pointA.transform.position, _pointB.transform.position, Mathf.PingPong(Time.time * 2f, 1.0f));
 
-        this.transform.Rotate(0, 20f * Time.deltaTime, 0);
+        //this.transform.Rotate(0, 20f * Time.deltaTime, 0);
     }
 
     void OnTriggerEnter(Collider other)

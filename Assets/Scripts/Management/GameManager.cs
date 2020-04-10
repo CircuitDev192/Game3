@@ -73,8 +73,9 @@ public class GameManager : Context<GameManager>
         {
             if (pickup.GetComponentInChildren<WeaponPickup>().weaponName == previousWeaponName)
             {
-                Vector3 offset = new Vector3(0, -1f, 0);
-                Instantiate(pickup, player.transform.position + offset, Quaternion.identity);
+                float offset = 2f;
+                GameObject weap = Instantiate(pickup, player.transform.position + (player.transform.forward * offset), Quaternion.identity);
+                weap.GetComponentInChildren<Rigidbody>().AddForce(player.transform.forward * 300f);
                 break;
             }
         }

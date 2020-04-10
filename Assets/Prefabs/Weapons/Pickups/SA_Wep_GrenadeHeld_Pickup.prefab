@@ -104,8 +104,10 @@ GameObject:
   - component: {fileID: 8040488781553898282}
   - component: {fileID: 8040488781557312350}
   - component: {fileID: 8040488781556160408}
+  - component: {fileID: 6465807153927270182}
   - component: {fileID: 8040488781554239660}
   - component: {fileID: 8040488781554239663}
+  - component: {fileID: 3968081179193916726}
   m_Layer: 2
   m_Name: Graphics
   m_TagString: Untagged
@@ -174,6 +176,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &6465807153927270182
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8040488781554239662}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 43830099792562964, guid: 01cd7a93dab118f4f8c9339f4e42f11d, type: 2}
 --- !u!114 &8040488781554239660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,5 +216,21 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.09
+  m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &3968081179193916726
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8040488781554239662}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
