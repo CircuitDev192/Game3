@@ -451,6 +451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Glock
+  weaponTypeInt: 1
   damage: 35
   fireRate: 0.56
   roundsPerMag: 15

@@ -109,15 +109,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Frag Grenade
+  weaponTypeInt: 4
   damage: 0
   fireRate: 2
   roundsPerMag: 1
   range: 0
   impactForce: 0
   fullAuto: 0
-  shotVolume: 0
   flashlightOn: 0
+  audibleDistance: 0
   weaponAnimation: 10
+  meleeType: 0
   fireAnimationStartDelay: 1.5
   reloadTime: 0
   idleBodyHorizontal: 0

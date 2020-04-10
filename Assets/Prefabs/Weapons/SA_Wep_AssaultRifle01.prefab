@@ -367,20 +367,23 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3547611854506926495}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67cc2b510bafc934a8ef9e5098a0fbaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   name: AK-47
+  weaponTypeInt: 0
   damage: 50
   fireRate: 0.11
   roundsPerMag: 30
   range: 30
   impactForce: 75
   fullAuto: 1
+  flashlightOn: 0
   audibleDistance: 100
   weaponAnimation: 2
+  meleeType: 0
   fireAnimationStartDelay: 0.03
   reloadTime: 1.59
   idleBodyHorizontal: 0.6
@@ -410,7 +413,7 @@ MonoBehaviour:
   audioClips:
   - {fileID: 8300000, guid: 1425c5c8f171c6c4d975e03903fc9aa8, type: 3}
   - {fileID: 8300000, guid: 5da41b04974cf5b4a94b6f262ce6542c, type: 3}
-  roundsInCurrentMag: 30
+  roundsInCurrentMag: 18
   totalAmmo: 1
   currentFireMode: 2
   lineRenderer: {fileID: 7485656062715143805}
@@ -874,6 +877,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2385796, guid: 6e1113468f14f5d47908179a77a9654c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e1113468f14f5d47908179a77a9654c, type: 3}
 --- !u!4 &7158266022839691935 stripped
@@ -895,6 +902,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3547611854507206733}
     m_Modifications:
+    - target: {fileID: 1440422070601835080, guid: 2a39d612e531ad24fb8c1b830b488f77,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440422070601835080, guid: 2a39d612e531ad24fb8c1b830b488f77,
+        type: 3}
+      propertyPath: m_Positions.Array.data[0].x
+      value: 2.2235093
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440422070601835080, guid: 2a39d612e531ad24fb8c1b830b488f77,
+        type: 3}
+      propertyPath: m_Positions.Array.data[0].y
+      value: 0.052870277
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440422070601835080, guid: 2a39d612e531ad24fb8c1b830b488f77,
+        type: 3}
+      propertyPath: m_Positions.Array.data[0].z
+      value: 0.13534717
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440422070601835080, guid: 2a39d612e531ad24fb8c1b830b488f77,
+        type: 3}
+      propertyPath: m_Positions.Array.data[1].x
+      value: 2.9579666
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440422070601835080, guid: 2a39d612e531ad24fb8c1b830b488f77,
+        type: 3}
+      propertyPath: m_Positions.Array.data[1].y
+      value: 0.08955086
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440422070601835080, guid: 2a39d612e531ad24fb8c1b830b488f77,
+        type: 3}
+      propertyPath: m_Positions.Array.data[1].z
+      value: 0.1218207
+      objectReference: {fileID: 0}
     - target: {fileID: 2096306428172096986, guid: 2a39d612e531ad24fb8c1b830b488f77,
         type: 3}
       propertyPath: m_Name
@@ -1034,6 +1076,11 @@ PrefabInstance:
     - target: {fileID: 6860268054421660113, guid: b83b4973d70eaa745b60cf5048efe750,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985324784053903907, guid: b83b4973d70eaa745b60cf5048efe750,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

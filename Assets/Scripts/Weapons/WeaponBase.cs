@@ -14,6 +14,7 @@ public abstract class WeaponBase : MonoBehaviour
     #region Weapon Intrinsics
 
     public string name;
+    public int weaponTypeInt; // 0 = Primary, 1 = Secondary, 2 = Melee
     public float damage;
     public float fireRate;
     public int roundsPerMag;

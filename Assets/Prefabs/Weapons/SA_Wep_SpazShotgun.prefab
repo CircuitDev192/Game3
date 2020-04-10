@@ -1095,14 +1095,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Spas-12
+  weaponTypeInt: 0
   damage: 67
   fireRate: 0.675
   roundsPerMag: 1
   range: 30
   impactForce: 50
   fullAuto: 0
+  flashlightOn: 0
   audibleDistance: 100
   weaponAnimation: 4
+  meleeType: 0
   fireAnimationStartDelay: 0
   reloadTime: 0.58
   idleBodyHorizontal: 0.6
