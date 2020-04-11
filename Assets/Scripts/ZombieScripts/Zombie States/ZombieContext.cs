@@ -76,7 +76,7 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
 
     public override void InitializeContext()
     {
-        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource = gameObject.GetComponent<AudioSource>();
 
         zombieNavMeshAgent.enabled = true;
         if (!zombieNavMeshAgent.isOnNavMesh)
@@ -190,6 +190,8 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         int index = Random.Range(0, clipArray.Length);
         AudioClip clipToPlay = clipArray[index];
 
-        AudioSource.PlayClipAtPoint(clipToPlay, this.transform.position);
+        audioSource.clip = clipToPlay;
+        audioSource.pitch = Random.Range(0.75F, 1.25F);
+        audioSource.Play();
     }
 }
