@@ -35,6 +35,14 @@ public class WeaponIdleState : WeaponBaseState
         // Swap weapon
         if (context.currentScrollDelta != 0) return context.swapState;
 
+        // Swap to consumable
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            context.consumableEquipped = !context.consumableEquipped;
+            context.consumables[context.currentConsumableIndex].enabled = context.consumableEquipped;
+            return context.swapState;
+        }
+
         // Enable Flashlight
         if (Input.GetKeyDown(KeyCode.F))
         {

@@ -19,9 +19,15 @@ public class WeaponContext : Context<WeaponContext>
     public Animator playerAnimator;
     public Transform weaponRoot;
     public WeaponBase[] weaponPrefabs;
+    public WeaponBase[] consumablePrefabs;
+    public string equippedConsumable;
     public List<WeaponBase> weapons;
+    public List<WeaponBase> consumables;
+    public WeaponBase currentWeapon;
     public int currentWeaponIndex;
+    public int currentConsumableIndex;
     public bool flashlightOn = false;
+    public bool consumableEquipped = false;
     private bool isInPickupRange = false;
 
     public float weaponSwapTime;
@@ -51,11 +57,27 @@ public class WeaponContext : Context<WeaponContext>
             }
         }
 
+        foreach (WeaponBase consumable in consumablePrefabs)
+        {
+            WeaponBase consume = Instantiate(consumable, weaponRoot);
+            consume.enabled = false;
+            consumables.Add(consume);
+        }
+
         currentWeaponIndex = 0;
-        weapons[currentWeaponIndex].enabled = true;
+        currentWeapon = weapons[currentWeaponIndex];
+        currentWeapon.enabled = true;
+
+        currentConsumableIndex = 0;
 
         EventManager.GameStateChanged += GameStateChanged;
         EventManager.PlayerCollidedWithPickup += PlayerCollidedWithPickup;
+        //EventManager.PlayerChangedConsumable += PlayerChangedConsumable;
+    }
+
+    private void PlayerChangedConsumable(string consumableName)
+    {
+        equippedConsumable = consumableName;
     }
 
     private void PlayerCollidedWithPickup(string weaponName)
