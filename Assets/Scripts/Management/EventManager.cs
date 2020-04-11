@@ -81,6 +81,10 @@ public static class EventManager
     public static Action<string> PlayerPickedUpWeapon;
     public static void TriggerPlayerPickedUpWeapon(string previousWeaponName) { PlayerPickedUpWeapon?.Invoke(previousWeaponName); }
 
+    // Player changed the equipped consumable
+    public static Action<string> PlayerChangedConsumable;
+    public static void TriggerPlayerChangedConsumable(string consumableName) { PlayerChangedConsumable?.Invoke(consumableName); }
+
     #endregion
 
     // Zombie killed event
