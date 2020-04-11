@@ -492,7 +492,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0d0640256413f124ea5df50c4ad59fad, type: 3}
   - {fileID: 8300000, guid: 5da41b04974cf5b4a94b6f262ce6542c, type: 3}
   roundsInCurrentMag: 15
-  totalAmmo: 64
+  totalAmmo: 30
   currentFireMode: 0
   lineRenderer: {fileID: 8832074140557259614}
 --- !u!1 &5717782928319637910

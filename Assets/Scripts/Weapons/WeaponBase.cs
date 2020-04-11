@@ -75,23 +75,22 @@ public abstract class WeaponBase : MonoBehaviour
     
     public void Reload()
     {
-        //int roundsUsedInMag = roundsPerMag - roundsInCurrentMag;
-
-        //if(totalAmmo < roundsUsedInMag)
-        //{
-        //    roundsInCurrentMag += totalAmmo;
-        //    totalAmmo = 0;
-        //}
-        //else
-        //{
-        //    roundsInCurrentMag = roundsPerMag;
-        //    totalAmmo -= roundsUsedInMag;
-        //}
+        if(totalAmmo < roundsPerMag)
+        {
+            roundsInCurrentMag = totalAmmo;
+            totalAmmo = 0;
+        }
+        else
+        {
+            roundsInCurrentMag = roundsPerMag;
+            totalAmmo -= roundsPerMag;
+            if (totalAmmo < 0) totalAmmo = 0;
+        }
 
         audioSource.PlayOneShot(audioClips[1], 0.25f);
-        roundsInCurrentMag = roundsPerMag;
 
         EventManager.TriggerAmmoCountChanged(roundsInCurrentMag);
+        EventManager.TriggerTotalAmmoChanged(totalAmmo);
     }
 
     public void SetIdleValues(Animator playerAnimator)

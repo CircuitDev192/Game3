@@ -18,7 +18,7 @@ public class ThrowableWeapon : WeaponBase
         GameObject frag = Instantiate(fragGrenadeThrown, this.gameObject.transform);
         frag.transform.parent = null;
         //disable renderer
-        weaponRenderer.enabled = false;
+        //weaponRenderer.enabled = false;
 
 
         frag.GetComponent<Rigidbody>().AddForce(directionTransform.forward.normalized * 2000);
