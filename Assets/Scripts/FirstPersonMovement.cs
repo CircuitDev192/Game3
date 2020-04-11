@@ -57,6 +57,8 @@ public class FirstPersonMovement : MonoBehaviour
         m_Jumping = false;
         m_AudioSource = GetComponent<AudioSource>();
         m_MouseLook.Init(transform, m_Camera.transform);
+
+        EventManager.MouseShouldHide += MouseShouldHide;
     }
 
 
@@ -260,5 +262,10 @@ public class FirstPersonMovement : MonoBehaviour
             return;
         }
         body.AddForceAtPosition(m_CharacterController.velocity * 0.1f, hit.point, ForceMode.Impulse);
+    }
+
+    private void MouseShouldHide(bool shouldHide)
+    {
+        m_MouseLook.SetCursorLock(shouldHide);
     }
 }
