@@ -354,6 +354,7 @@ MonoBehaviour:
   weaponName: AK-47
   _pointA: {fileID: 8384828572423109479}
   _pointB: {fileID: 8384828571335356273}
+  isConsumable: 0
 --- !u!135 &7432364322531598772
 SphereCollider:
   m_ObjectHideFlags: 0

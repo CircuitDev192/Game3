@@ -17,7 +17,7 @@ public class UIPickupInfoController : MonoBehaviour
         EventManager.PlayerLeftPickup += PlayerLeftPickup;
     }
 
-    private void PlayerCollidedWithPickup(string weaponName)
+    private void PlayerCollidedWithPickup(string weaponName, bool isConsumable)
     {
         promptText.gameObject.SetActive(true);
         pickupText.gameObject.SetActive(true);

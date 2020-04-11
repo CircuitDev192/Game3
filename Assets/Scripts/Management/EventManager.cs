@@ -70,16 +70,16 @@ public static class EventManager
     public static void TriggerSuppressorDurabilityChanged(float durability) { SuppressorDurabilityChanged?.Invoke(durability); }
 
     // Player walks into weapon pickup
-    public static Action<string> PlayerCollidedWithPickup;
-    public static void TriggerPlayerCollidedWithPickup(string weaponName) { PlayerCollidedWithPickup?.Invoke(weaponName); }
+    public static Action<string, bool> PlayerCollidedWithPickup;
+    public static void TriggerPlayerCollidedWithPickup(string weaponName, bool isConsumable) { PlayerCollidedWithPickup?.Invoke(weaponName, isConsumable); }
 
     // Player walks away from weapon pickup
     public static Action PlayerLeftPickup;
     public static void TriggerPlayerLeftPickup() { PlayerLeftPickup?.Invoke(); }
 
     // Player picked up a weapon
-    public static Action<string> PlayerPickedUpWeapon;
-    public static void TriggerPlayerPickedUpWeapon(string previousWeaponName) { PlayerPickedUpWeapon?.Invoke(previousWeaponName); }
+    public static Action<string, bool> PlayerPickedUpWeapon;
+    public static void TriggerPlayerPickedUpWeapon(string previousWeaponName, bool isConsumable) { PlayerPickedUpWeapon?.Invoke(previousWeaponName, isConsumable); }
 
     #endregion
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FragGrenade : MonoBehaviour
+public class Flashbang : MonoBehaviour
 {
     [SerializeField]
     private float timer = 5f;
@@ -19,7 +19,6 @@ public class FragGrenade : MonoBehaviour
     private float collisionAudibleDistance;
     [SerializeField]
     private float explosionAudibleDistance;
-
 
     // Update is called once per frame
     void Update()
