@@ -13,6 +13,10 @@ public static class EventManager
     public static Action UIQuitClicked;
     public static void TriggerUIQuitClicked() { UIQuitClicked?.Invoke(); }
 
+    // Should mouse be hidden/locked
+    public static Action<bool> MouseShouldHide;
+    public static void TriggerMouseShouldHide(bool shouldHide) { MouseShouldHide?.Invoke(shouldHide); }
+
     #endregion
 
     #region Game Manager Events

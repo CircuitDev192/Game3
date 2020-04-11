@@ -10,16 +10,7 @@ public class UIConsumableWheelController : MonoBehaviour
     [SerializeField] private Button flareButton;
     [SerializeField] private Button medkitButton;
     [SerializeField] private Button flashButton;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        rockButton.onClick.AddListener(RockButtonClicked);
-        fragButton.onClick.AddListener(FragButtonClicked);
-        flareButton.onClick.AddListener(FlareButtonClicked);
-        medkitButton.onClick.AddListener(MedkitButtonClicked);
-        flashButton.onClick.AddListener(FlashButtonClicked);
-    }
+    [SerializeField] private Text selectedItem;
 
     // Update is called once per frame
     void Update()
@@ -31,9 +22,11 @@ public class UIConsumableWheelController : MonoBehaviour
             flareButton.gameObject.SetActive(true);
             medkitButton.gameObject.SetActive(true);
             flashButton.gameObject.SetActive(true);
+            selectedItem.gameObject.SetActive(true);
 
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.Confined;
+            EventManager.TriggerMouseShouldHide(false);
+
+            Time.timeScale = 0.3f;
         }
 
         if (Input.GetKeyUp(KeyCode.LeftAlt))
@@ -43,32 +36,37 @@ public class UIConsumableWheelController : MonoBehaviour
             flareButton.gameObject.SetActive(false);
             medkitButton.gameObject.SetActive(false);
             flashButton.gameObject.SetActive(false);
+            selectedItem.gameObject.SetActive(false);
+
+            EventManager.TriggerPlayerChangedConsumable(selectedItem.text);
+            EventManager.TriggerMouseShouldHide(true);
+
+            Time.timeScale = 1f;
         }
     }
 
-    private void RockButtonClicked()
+    public void RockButtonHover()
     {
-        EventManager.TriggerPlayerChangedConsumable("Rock");
-        Debug.LogWarning("Button Clicked!");
+        selectedItem.text = "Rock";
     }
 
-    private void FragButtonClicked()
+    public void FragButtonHover()
     {
-        EventManager.TriggerPlayerChangedConsumable("Frag Grenade");
+        selectedItem.text = "Frag Grenade";
     }
 
-    private void FlareButtonClicked()
+    public void FlareButtonHover()
     {
-        EventManager.TriggerPlayerChangedConsumable("Flare");
+        selectedItem.text = "Flare";
     }
 
-    private void MedkitButtonClicked()
+    public void MedkitButtonHover()
     {
-        EventManager.TriggerPlayerChangedConsumable("Medkit");
+        selectedItem.text = "Medkit";
     }
 
-    private void FlashButtonClicked()
+    public void FlashButtonHover()
     {
-        EventManager.TriggerPlayerChangedConsumable("Flashbang");
+        selectedItem.text = "Flashbang";
     }
 }
