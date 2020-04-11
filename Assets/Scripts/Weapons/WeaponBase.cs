@@ -15,6 +15,7 @@ public abstract class WeaponBase : MonoBehaviour
 
     public string name;
     public int weaponTypeInt; // 0 = Primary, 1 = Secondary, 2 = Melee, 3 = (Not yet implemented)Throwable
+    public PlayerManager.AmmoType ammoType;
     public float damage;
     public float fireRate;
     public int roundsPerMag;
@@ -68,14 +69,15 @@ public abstract class WeaponBase : MonoBehaviour
     public AudioClip[] audioClips;
 
     public int roundsInCurrentMag;
-    public int totalAmmo;
     public FireMode currentFireMode;
 
     public abstract IEnumerator Fire(Transform directionTransform);
     
     public void Reload()
     {
-        if(totalAmmo < roundsPerMag)
+        int totalAmmo = PlayerManager.instance.GetTotalAmmoOfType(ammoType);
+
+        if (totalAmmo < roundsPerMag)
         {
             roundsInCurrentMag = totalAmmo;
             totalAmmo = 0;
@@ -90,7 +92,7 @@ public abstract class WeaponBase : MonoBehaviour
         audioSource.PlayOneShot(audioClips[1], 0.25f);
 
         EventManager.TriggerAmmoCountChanged(roundsInCurrentMag);
-        EventManager.TriggerTotalAmmoChanged(totalAmmo);
+        EventManager.TriggerTotalAmmoChanged(totalAmmo, ammoType);
     }
 
     public void SetIdleValues(Animator playerAnimator)

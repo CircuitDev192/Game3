@@ -29,7 +29,7 @@ public class WeaponSwapState : WeaponBaseState
 
         EventManager.TriggerWeaponChanged(context.currentWeapon.name);
         EventManager.TriggerAmmoCountChanged(context.currentWeapon.roundsInCurrentMag);
-        EventManager.TriggerTotalAmmoChanged(context.currentWeapon.totalAmmo);
+        EventManager.TriggerTotalAmmoChanged(PlayerManager.instance.GetTotalAmmoOfType(context.currentWeapon.ammoType), context.currentWeapon.ammoType);
 
         context.playerAnimator.SetInteger("WeaponType_int", context.currentWeapon.weaponAnimation);
         context.playerAnimator.SetInteger("MeleeType_int", context.currentWeapon.meleeType);

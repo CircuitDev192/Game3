@@ -8,7 +8,7 @@ public class WeaponReloadState : WeaponBaseState
     {
         Debug.Log("Weapon entered reload state");
 
-        if (context.currentWeapon.totalAmmo > 0)
+        if (PlayerManager.instance.GetTotalAmmoOfType(context.currentWeapon.ammoType) > 0)
         {
             context.playerAnimator.SetBool("Reload_b", true);
             context.currentWeapon.Reload();

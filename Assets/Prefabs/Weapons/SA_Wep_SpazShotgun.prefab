@@ -1096,6 +1096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Spas-12
   weaponTypeInt: 0
+  ammoType: 1
   damage: 67
   fireRate: 0.675
   roundsPerMag: 1

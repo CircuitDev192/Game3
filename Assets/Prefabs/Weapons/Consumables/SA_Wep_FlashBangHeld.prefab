@@ -110,6 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Flashbang
   weaponTypeInt: 3
+  ammoType: 4
   damage: 0
   fireRate: 2
   roundsPerMag: 1

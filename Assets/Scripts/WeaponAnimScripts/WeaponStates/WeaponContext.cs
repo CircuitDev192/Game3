@@ -107,10 +107,11 @@ public class WeaponContext : Context<WeaponContext>
                 {
                     if (consumable.name == weaponName)
                     {
-                        consumable.totalAmmo++;
+                        int ammoBeforePickup = PlayerManager.instance.GetTotalAmmoOfType(consumable.ammoType);
+                        ammoBeforePickup++;
                         if (currentWeapon.name == weaponName)
                         {
-                            EventManager.TriggerTotalAmmoChanged(consumable.totalAmmo);
+                            EventManager.TriggerTotalAmmoChanged(ammoBeforePickup, consumable.ammoType);
                         }
                         EventManager.TriggerPlayerPickedUpWeapon(consumable.name, true);
                     }
@@ -123,9 +124,12 @@ public class WeaponContext : Context<WeaponContext>
                     if (weapon.name == weaponName)
                     {
                         EventManager.TriggerPlayerPickedUpWeapon(weapons[weapon.weaponTypeInt].name, false);
+                        int ammoInPreviousMag = weapons[weapon.weaponTypeInt].roundsInCurrentMag;
+                        EventManager.TriggerTotalAmmoChangedSwap(PlayerManager.instance.GetTotalAmmoOfType(weapons[weapon.weaponTypeInt].ammoType) + ammoInPreviousMag, weapons[weapon.weaponTypeInt].ammoType);
                         Destroy(weapons[weapon.weaponTypeInt].gameObject);
                         WeaponBase weap = Instantiate(weapon, weaponRoot);
                         weapons[weapon.weaponTypeInt] = weap;
+                        weapons[weapon.weaponTypeInt].roundsInCurrentMag = 0;
 
                         if (currentWeaponIndex != weapon.weaponTypeInt)
                         {

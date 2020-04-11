@@ -54,8 +54,12 @@ public static class EventManager
     public static void TriggerAmmoCountChanged(int ammoCount) { AmmoCountChanged?.Invoke(ammoCount); }
 
     // Total ammo count changed event
-    public static Action<int> TotalAmmoChanged;
-    public static void TriggerTotalAmmoChanged(int totalAmmo) { TotalAmmoChanged?.Invoke(totalAmmo); }
+    public static Action<int, PlayerManager.AmmoType> TotalAmmoChanged;
+    public static void TriggerTotalAmmoChanged(int totalAmmo, PlayerManager.AmmoType ammoType) { TotalAmmoChanged?.Invoke(totalAmmo, ammoType); }
+
+    // Total ammo count updated on weapon swap event
+    public static Action<int, PlayerManager.AmmoType> TotalAmmoChangedSwap;
+    public static void TriggerTotalAmmoChangedSwap(int totalAmmo, PlayerManager.AmmoType ammoType) { TotalAmmoChangedSwap?.Invoke(totalAmmo, ammoType); }
 
     // Weapon changed event
     public static Action<string> WeaponChanged;

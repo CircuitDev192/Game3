@@ -47,7 +47,7 @@ public class UIPlayerInfoController : MonoBehaviour
         this.roundsInMag.text = roundsInMag.ToString("D2");
     }
 
-    private void TotalAmmoChanged(int totalAmmo)
+    private void TotalAmmoChanged(int totalAmmo, PlayerManager.AmmoType ammoType)
     {
         this.totalAmmo.text = "/" + totalAmmo.ToString("D2");
     }

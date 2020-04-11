@@ -623,6 +623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Deagle
   weaponTypeInt: 1
+  ammoType: 2
   damage: 125
   fireRate: 0.56
   roundsPerMag: 8
