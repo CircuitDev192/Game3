@@ -31,6 +31,9 @@ public class UIConsumableWheelController : MonoBehaviour
             flareButton.gameObject.SetActive(true);
             medkitButton.gameObject.SetActive(true);
             flashButton.gameObject.SetActive(true);
+
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
         }
 
         if (Input.GetKeyUp(KeyCode.LeftAlt))
@@ -46,6 +49,7 @@ public class UIConsumableWheelController : MonoBehaviour
     private void RockButtonClicked()
     {
         EventManager.TriggerPlayerChangedConsumable("Rock");
+        Debug.LogWarning("Button Clicked!");
     }
 
     private void FragButtonClicked()
