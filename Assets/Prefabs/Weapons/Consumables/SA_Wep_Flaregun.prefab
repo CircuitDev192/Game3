@@ -149,7 +149,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0d0640256413f124ea5df50c4ad59fad, type: 3}
   - {fileID: 8300000, guid: 5da41b04974cf5b4a94b6f262ce6542c, type: 3}
   roundsInCurrentMag: 1
-  totalAmmo: 3
   currentFireMode: 0
   flarePrefab: {fileID: 7957489420411926333, guid: 5f14647b09ad3e2469bf5c286f3d8507,
     type: 3}
