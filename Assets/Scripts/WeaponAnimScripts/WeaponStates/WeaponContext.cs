@@ -62,6 +62,8 @@ public class WeaponContext : Context<WeaponContext>
             WeaponBase consume = Instantiate(consumable, weaponRoot);
             consume.enabled = false;
             consumables.Add(consume);
+            int totalAmmo = PlayerManager.instance.GetTotalAmmoOfType(consume.ammoType);
+            EventManager.TriggerUpdateItemCountUI(consume.name, consume.roundsInCurrentMag + totalAmmo);
         }
 
         currentWeaponIndex = 0;
