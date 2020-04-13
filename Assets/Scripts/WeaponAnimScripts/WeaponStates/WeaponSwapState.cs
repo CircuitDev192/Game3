@@ -24,6 +24,7 @@ public class WeaponSwapState : WeaponBaseState
         else
         {
             context.currentWeapon = context.consumables[context.currentConsumableIndex];
+            context.currentWeapon.enabled = true;
         }
 
 

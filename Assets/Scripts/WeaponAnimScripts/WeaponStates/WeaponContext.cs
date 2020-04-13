@@ -72,12 +72,25 @@ public class WeaponContext : Context<WeaponContext>
 
         EventManager.GameStateChanged += GameStateChanged;
         EventManager.PlayerCollidedWithPickup += PlayerCollidedWithPickup;
-        //EventManager.PlayerChangedConsumable += PlayerChangedConsumable;
+        EventManager.PlayerChangedConsumable += PlayerChangedConsumable;
     }
 
     private void PlayerChangedConsumable(string consumableName)
     {
         equippedConsumable = consumableName;
+        foreach(WeaponBase consumable in consumables)
+        {
+            if (consumable.name == consumableName)
+            {
+                currentConsumableIndex = consumables.IndexOf(consumable);
+            }
+        }
+        if (consumableEquipped)
+        {
+            currentState.ExitState(this);
+            currentState = swapState;
+            currentState.EnterState(this);
+        }
     }
 
     private void PlayerCollidedWithPickup(string weaponName, bool isConsumable)
