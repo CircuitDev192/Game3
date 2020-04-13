@@ -5,26 +5,27 @@ using UnityEngine;
 public class ThrowableWeapon : WeaponBase
 {
     [SerializeField]
-    private GameObject fragGrenadeThrown;
+    private GameObject grenadeThrown;
 
     public override IEnumerator Fire(Transform directionTransform)
     {
         yield return new WaitForSeconds(fireAnimationStartDelay);
 
         roundsInCurrentMag--;
+
         EventManager.TriggerAmmoCountChanged(roundsInCurrentMag);
 
         //instantiate grenade
-        GameObject frag = Instantiate(fragGrenadeThrown, this.gameObject.transform);
-        frag.transform.parent = null;
+        GameObject grenade = Instantiate(grenadeThrown, this.gameObject.transform);
+        grenade.transform.parent = null;
         //disable renderer
-        weaponRenderer.enabled = false;
+        //weaponRenderer.enabled = false;
 
 
-        frag.GetComponent<Rigidbody>().AddForce(directionTransform.forward.normalized * 2000);
+        grenade.GetComponent<Rigidbody>().AddForce(directionTransform.forward.normalized * 2000);
 
         yield return new WaitForSeconds(0.2f);
-        frag.GetComponent<MeshCollider>().enabled = true;
+        grenade.GetComponent<MeshCollider>().enabled = true;
 
         // wait one frame
         yield return new WaitForEndOfFrame();

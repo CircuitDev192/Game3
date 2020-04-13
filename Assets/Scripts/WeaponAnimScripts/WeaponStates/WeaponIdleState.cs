@@ -16,18 +16,16 @@ public class WeaponIdleState : WeaponBaseState
     {
         if (context.gameState == GameState.Paused) return this;
 
-        WeaponBase weapon = context.weapons[context.currentWeaponIndex];
-
         // Weapon should fire or reload
         if(Input.GetMouseButtonDown(0))
         {
-            if (weapon.roundsInCurrentMag > 0) return context.fireState;
+            if (context.currentWeapon.roundsInCurrentMag > 0) return context.fireState;
 
             else return context.reloadState;
         }
 
         // Weapon should reload
-        if (Input.GetKeyDown(KeyCode.R) && weapon.roundsInCurrentMag < weapon.roundsPerMag) return context.reloadState;
+        if (Input.GetKeyDown(KeyCode.R) && context.currentWeapon.roundsInCurrentMag < context.currentWeapon.roundsPerMag) return context.reloadState;
 
 
         context.currentScrollDelta = Input.GetAxisRaw("Mouse ScrollWheel");
@@ -35,12 +33,20 @@ public class WeaponIdleState : WeaponBaseState
         // Swap weapon
         if (context.currentScrollDelta != 0) return context.swapState;
 
+        // Swap to consumable
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            context.consumableEquipped = !context.consumableEquipped;
+            context.consumables[context.currentConsumableIndex].enabled = context.consumableEquipped;
+            return context.swapState;
+        }
+
         // Enable Flashlight
         if (Input.GetKeyDown(KeyCode.F))
         {
             context.flashlightOn = !context.flashlightOn;
-            weapon.flashLight.enabled = context.flashlightOn;
-            weapon.flashlightOn = context.flashlightOn;
+            context.currentWeapon.flashLight.enabled = context.flashlightOn;
+            context.currentWeapon.flashlightOn = context.flashlightOn;
         }
 
         return this;

@@ -58,8 +58,12 @@ public static class EventManager
     public static void TriggerAmmoCountChanged(int ammoCount) { AmmoCountChanged?.Invoke(ammoCount); }
 
     // Total ammo count changed event
-    public static Action<int> TotalAmmoChanged;
-    public static void TriggerTotalAmmoChanged(int totalAmmo) { TotalAmmoChanged?.Invoke(totalAmmo); }
+    public static Action<int, PlayerManager.AmmoType> TotalAmmoChanged;
+    public static void TriggerTotalAmmoChanged(int totalAmmo, PlayerManager.AmmoType ammoType) { TotalAmmoChanged?.Invoke(totalAmmo, ammoType); }
+
+    // Total ammo count updated on weapon swap event
+    public static Action<int, PlayerManager.AmmoType> TotalAmmoChangedSwap;
+    public static void TriggerTotalAmmoChangedSwap(int totalAmmo, PlayerManager.AmmoType ammoType) { TotalAmmoChangedSwap?.Invoke(totalAmmo, ammoType); }
 
     // Weapon changed event
     public static Action<string> WeaponChanged;
@@ -74,16 +78,16 @@ public static class EventManager
     public static void TriggerSuppressorDurabilityChanged(float durability) { SuppressorDurabilityChanged?.Invoke(durability); }
 
     // Player walks into weapon pickup
-    public static Action<string> PlayerCollidedWithPickup;
-    public static void TriggerPlayerCollidedWithPickup(string weaponName) { PlayerCollidedWithPickup?.Invoke(weaponName); }
+    public static Action<string, bool> PlayerCollidedWithPickup;
+    public static void TriggerPlayerCollidedWithPickup(string weaponName, bool isConsumable) { PlayerCollidedWithPickup?.Invoke(weaponName, isConsumable); }
 
     // Player walks away from weapon pickup
     public static Action PlayerLeftPickup;
     public static void TriggerPlayerLeftPickup() { PlayerLeftPickup?.Invoke(); }
 
     // Player picked up a weapon
-    public static Action<string> PlayerPickedUpWeapon;
-    public static void TriggerPlayerPickedUpWeapon(string previousWeaponName) { PlayerPickedUpWeapon?.Invoke(previousWeaponName); }
+    public static Action<string, bool> PlayerPickedUpWeapon;
+    public static void TriggerPlayerPickedUpWeapon(string previousWeaponName, bool isConsumable) { PlayerPickedUpWeapon?.Invoke(previousWeaponName, isConsumable); }
 
     // Player changed the equipped consumable
     public static Action<string> PlayerChangedConsumable;

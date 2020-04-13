@@ -6419,9 +6419,20 @@ MonoBehaviour:
   - {fileID: 4624678529073616633, guid: 0aec694b0c0c3a446acbce119be443f0, type: 3}
   - {fileID: 65264894889758074, guid: 4d0463a185c782b4f83578cee3221993, type: 3}
   - {fileID: 572241145689354226, guid: d7d16aafc56e8104badde3d4a6fe87ae, type: 3}
+  consumablePrefabs:
+  - {fileID: -5020903799860781653, guid: 1a0192c7eb52d0148a5ecc2f345b5f30, type: 3}
+  - {fileID: 572241145689354226, guid: d7d16aafc56e8104badde3d4a6fe87ae, type: 3}
+  - {fileID: 2261001177301076415, guid: 1220b9b205e853e4a850d2f6ce25ca56, type: 3}
+  - {fileID: 7102301656092795077, guid: fae7a5aa7fd0d814d93ca1cc198eda55, type: 3}
+  - {fileID: 8003956396084438916, guid: 9a53a5e4d5b4a8542b0700946af4ebd6, type: 3}
+  equippedConsumable: Rock
   weapons: []
+  consumables: []
+  currentWeapon: {fileID: 0}
   currentWeaponIndex: 0
+  currentConsumableIndex: 0
   flashlightOn: 0
+  consumableEquipped: 0
   weaponSwapTime: 0.5
   currentScrollDelta: 0
   mainCamera: {fileID: 0}

@@ -28,11 +28,9 @@ public class WeaponFireState : WeaponBaseState
         // We can fire another shot
         if (Time.time < nextShotTime) return this;
 
-        WeaponBase weapon = context.weapons[context.currentWeaponIndex];
-
         if (!Input.GetMouseButton(0))
         {
-            if (weapon.roundsInCurrentMag == 0)
+            if (context.currentWeapon.roundsInCurrentMag == 0)
             {
                 return context.reloadState;
             }
@@ -40,11 +38,11 @@ public class WeaponFireState : WeaponBaseState
         }
 
         // Make sure we have ammo
-        if (weapon.roundsInCurrentMag > 0)
+        if (context.currentWeapon.roundsInCurrentMag > 0)
         {
             // Delegate firing to the weapon
-            context.StartCoroutine(weapon.Fire(context.mainCamera.transform));
-            nextShotTime = Time.time + weapon.fireRate;
+            context.StartCoroutine(context.currentWeapon.Fire(context.mainCamera.transform));
+            nextShotTime = Time.time + context.currentWeapon.fireRate;
         }
         // No ammo in mag, reload
         else return context.reloadState;

@@ -110,6 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Katana
   weaponTypeInt: 2
+  ammoType: 7
   damage: 150
   fireRate: 1.5
   roundsPerMag: 1
@@ -150,7 +151,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1425c5c8f171c6c4d975e03903fc9aa8, type: 3}
   - {fileID: 8300000, guid: 5da41b04974cf5b4a94b6f262ce6542c, type: 3}
   roundsInCurrentMag: 1
-  totalAmmo: 1
+  totalAmmo: 0
   currentFireMode: 0
 --- !u!82 &1230092820096490381
 AudioSource:

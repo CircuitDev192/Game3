@@ -8,13 +8,11 @@ public class WeaponReloadState : WeaponBaseState
     {
         Debug.Log("Weapon entered reload state");
 
-        WeaponBase weapon = context.weapons[context.currentWeaponIndex];
-
-        if (weapon.totalAmmo > 0)
+        if (PlayerManager.instance.GetTotalAmmoOfType(context.currentWeapon.ammoType) > 0)
         {
             context.playerAnimator.SetBool("Reload_b", true);
-            weapon.Reload();
-            timeToFinishReload = Time.time + weapon.reloadTime;
+            context.currentWeapon.Reload();
+            timeToFinishReload = Time.time + context.currentWeapon.reloadTime;
         }
         else timeToFinishReload = Time.time;
     }

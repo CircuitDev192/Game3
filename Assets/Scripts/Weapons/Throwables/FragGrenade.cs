@@ -9,12 +9,17 @@ public class FragGrenade : MonoBehaviour
     private bool isExploded = false;
     [SerializeField]
     private GameObject explosion;
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip explosionSound;
+    [SerializeField]
+    private AudioClip collisionSound;
+    [SerializeField]
+    private float collisionAudibleDistance;
+    [SerializeField]
+    private float explosionAudibleDistance;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -24,9 +29,21 @@ public class FragGrenade : MonoBehaviour
         {
             //explode
             Instantiate(explosion, this.gameObject.transform);
+            audioSource.pitch = 1f;
+            audioSource.maxDistance = explosionAudibleDistance;
+            audioSource.PlayOneShot(explosionSound, 1f);
+            EventManager.TriggerSoundGenerated(this.transform.position, explosionAudibleDistance);
             this.gameObject.GetComponent<MeshRenderer>().enabled = false;
             isExploded = true;
             Destroy(this.gameObject, 4f);
         }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        audioSource.pitch = Random.Range(0.75f, 1.25f);
+        audioSource.maxDistance = collisionAudibleDistance * 2;
+        audioSource.PlayOneShot(collisionSound, 0.15f);
+        EventManager.TriggerSoundGenerated(this.transform.position, collisionAudibleDistance);
     }
 }

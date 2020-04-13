@@ -19,9 +19,15 @@ public class WeaponContext : Context<WeaponContext>
     public Animator playerAnimator;
     public Transform weaponRoot;
     public WeaponBase[] weaponPrefabs;
+    public WeaponBase[] consumablePrefabs;
+    public string equippedConsumable;
     public List<WeaponBase> weapons;
+    public List<WeaponBase> consumables;
+    public WeaponBase currentWeapon;
     public int currentWeaponIndex;
+    public int currentConsumableIndex;
     public bool flashlightOn = false;
+    public bool consumableEquipped = false;
     private bool isInPickupRange = false;
 
     public float weaponSwapTime;
@@ -51,18 +57,47 @@ public class WeaponContext : Context<WeaponContext>
             }
         }
 
+        foreach (WeaponBase consumable in consumablePrefabs)
+        {
+            WeaponBase consume = Instantiate(consumable, weaponRoot);
+            consume.enabled = false;
+            consumables.Add(consume);
+        }
+
         currentWeaponIndex = 0;
-        weapons[currentWeaponIndex].enabled = true;
+        currentWeapon = weapons[currentWeaponIndex];
+        currentWeapon.enabled = true;
+
+        currentConsumableIndex = 0;
 
         EventManager.GameStateChanged += GameStateChanged;
         EventManager.PlayerCollidedWithPickup += PlayerCollidedWithPickup;
+        EventManager.PlayerChangedConsumable += PlayerChangedConsumable;
     }
 
-    private void PlayerCollidedWithPickup(string weaponName)
+    private void PlayerChangedConsumable(string consumableName)
+    {
+        equippedConsumable = consumableName;
+        foreach(WeaponBase consumable in consumables)
+        {
+            if (consumable.name == consumableName)
+            {
+                currentConsumableIndex = consumables.IndexOf(consumable);
+            }
+        }
+        if (consumableEquipped)
+        {
+            currentState.ExitState(this);
+            currentState = swapState;
+            currentState.EnterState(this);
+        }
+    }
+
+    private void PlayerCollidedWithPickup(string weaponName, bool isConsumable)
     {
         isInPickupRange = true;
         EventManager.PlayerLeftPickup += PlayerLeftPickup;
-        StartCoroutine(WaitForPlayerToPickupWeapon(weaponName));
+        StartCoroutine(WaitForPlayerToPickupWeapon(weaponName, isConsumable));
     }
 
     private void PlayerLeftPickup()
@@ -71,7 +106,7 @@ public class WeaponContext : Context<WeaponContext>
         EventManager.PlayerLeftPickup -= PlayerLeftPickup;
     }
 
-    private IEnumerator WaitForPlayerToPickupWeapon(string weaponName)
+    private IEnumerator WaitForPlayerToPickupWeapon(string weaponName, bool isConsumable)
     {
         while (!Input.GetKeyDown(KeyCode.E) && isInPickupRange)
         {
@@ -79,26 +114,48 @@ public class WeaponContext : Context<WeaponContext>
         }
         if (isInPickupRange)
         {
-            foreach (WeaponBase weapon in weaponPrefabs)
+            if (isConsumable)
             {
-                if (weapon.name == weaponName)
+                foreach (WeaponBase consumable in consumables)
                 {
-                    EventManager.TriggerPlayerPickedUpWeapon(weapons[weapon.weaponTypeInt].name);
-                    Destroy(weapons[weapon.weaponTypeInt].gameObject);
-                    WeaponBase weap = Instantiate(weapon, weaponRoot);
-                    weapons[weapon.weaponTypeInt] = weap;
+                    if (consumable.name == weaponName)
+                    {
+                        int ammoBeforePickup = PlayerManager.instance.GetTotalAmmoOfType(consumable.ammoType);
+                        ammoBeforePickup++;
+                        if (currentWeapon.name == weaponName)
+                        {
+                            EventManager.TriggerTotalAmmoChanged(ammoBeforePickup, consumable.ammoType);
+                        }
+                        EventManager.TriggerPlayerPickedUpWeapon(consumable.name, true);
+                    }
+                }
+            }
+            else
+            {
+                foreach (WeaponBase weapon in weaponPrefabs)
+                {
+                    if (weapon.name == weaponName)
+                    {
+                        EventManager.TriggerPlayerPickedUpWeapon(weapons[weapon.weaponTypeInt].name, false);
+                        int ammoInPreviousMag = weapons[weapon.weaponTypeInt].roundsInCurrentMag;
+                        EventManager.TriggerTotalAmmoChangedSwap(PlayerManager.instance.GetTotalAmmoOfType(weapons[weapon.weaponTypeInt].ammoType) + ammoInPreviousMag, weapons[weapon.weaponTypeInt].ammoType);
+                        Destroy(weapons[weapon.weaponTypeInt].gameObject);
+                        WeaponBase weap = Instantiate(weapon, weaponRoot);
+                        weapons[weapon.weaponTypeInt] = weap;
+                        weapons[weapon.weaponTypeInt].roundsInCurrentMag = 0;
 
-                    if (currentWeaponIndex != weapon.weaponTypeInt)
-                    {
-                        weap.enabled = false;
+                        if (currentWeaponIndex != weapon.weaponTypeInt)
+                        {
+                            weap.enabled = false;
+                        }
+                        else
+                        {
+                            currentState.ExitState(this);
+                            currentState = swapState;
+                            currentState.EnterState(this);
+                        }
+                        break;
                     }
-                    else
-                    {
-                        currentState.ExitState(this);
-                        currentState = swapState;
-                        currentState.EnterState(this);
-                    }
-                    break;
                 }
             }
         }
