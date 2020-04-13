@@ -13,6 +13,10 @@ public static class EventManager
     public static Action UIQuitClicked;
     public static void TriggerUIQuitClicked() { UIQuitClicked?.Invoke(); }
 
+    // Should mouse be hidden/locked
+    public static Action<bool> MouseShouldHide;
+    public static void TriggerMouseShouldHide(bool shouldHide) { MouseShouldHide?.Invoke(shouldHide); }
+
     #endregion
 
     #region Game Manager Events
@@ -84,6 +88,10 @@ public static class EventManager
     // Player picked up a weapon
     public static Action<string, bool> PlayerPickedUpWeapon;
     public static void TriggerPlayerPickedUpWeapon(string previousWeaponName, bool isConsumable) { PlayerPickedUpWeapon?.Invoke(previousWeaponName, isConsumable); }
+
+    // Player changed the equipped consumable
+    public static Action<string> PlayerChangedConsumable;
+    public static void TriggerPlayerChangedConsumable(string consumableName) { PlayerChangedConsumable?.Invoke(consumableName); }
 
     #endregion
 
