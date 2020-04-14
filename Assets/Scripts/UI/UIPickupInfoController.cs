@@ -37,6 +37,7 @@ public class UIPickupInfoController : MonoBehaviour
     {
         promptText.gameObject.SetActive(false);
         pickupText.gameObject.SetActive(false);
+        Debug.LogError("Player Left Pickup.");
     }
 
 }
