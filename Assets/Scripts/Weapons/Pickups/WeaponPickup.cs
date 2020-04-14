@@ -7,8 +7,6 @@ public class WeaponPickup : MonoBehaviour
     public string weaponName; // Must match the name variable of the weapon prefab exactly
     [SerializeField]
     private GameObject _pointA, _pointB;
-    [SerializeField]
-    private bool isConsumable;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +28,7 @@ public class WeaponPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            EventManager.TriggerPlayerCollidedWithPickup(weaponName, isConsumable);
+            EventManager.TriggerPlayerCollidedWithPickup(weaponName);
             EventManager.PlayerPickedUpWeapon += PlayerPickedUpWeapon;
         }
     }
@@ -44,7 +42,7 @@ public class WeaponPickup : MonoBehaviour
         }
     }
 
-    void PlayerPickedUpWeapon(string previousWeaponName, bool isConsumable)
+    void PlayerPickedUpWeapon(string previousWeaponName)
     {
         EventManager.PlayerPickedUpWeapon -= PlayerPickedUpWeapon;
         Destroy(this.gameObject.transform.parent.gameObject);
