@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,35 @@ public class UIConsumableWheelController : MonoBehaviour
     [SerializeField] private Button medkitButton;
     [SerializeField] private Button flashButton;
     [SerializeField] private Text selectedItem;
+    [SerializeField] private GameObject[] itemCounts;
+    [SerializeField] private string[] itemNames;
+
+    private void Awake()
+    {
+        EventManager.UpdateItemCountUI += UpdateItemCountUI;
+        rockButton.gameObject.SetActive(false);
+        fragButton.gameObject.SetActive(false);
+        flareButton.gameObject.SetActive(false);
+        medkitButton.gameObject.SetActive(false);
+        flashButton.gameObject.SetActive(false);
+        selectedItem.gameObject.SetActive(false);
+
+        EventManager.TriggerPlayerChangedConsumable(selectedItem.text);
+        EventManager.TriggerMouseShouldHide(true);
+    }
+
+    private void UpdateItemCountUI(string consumableName, int newValue)
+    {
+        int counter = 0;
+        foreach(string consumable in itemNames)
+        {
+            if (consumable == consumableName)
+            {
+                itemCounts[counter].GetComponentInChildren<Text>().text = newValue.ToString();
+            }
+            counter++;
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -24,7 +54,7 @@ public class UIConsumableWheelController : MonoBehaviour
             flashButton.gameObject.SetActive(true);
             selectedItem.gameObject.SetActive(true);
 
-            EventManager.TriggerMouseShouldHide(false);
+            EventManager.TriggerMouseShouldHide(false);       
 
             Time.timeScale = 0.3f;
         }
@@ -47,26 +77,26 @@ public class UIConsumableWheelController : MonoBehaviour
 
     public void RockButtonHover()
     {
-        selectedItem.text = "Rock";
+        selectedItem.text = itemNames[0];
     }
 
     public void FragButtonHover()
     {
-        selectedItem.text = "Frag Grenade";
+        selectedItem.text = itemNames[1];
     }
 
     public void FlareButtonHover()
     {
-        selectedItem.text = "Flare";
+        selectedItem.text = itemNames[2];
     }
 
     public void MedkitButtonHover()
     {
-        selectedItem.text = "Medkit";
+        selectedItem.text = itemNames[3];
     }
 
     public void FlashButtonHover()
     {
-        selectedItem.text = "Flashbang";
+        selectedItem.text = itemNames[4];
     }
 }

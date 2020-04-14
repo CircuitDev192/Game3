@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
@@ -67,7 +67,7 @@ public class FirstPersonMovement : MonoBehaviour
     {
         RotateView();
         // the jump state needs to read here to make sure it is not missed
-        if (!m_Jump)
+        if (!m_Jump && !m_Jumping)
         {
             m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
         }
@@ -220,7 +220,7 @@ public class FirstPersonMovement : MonoBehaviour
 #if !MOBILE_INPUT
         // On standalone builds, walk/run speed is modified by a key press.
         // keep track of whether or not the character is walking or running
-        m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
+        m_IsWalking = !(Input.GetKey(KeyCode.LeftShift) && vertical > Mathf.Epsilon);
 #endif
         // set the desired speed to be walking or running
         speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;

@@ -715,6 +715,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+  itemCounts:
+  - {fileID: 7675507019650997780}
+  - {fileID: 2953549732380407621}
+  - {fileID: 8483245006250628143}
+  - {fileID: 4643000370274058862}
+  - {fileID: 7195379495223853598}
+  itemNames:
+  - Rock
+  - Frag Grenade
+  - Flare
+  - Medkit
+  - Flashbang
 --- !u!1 &2414016369228861727
 GameObject:
   m_ObjectHideFlags: 0

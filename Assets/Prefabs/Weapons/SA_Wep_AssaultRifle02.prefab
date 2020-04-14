@@ -374,10 +374,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: M-16
   weaponTypeInt: 0
+  ammoType: 0
   damage: 45
   fireRate: 0.11
   roundsPerMag: 30
-  range: 50
+  range: 125
   impactForce: 90
   fullAuto: 1
   flashlightOn: 0
@@ -414,7 +415,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1425c5c8f171c6c4d975e03903fc9aa8, type: 3}
   - {fileID: 8300000, guid: 5da41b04974cf5b4a94b6f262ce6542c, type: 3}
   roundsInCurrentMag: 30
-  totalAmmo: 60
   currentFireMode: 2
   lineRenderer: {fileID: 1273215274056676959}
 --- !u!1 &7352011040423579237

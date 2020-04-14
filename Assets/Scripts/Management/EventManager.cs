@@ -93,6 +93,10 @@ public static class EventManager
     public static Action<string> PlayerChangedConsumable;
     public static void TriggerPlayerChangedConsumable(string consumableName) { PlayerChangedConsumable?.Invoke(consumableName); }
 
+    // Update consumable count value
+    public static Action<string, int> UpdateItemCountUI;
+    public static void TriggerUpdateItemCountUI(string consumableName, int newValue) { UpdateItemCountUI?.Invoke(consumableName, newValue); }
+
     #endregion
 
     // Zombie killed event

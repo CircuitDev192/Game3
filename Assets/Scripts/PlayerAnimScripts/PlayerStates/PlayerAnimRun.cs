@@ -21,7 +21,7 @@ public class PlayerAnimRun : PlayerAnimBase
         {
             player.TransitionToState(player.jumpState);
         }
-        else if (!Input.GetKey(KeyCode.LeftShift))
+        else if (!Input.GetKey(KeyCode.LeftShift) || !Input.GetKey(KeyCode.W))
         {
             player.TransitionToState(player.walkState);
         }
