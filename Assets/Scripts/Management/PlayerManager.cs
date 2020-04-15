@@ -43,6 +43,37 @@ public class PlayerManager : MonoBehaviour
         EventManager.PlayerHealthChanged += PlayerHealthChanged;
         EventManager.TotalAmmoChanged += TotalAmmoChanged;
         EventManager.TotalAmmoChangedSwap += TotalAmmoChangedSwap;
+        EventManager.PlayerPickedUpAmmo += PlayerPickedUpAmmo;
+    }
+
+    private void PlayerPickedUpAmmo(AmmoType ammoType, int addedAmmo)
+    {
+        switch (ammoType)
+        {
+            case AmmoType.ASSAULTRIFLE:
+                EventManager.TriggerTotalAmmoChanged(assaultRifleAmmo + addedAmmo, ammoType);
+                break;
+            case AmmoType.SHOTGUN:
+                EventManager.TriggerTotalAmmoChanged(shotgunAmmo + addedAmmo, ammoType);
+                break;
+            case AmmoType.PISTOL:
+                EventManager.TriggerTotalAmmoChanged(pistolAmmo + addedAmmo, ammoType);
+                break;
+            case AmmoType.FRAG:
+                EventManager.TriggerTotalAmmoChanged(fragGrenades + addedAmmo, ammoType);
+                break;
+            case AmmoType.FLASH:
+                EventManager.TriggerTotalAmmoChanged(flashbangGrenades + addedAmmo, ammoType);
+                break;
+            case AmmoType.MEDKITS:
+                EventManager.TriggerTotalAmmoChanged(medkits + addedAmmo, ammoType);
+                break;
+            case AmmoType.FLARES:
+                EventManager.TriggerTotalAmmoChanged(flares + addedAmmo, ammoType);
+                break;
+            default:
+                break;
+        }
     }
 
     public int GetTotalAmmoOfType(AmmoType ammoType)
@@ -65,6 +96,29 @@ public class PlayerManager : MonoBehaviour
                 return flares;
             default:
                 return 0;
+        }
+    }
+
+    public string ConvertAmmoTypeToString (AmmoType ammoType)
+    {
+        switch (ammoType)
+        {
+            case AmmoType.ASSAULTRIFLE:
+                return "Assault Rifle Ammo";
+            case AmmoType.SHOTGUN:
+                return "Shotgun Ammo";
+            case AmmoType.PISTOL:
+                return "Pistol Ammo";
+            case AmmoType.FRAG:
+                return "Frag Grenade";
+            case AmmoType.FLASH:
+                return "Flashbang Grenade";
+            case AmmoType.MEDKITS:
+                return "Medkit";
+            case AmmoType.FLARES:
+                return "Flare";
+            default:
+                return "";
         }
     }
 

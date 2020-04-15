@@ -72,19 +72,17 @@ public class GameManager : Context<GameManager>
         currentState.EnterState(this);
     }
 
-    private void PlayerPickedUpWeapon(string previousWeaponName, bool isConsumable)
+    private void PlayerPickedUpWeapon(string previousWeaponName)
     {
-        if (!isConsumable)
+
+        foreach (GameObject pickup in weaponPickupPrefabs)
         {
-            foreach (GameObject pickup in weaponPickupPrefabs)
+            if (pickup.GetComponentInChildren<WeaponPickup>().weaponName == previousWeaponName)
             {
-                if (pickup.GetComponentInChildren<WeaponPickup>().weaponName == previousWeaponName)
-                {
-                    float offset = 2f;
-                    GameObject weap = Instantiate(pickup, player.transform.position + (player.transform.forward * offset), Quaternion.identity);
-                    weap.GetComponentInChildren<Rigidbody>().AddForce(player.transform.forward * 300f);
-                    break;
-                }
+                float offset = 2f;
+                GameObject weap = Instantiate(pickup, player.transform.position + (player.transform.forward * offset), Quaternion.identity);
+                weap.GetComponentInChildren<Rigidbody>().AddForce(player.transform.forward * 300f);
+                break;
             }
         }
     }

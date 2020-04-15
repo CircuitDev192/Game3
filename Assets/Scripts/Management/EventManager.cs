@@ -78,21 +78,29 @@ public static class EventManager
     public static void TriggerSuppressorDurabilityChanged(float durability) { SuppressorDurabilityChanged?.Invoke(durability); }
 
     // Player walks into weapon pickup
-    public static Action<string, bool> PlayerCollidedWithPickup;
-    public static void TriggerPlayerCollidedWithPickup(string weaponName, bool isConsumable) { PlayerCollidedWithPickup?.Invoke(weaponName, isConsumable); }
+    public static Action<string> PlayerCollidedWithPickup;
+    public static void TriggerPlayerCollidedWithPickup(string weaponName) { PlayerCollidedWithPickup?.Invoke(weaponName); }
 
     // Player walks away from weapon pickup
     public static Action PlayerLeftPickup;
     public static void TriggerPlayerLeftPickup() { PlayerLeftPickup?.Invoke(); }
 
     // Player picked up a weapon
-    public static Action<string, bool> PlayerPickedUpWeapon;
-    public static void TriggerPlayerPickedUpWeapon(string previousWeaponName, bool isConsumable) { PlayerPickedUpWeapon?.Invoke(previousWeaponName, isConsumable); }
+    public static Action<string> PlayerPickedUpWeapon;
+    public static void TriggerPlayerPickedUpWeapon(string previousWeaponName) { PlayerPickedUpWeapon?.Invoke(previousWeaponName); }
 
     // Player changed the equipped consumable
     public static Action<string> PlayerChangedConsumable;
     public static void TriggerPlayerChangedConsumable(string consumableName) { PlayerChangedConsumable?.Invoke(consumableName); }
 
+    // Player collided with ammo
+    public static Action<PlayerManager.AmmoType, int> PlayerCollidedWithAmmo;
+    public static void TriggerPlayerCollidedWithAmmo(PlayerManager.AmmoType ammoType, int addedAmmo) { PlayerCollidedWithAmmo?.Invoke(ammoType ,addedAmmo); }
+
+    // Player picked up ammo
+    public static Action<PlayerManager.AmmoType, int> PlayerPickedUpAmmo;
+    public static void TriggerPlayerPickedUpAmmo(PlayerManager.AmmoType ammoType, int addedAmmo) { PlayerPickedUpAmmo?.Invoke(ammoType, addedAmmo); }
+    
     // Update consumable count value
     public static Action<string, int> UpdateItemCountUI;
     public static void TriggerUpdateItemCountUI(string consumableName, int newValue) { UpdateItemCountUI?.Invoke(consumableName, newValue); }
