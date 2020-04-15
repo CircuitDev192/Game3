@@ -152,15 +152,19 @@ public class PlayerManager : MonoBehaviour
                 break;
             case AmmoType.FRAG:
                 fragGrenades = updatedAmmo;
+                EventManager.TriggerUpdateItemCountUI("Frag Grenade", updatedAmmo + 1);
                 break;
             case AmmoType.FLASH:
                 flashbangGrenades = updatedAmmo;
+                EventManager.TriggerUpdateItemCountUI("Flashbang", updatedAmmo + 1);
                 break;
             case AmmoType.MEDKITS:
                 medkits = updatedAmmo;
+                EventManager.TriggerUpdateItemCountUI("Medkit", updatedAmmo + 1);
                 break;
             case AmmoType.FLARES:
                 flares = updatedAmmo;
+                EventManager.TriggerUpdateItemCountUI("Flare", updatedAmmo + 1);
                 break;
             default:
                 break;

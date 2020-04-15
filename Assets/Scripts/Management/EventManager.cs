@@ -100,6 +100,10 @@ public static class EventManager
     // Player picked up ammo
     public static Action<PlayerManager.AmmoType, int> PlayerPickedUpAmmo;
     public static void TriggerPlayerPickedUpAmmo(PlayerManager.AmmoType ammoType, int addedAmmo) { PlayerPickedUpAmmo?.Invoke(ammoType, addedAmmo); }
+    
+    // Update consumable count value
+    public static Action<string, int> UpdateItemCountUI;
+    public static void TriggerUpdateItemCountUI(string consumableName, int newValue) { UpdateItemCountUI?.Invoke(consumableName, newValue); }
 
     #endregion
 
