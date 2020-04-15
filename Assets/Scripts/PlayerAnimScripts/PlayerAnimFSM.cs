@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimFSM : MonoBehaviour
+public class PlayerAnimFSM : MonoBehaviour, IDamageAble
 {
 
     private PlayerAnimBase currentState;
@@ -23,9 +23,13 @@ public class PlayerAnimFSM : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        EventManager.TriggerPlayerHealthChanged(health);
+
         playerAnimator = GetComponentInChildren<Animator>();
         playerCam = GetComponentInChildren<Camera>();
         TransitionToState(idleState);
+
+        EventManager.PlayerDamaged += Damage;
     }
 
     // Update is called once per frame
