@@ -9,6 +9,7 @@ public class ZombieAttackingState : ZombieBaseState
 
     public override void EnterState(ZombieContext context)
     {
+        Debug.Log("Zombie entered Attack state!");
         timeToAttack = Time.time;
     }
 

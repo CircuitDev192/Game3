@@ -9,6 +9,7 @@ public class ZombieChasingState : ZombieBaseState
 
     public override void EnterState(ZombieContext context)
     {
+        Debug.Log("Zombie entered Chase state!");
         context.zombieNavMeshAgent.enabled = true;
         context.zombieNavMeshAgent.speed = context.runSpeed;
         context.currentTarget = context.playerTransform.position;
@@ -27,12 +28,14 @@ public class ZombieChasingState : ZombieBaseState
     public override BaseState<ZombieContext> UpdateState(ZombieContext context)
     {
         if (base.ShouldDie(context)) return context.deadState;
+        
+        context.PlayTimedSound(this);
 
         context.currentTarget = context.playerTransform.position;
 
         float distance = Vector3.Distance(context.transform.position, context.currentTarget);
 
-        if (distance <= context.zombieNavMeshAgent.stoppingDistance) return context.attackState;
+        if (context.zombieNavMeshAgent.remainingDistance <= context.zombieNavMeshAgent.stoppingDistance) return context.attackState;
 
         if (distance > context.visionDistance) return context.idleState;
 

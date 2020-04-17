@@ -9,6 +9,8 @@ public class WeaponFireState : WeaponBaseState
     {
         Debug.Log("Weapon entered fire state.");
 
+        EventManager.TriggerSoundGenerated(context.transform.position, context.weapons[context.currentWeaponIndex].audibleDistance);
+
         context.playerAnimator.SetBool("Shoot_b", true);
         nextShotTime = (nextShotTime > Time.time) ? nextShotTime : Time.time;
     }
@@ -22,23 +24,28 @@ public class WeaponFireState : WeaponBaseState
 
     public override BaseState<WeaponContext> UpdateState(WeaponContext context)
     {
+        
         // We can fire another shot
-        if(Time.time > nextShotTime)
-        {
-            WeaponBase weapon = context.weapons[context.currentWeaponIndex];
+        if (Time.time < nextShotTime) return this;
 
-            // Make sure we have ammo
-            if (weapon.roundsInCurrentMag > 0)
+        if (!Input.GetMouseButton(0))
+        {
+            if (context.currentWeapon.roundsInCurrentMag == 0)
             {
-                // Delegate firing to the weapon
-                context.StartCoroutine(weapon.Fire(context.mainCamera.transform));
-                nextShotTime = Time.time + weapon.fireRate;
+                return context.reloadState;
             }
-            // No ammo in mag, reload
-            else return context.reloadState;
+            else return context.idleState;
         }
 
-        if (Input.GetMouseButtonUp(0)) return context.idleState;
+        // Make sure we have ammo
+        if (context.currentWeapon.roundsInCurrentMag > 0)
+        {
+            // Delegate firing to the weapon
+            context.StartCoroutine(context.currentWeapon.Fire(context.mainCamera.transform));
+            nextShotTime = Time.time + context.currentWeapon.fireRate;
+        }
+        // No ammo in mag, reload
+        else return context.reloadState;
 
         return this;
     }

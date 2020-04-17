@@ -6,6 +6,7 @@ public class ZombieDeadState : ZombieBaseState
 {
     public override void EnterState(ZombieContext context)
     {
+        Debug.Log("Zombie entered Dead state!");
         EventManager.TriggerZombieKilled();
         context.EnableRagdoll();
     }

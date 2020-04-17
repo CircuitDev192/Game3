@@ -38,7 +38,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1543332733475048893}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -71,8 +71,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 1.9876149, y: 0.042897996, z: 0.22845927}
+  - {x: 3.3120017, y: 0.1064786, z: 0.22793838}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -166,7 +166,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2228348636131878560}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
@@ -508,7 +508,7 @@ MeshCollider:
   m_GameObject: {fileID: 8527565352046566267}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
@@ -569,7 +569,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -621,15 +621,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67cc2b510bafc934a8ef9e5098a0fbaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Desert Eagle
+  name: Deagle
+  weaponTypeInt: 1
+  ammoType: 2
   damage: 125
   fireRate: 0.56
   roundsPerMag: 8
-  range: 30
+  range: 50
   impactForce: 100
   fullAuto: 0
-  shotVolume: 0
+  flashlightOn: 0
+  audibleDistance: 100
   weaponAnimation: 1
+  meleeType: 0
   fireAnimationStartDelay: 0.09
   reloadTime: 1.36
   idleBodyHorizontal: 0
@@ -654,13 +658,12 @@ MonoBehaviour:
     type: 3}
   weaponRenderer: {fileID: 8527565352044655475}
   flashlightRenderer: {fileID: 8527565352044581529}
-  weaponSoundSync: {fileID: 0}
+  opticRenderer: {fileID: 8527565352044573545}
   audioSource: {fileID: 82313318778815940}
   audioClips:
   - {fileID: 8300000, guid: 0d0640256413f124ea5df50c4ad59fad, type: 3}
   - {fileID: 8300000, guid: 5da41b04974cf5b4a94b6f262ce6542c, type: 3}
   roundsInCurrentMag: 8
-  totalAmmo: 64
   currentFireMode: 0
   lineRenderer: {fileID: 5215330253993496879}
 --- !u!1 &8527565352046568149
@@ -1059,6 +1062,10 @@ PrefabInstance:
     - target: {fileID: 450098, guid: 6e1113468f14f5d47908179a77a9654c, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2385796, guid: 6e1113468f14f5d47908179a77a9654c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e1113468f14f5d47908179a77a9654c, type: 3}

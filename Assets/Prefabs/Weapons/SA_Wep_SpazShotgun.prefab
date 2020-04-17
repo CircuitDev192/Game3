@@ -1077,7 +1077,7 @@ MeshCollider:
   m_GameObject: {fileID: 6132034752450696460}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
@@ -1095,14 +1095,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Spas-12
+  weaponTypeInt: 0
+  ammoType: 1
   damage: 67
   fireRate: 0.675
   roundsPerMag: 1
-  range: 30
+  range: 50
   impactForce: 50
   fullAuto: 0
-  shotVolume: 0
+  flashlightOn: 0
+  audibleDistance: 100
   weaponAnimation: 4
+  meleeType: 0
   fireAnimationStartDelay: 0
   reloadTime: 0.58
   idleBodyHorizontal: 0.6
@@ -1127,13 +1131,12 @@ MonoBehaviour:
     type: 3}
   weaponRenderer: {fileID: 6132034752448678912}
   flashlightRenderer: {fileID: 6132034752448675000}
-  weaponSoundSync: {fileID: 0}
+  opticRenderer: {fileID: 6132034752448678030}
   audioSource: {fileID: 3856031629462493671}
   audioClips:
   - {fileID: 8300000, guid: 928932d277a7fef4081dce583075c438, type: 3}
   - {fileID: 8300000, guid: 78f506947954fc94dbd73ed64a0ec1ae, type: 3}
   roundsInCurrentMag: 1
-  totalAmmo: 1
   currentFireMode: 0
   lineRenderers:
   - {fileID: 3741826034335617492}
@@ -1201,7 +1204,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1416,7 +1419,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6132034752450402340
 Transform:
   m_ObjectHideFlags: 0

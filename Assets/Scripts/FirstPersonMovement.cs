@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
@@ -7,7 +7,6 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(AudioSource))]
-[RequireComponent(typeof(PlayerSoundSync))]
 public class FirstPersonMovement : MonoBehaviour
 {
     [SerializeField] private bool m_IsWalking;
@@ -41,7 +40,6 @@ public class FirstPersonMovement : MonoBehaviour
     private float m_NextStep;
     private bool m_Jumping;
     private AudioSource m_AudioSource;
-    private PlayerSoundSync playerSoundSync;
 
     [SerializeField]
     private Transform headJoint;
@@ -59,7 +57,8 @@ public class FirstPersonMovement : MonoBehaviour
         m_Jumping = false;
         m_AudioSource = GetComponent<AudioSource>();
         m_MouseLook.Init(transform, m_Camera.transform);
-        playerSoundSync = GetComponent<PlayerSoundSync>();
+
+        EventManager.MouseShouldHide += MouseShouldHide;
     }
 
 
@@ -68,7 +67,7 @@ public class FirstPersonMovement : MonoBehaviour
     {
         RotateView();
         // the jump state needs to read here to make sure it is not missed
-        if (!m_Jump)
+        if (!m_Jump && !m_Jumping)
         {
             m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
         }
@@ -95,8 +94,7 @@ public class FirstPersonMovement : MonoBehaviour
     private void PlayLandingSound()
     {
         m_AudioSource.clip = m_LandSound;
-        //m_AudioSource.Play();
-        playerSoundSync.PlayLanding();
+        m_AudioSource.Play();
         m_NextStep = m_StepCycle + .5f;
     }
 
@@ -146,8 +144,7 @@ public class FirstPersonMovement : MonoBehaviour
     private void PlayJumpSound()
     {
         m_AudioSource.clip = m_JumpSound;
-        //m_AudioSource.Play();
-        playerSoundSync.PlayJumping();
+        m_AudioSource.Play();
     }
 
 
@@ -180,8 +177,7 @@ public class FirstPersonMovement : MonoBehaviour
         // excluding sound at index 0
         int n = Random.Range(1, m_FootstepSounds.Length);
         m_AudioSource.clip = m_FootstepSounds[n];
-        //m_AudioSource.PlayOneShot(m_AudioSource.clip, 0.2f);
-        playerSoundSync.PlayFootStep(n);
+        m_AudioSource.PlayOneShot(m_AudioSource.clip, 0.2f);
 
         // move picked sound to index 0 so it's not picked next time
         m_FootstepSounds[n] = m_FootstepSounds[0];
@@ -224,7 +220,7 @@ public class FirstPersonMovement : MonoBehaviour
 #if !MOBILE_INPUT
         // On standalone builds, walk/run speed is modified by a key press.
         // keep track of whether or not the character is walking or running
-        m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
+        m_IsWalking = !(Input.GetKey(KeyCode.LeftShift) && vertical > Mathf.Epsilon);
 #endif
         // set the desired speed to be walking or running
         speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
@@ -266,5 +262,10 @@ public class FirstPersonMovement : MonoBehaviour
             return;
         }
         body.AddForceAtPosition(m_CharacterController.velocity * 0.1f, hit.point, ForceMode.Impulse);
+    }
+
+    private void MouseShouldHide(bool shouldHide)
+    {
+        m_MouseLook.SetCursorLock(shouldHide);
     }
 }
