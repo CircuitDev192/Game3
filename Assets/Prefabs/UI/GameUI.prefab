@@ -657,6 +657,7 @@ MonoBehaviour:
   - Medkit
   - Flashbang
   - Suppressor
+  suppressors: {fileID: 2613350264227704745}
 --- !u!1 &1536081880816994937
 GameObject:
   m_ObjectHideFlags: 0
