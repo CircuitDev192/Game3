@@ -624,6 +624,8 @@ MonoBehaviour:
   name: Deagle
   weaponTypeInt: 1
   ammoType: 2
+  equippedSuppressor: {fileID: 0}
+  suppressorFatigue: 18
   damage: 125
   fireRate: 0.56
   roundsPerMag: 8
@@ -659,6 +661,7 @@ MonoBehaviour:
   weaponRenderer: {fileID: 8527565352044655475}
   flashlightRenderer: {fileID: 8527565352044581529}
   opticRenderer: {fileID: 8527565352044573545}
+  suppressorRenderer: {fileID: 8527565352044591781}
   audioSource: {fileID: 82313318778815940}
   audioClips:
   - {fileID: 8300000, guid: 0d0640256413f124ea5df50c4ad59fad, type: 3}
@@ -842,7 +845,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8527565352046948919
 Transform:
   m_ObjectHideFlags: 0

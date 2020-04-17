@@ -15,6 +15,7 @@ public class PlayerManager : MonoBehaviour
         FLASH,
         MEDKITS,
         FLARES,
+        SUPPRESSOR,
         INF_OR_MELEE
     }
 

@@ -453,6 +453,8 @@ MonoBehaviour:
   name: Glock
   weaponTypeInt: 1
   ammoType: 2
+  equippedSuppressor: {fileID: 0}
+  suppressorFatigue: 5
   damage: 35
   fireRate: 0.56
   roundsPerMag: 15
@@ -488,6 +490,7 @@ MonoBehaviour:
   weaponRenderer: {fileID: 5717782928321769300}
   flashlightRenderer: {fileID: 5717782928321802992}
   opticRenderer: {fileID: 5717782928321756862}
+  suppressorRenderer: {fileID: 5717782928322085308}
   audioSource: {fileID: 860071866838708420}
   audioClips:
   - {fileID: 8300000, guid: 0d0640256413f124ea5df50c4ad59fad, type: 3}

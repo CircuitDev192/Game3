@@ -71,17 +71,39 @@ public class MultiRoundWeapon : WeaponBase
         // Enable bullet trail, muzzle flash mesh, and muzzle flash light
         foreach(LineRenderer lineRenderer in lineRenderers) lineRenderer.enabled = true;
 
+        if (equippedSuppressor)
+        {
+            muzzleFlashRenderer.transform.position += this.transform.forward * 0.2f;
+            muzzleFlashRenderer.transform.localScale /= 2f;
+            muzzleFlashLight.transform.position += this.transform.forward * 0.55f;
+            muzzleFlashLight.intensity /= 5f;
+
+            audioSource.PlayOneShot(audioClips[0], 0.2f);
+
+        }
+        else
+        {
+            audioSource.PlayOneShot(audioClips[0], 0.2f);
+        }
+
         muzzleFlashRenderer.enabled = true;
         muzzleFlashLight.enabled = true;
-
-        audioSource.PlayOneShot(audioClips[0], 0.2f);
-        //weaponSoundSync.PlaySound(0);
 
         // wait one frame
         yield return new WaitForEndOfFrame();
 
         // Disable bullet trail, muzzle flash mesh, and muzzle flash light
         foreach (LineRenderer lineRenderer in lineRenderers) lineRenderer.enabled = false;
+
+        if (equippedSuppressor)
+        {
+            muzzleFlashRenderer.transform.position -= this.transform.forward * 0.2f;
+            muzzleFlashRenderer.transform.localScale *= 2f;
+            muzzleFlashLight.transform.position -= this.transform.forward * 0.55f;
+            muzzleFlashLight.intensity *= 5f;
+
+            equippedSuppressor.GetComponent<Suppressor>().UpdateDurability(suppressorFatigue);
+        }
 
         muzzleFlashRenderer.enabled = false;
         muzzleFlashLight.enabled = false;
@@ -104,7 +126,13 @@ public class MultiRoundWeapon : WeaponBase
         muzzleFlashLight.enabled = false;
         flashLight.enabled = flashlightOn;
         flashlightRenderer.enabled = true;
-
+        if (equippedSuppressor ?? false)
+        {
+            suppressorRenderer.enabled = true;
+        } else
+        {
+            suppressorRenderer.enabled = false;
+        }
     }
 
     protected override void OnDisable()
@@ -117,5 +145,9 @@ public class MultiRoundWeapon : WeaponBase
         muzzleFlashLight.enabled = false;
         flashLight.enabled = false;
         flashlightRenderer.enabled = false;
+        if (equippedSuppressor ?? false)
+        {
+            suppressorRenderer.enabled = false;
+        }
     }
 }
