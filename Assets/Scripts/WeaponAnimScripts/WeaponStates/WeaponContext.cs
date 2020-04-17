@@ -114,6 +114,7 @@ public class WeaponContext : Context<WeaponContext>
                 }
             }
             Destroy(suppressors[indexOfLowestDur]);
+            EventManager.TriggerSuppressorBroken();
             suppressors.Remove(suppressors[indexOfLowestDur]);
         }
         GameObject suppressor = Instantiate(suppressorPrefab, this.gameObject.transform);
