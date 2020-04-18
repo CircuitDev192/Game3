@@ -41,7 +41,16 @@ public class AmmoPickup : MonoBehaviour
 
     void PlayerPickedUpAmmo(PlayerManager.AmmoType ammoType, int addedAmmo)
     {
-        EventManager.PlayerPickedUpAmmo -= PlayerPickedUpAmmo;
-        Destroy(this.gameObject);
+        if (ammoType == PlayerManager.AmmoType.SUPPRESSOR)
+        {
+            EventManager.PlayerPickedUpAmmo -= PlayerPickedUpAmmo;
+            EventManager.TriggerPlayerPickedUpSuppressor();
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            EventManager.PlayerPickedUpAmmo -= PlayerPickedUpAmmo;
+            Destroy(this.gameObject);
+        }
     }
 }

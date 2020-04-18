@@ -20,9 +20,11 @@ public class WeaponContext : Context<WeaponContext>
     public Transform weaponRoot;
     public WeaponBase[] weaponPrefabs;
     public WeaponBase[] consumablePrefabs;
+    public GameObject suppressorPrefab;
     public string equippedConsumable;
     public List<WeaponBase> weapons;
     public List<WeaponBase> consumables;
+    public List<GameObject> suppressors;
     public WeaponBase currentWeapon;
     public int currentWeaponIndex;
     public int currentConsumableIndex;
@@ -76,6 +78,47 @@ public class WeaponContext : Context<WeaponContext>
         EventManager.PlayerCollidedWithPickup += PlayerCollidedWithPickup;
         EventManager.PlayerCollidedWithAmmo += PlayerCollidedWithAmmo;
         EventManager.PlayerChangedConsumable += PlayerChangedConsumable;
+        EventManager.PlayerPickedUpSuppressor += PlayerPickedUpSuppressor;
+        EventManager.SuppressorBroken += SuppressorBroken;
+    }
+
+    private void SuppressorBroken()
+    {
+        foreach (GameObject suppressor in suppressors)
+        {
+            if (suppressor.GetComponent<Suppressor>().GetDurability() <= 0f)
+            {
+                Destroy(suppressors[suppressors.IndexOf(suppressor)]);
+                suppressors.Remove(suppressor);
+                Destroy(currentWeapon.equippedSuppressor);
+                currentWeapon.suppressorRenderer.enabled = false;
+                break;
+            }
+        }
+    }
+
+    private void PlayerPickedUpSuppressor()
+    {
+        if (suppressors.Count == 2)
+        {
+            float lowestDur = 100f;
+            float currentDur;
+            int indexOfLowestDur = 0;
+            foreach (GameObject suppress in suppressors)
+            {
+                currentDur = suppress.gameObject.GetComponent<Suppressor>().GetDurability();
+                if (currentDur <= lowestDur)
+                {
+                    lowestDur = currentDur;
+                    indexOfLowestDur = suppressors.IndexOf(suppress);
+                }
+            }
+            Destroy(suppressors[indexOfLowestDur]);
+            EventManager.TriggerSuppressorBroken();
+            suppressors.Remove(suppressors[indexOfLowestDur]);
+        }
+        GameObject suppressor = Instantiate(suppressorPrefab, this.gameObject.transform);
+        suppressors.Add(suppressor);
     }
 
     private void PlayerCollidedWithAmmo(PlayerManager.AmmoType ammoType, int addedAmmo)

@@ -485,6 +485,8 @@ MonoBehaviour:
   name: AK-47
   weaponTypeInt: 0
   ammoType: 0
+  equippedSuppressor: {fileID: 0}
+  suppressorFatigue: 12
   damage: 50
   fireRate: 0.11
   roundsPerMag: 30
@@ -520,6 +522,7 @@ MonoBehaviour:
   weaponRenderer: {fileID: 3547611854509398253}
   flashlightRenderer: {fileID: 3547611854508945477}
   opticRenderer: {fileID: 3547611854509411647}
+  suppressorRenderer: {fileID: 3547611854508980079}
   audioSource: {fileID: 4180903577993360837}
   audioClips:
   - {fileID: 8300000, guid: 1425c5c8f171c6c4d975e03903fc9aa8, type: 3}
@@ -702,7 +705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3547611854507156081
 Transform:
   m_ObjectHideFlags: 0

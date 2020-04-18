@@ -73,9 +73,17 @@ public static class EventManager
     public static Action<float> FlashLightPowerChanged;
     public static void TriggerFlashLightPowerChanged(float power) { FlashLightPowerChanged?.Invoke(power); }
 
+    // Player picked up a suppressor
+    public static Action PlayerPickedUpSuppressor;
+    public static void TriggerPlayerPickedUpSuppressor() { PlayerPickedUpSuppressor?.Invoke(); }
+
     // Suppressor durability changed event
     public static Action<float> SuppressorDurabilityChanged;
     public static void TriggerSuppressorDurabilityChanged(float durability) { SuppressorDurabilityChanged?.Invoke(durability); }
+
+    // Suppressor Broken
+    public static Action SuppressorBroken;
+    public static void TriggerSuppressorBroken() { SuppressorBroken?.Invoke(); }
 
     // Player walks into weapon pickup
     public static Action<string> PlayerCollidedWithPickup;

@@ -16,6 +16,8 @@ public abstract class WeaponBase : MonoBehaviour
     public string name;
     public int weaponTypeInt; // 0 = Primary, 1 = Secondary, 2 = Melee, 3 = (Not yet implemented)Throwable
     public PlayerManager.AmmoType ammoType;
+    public GameObject equippedSuppressor;
+    public float suppressorFatigue = 0f;
     public float damage;
     public float fireRate;
     public int roundsPerMag;
@@ -62,6 +64,7 @@ public abstract class WeaponBase : MonoBehaviour
     public Renderer weaponRenderer;
     public Renderer flashlightRenderer;
     public Renderer opticRenderer;
+    public Renderer suppressorRenderer;
 
     #endregion
 
