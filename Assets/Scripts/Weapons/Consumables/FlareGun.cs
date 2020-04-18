@@ -21,7 +21,7 @@ public class FlareGun : WeaponBase
 
         flare.GetComponent<Rigidbody>().AddForce(directionTransform.forward.normalized * 3000);
 
-        audioSource.PlayOneShot(audioClips[0], 0.2f);
+        audioSource.PlayOneShot(shotSound, 0.7f * PlayerManager.instance.soundMultiplier);
 
         // wait one frame
         yield return new WaitForEndOfFrame();

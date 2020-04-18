@@ -13,6 +13,8 @@ public class ThrowableWeapon : WeaponBase
 
         roundsInCurrentMag--;
 
+        audioSource.PlayOneShot(shotSound, 1f * PlayerManager.instance.soundMultiplier);
+
         EventManager.TriggerAmmoCountChanged(roundsInCurrentMag);
 
         //instantiate grenade

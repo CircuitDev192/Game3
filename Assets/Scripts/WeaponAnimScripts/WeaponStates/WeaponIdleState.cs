@@ -111,6 +111,15 @@ public class WeaponIdleState : WeaponBaseState
             context.flashlightOn = !context.flashlightOn;
             context.currentWeapon.flashLight.enabled = context.flashlightOn;
             context.currentWeapon.flashlightOn = context.flashlightOn;
+            if (context.flashlightOn)
+            {
+                context.currentWeapon.GetComponent<AudioSource>().PlayOneShot(context.currentWeapon.flashlightOnSound, 0.7f * PlayerManager.instance.soundMultiplier);
+            }
+            else
+            {
+                context.currentWeapon.GetComponent<AudioSource>().PlayOneShot(context.currentWeapon.flashlightOffSound, 0.7f * PlayerManager.instance.soundMultiplier);
+
+            }
         }
 
         return this;

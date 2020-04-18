@@ -8,7 +8,7 @@ public class WeaponSwapState : WeaponBaseState
     {
         Debug.Log("Weapon entered swap state.");
 
-        context.currentWeapon.audioSource.PlayOneShot(context.currentWeapon.holsterSound, 0.25f);
+        context.currentWeapon.audioSource.PlayOneShot(context.currentWeapon.holsterSound, 0.5f * PlayerManager.instance.soundMultiplier);
                 
         context.currentWeapon.enabled = false;
 
@@ -56,7 +56,7 @@ public class WeaponSwapState : WeaponBaseState
     {
         if (Time.time > timeToFinishSwap)
         {
-            context.currentWeapon.audioSource.PlayOneShot(context.currentWeapon.unholsterSound, 0.25f);
+            context.currentWeapon.audioSource.PlayOneShot(context.currentWeapon.unholsterSound, 0.5f * PlayerManager.instance.soundMultiplier);
             return context.idleState;
         }
 

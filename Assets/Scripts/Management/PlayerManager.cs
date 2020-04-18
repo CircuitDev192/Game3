@@ -32,6 +32,9 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private int medkits;
     [SerializeField] private int flares;
     [SerializeField] private int suppressors;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip flashbangEarRinging;
+    [SerializeField] public float soundMultiplier = 1f;
 
     #endregion
 
@@ -48,6 +51,18 @@ public class PlayerManager : MonoBehaviour
         EventManager.PlayerPickedUpAmmo += PlayerPickedUpAmmo;
         EventManager.PlayerPickedUpSuppressor += PlayerPickedUpSuppressor;
         EventManager.SuppressorBroken += SuppressorBroken;
+        EventManager.FlashbangDetonated += FlashbangDetonated;
+    }
+
+    private void FlashbangDetonated(Vector3 flashbangPosition, float stunDistance)
+    {
+        if (Vector3.Distance(flashbangPosition, player.transform.position) < stunDistance)
+        {
+            audioSource.PlayOneShot(flashbangEarRinging, 0.7f);
+            //Lower the volume of all sounds that use this multiplier. 
+            soundMultiplier = 0.2f;
+            StartCoroutine(IncreaseMultiplierBackToOne());
+        }
     }
 
     private void PlayerPickedUpSuppressor()
@@ -191,5 +206,15 @@ public class PlayerManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private IEnumerator IncreaseMultiplierBackToOne()
+    {
+        while (soundMultiplier < 1f)
+        {
+            soundMultiplier += 0.05f * Time.deltaTime;
+            yield return null;
+        }
+        soundMultiplier = 1f;
     }
 }

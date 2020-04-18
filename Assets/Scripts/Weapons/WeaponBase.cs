@@ -76,6 +76,8 @@ public abstract class WeaponBase : MonoBehaviour
     public AudioClip removeMagSound;
     public AudioClip loadMagSound;
     public AudioClip[] cockingSounds;
+    public AudioClip flashlightOnSound;
+    public AudioClip flashlightOffSound;
 
     public int roundsInCurrentMag;
     public FireMode currentFireMode;
@@ -106,11 +108,11 @@ public abstract class WeaponBase : MonoBehaviour
 
     private IEnumerator PlayReloadSounds()
     {
-        audioSource.PlayOneShot(removeMagSound, 0.25f);
+        audioSource.PlayOneShot(removeMagSound, 0.5f);
         yield return new WaitForSeconds(0.75f);
-        audioSource.PlayOneShot(loadMagSound, 0.25f);
+        audioSource.PlayOneShot(loadMagSound, 0.5f);
         yield return new WaitForSeconds(0.75f);
-        audioSource.PlayOneShot(cockingSounds[Random.Range(0, cockingSounds.Length)], 0.25f);
+        audioSource.PlayOneShot(cockingSounds[Random.Range(0, cockingSounds.Length)], 0.5f);
         yield return new WaitForSeconds(0.75f);
     }
 

@@ -37,6 +37,8 @@ public class MeleeWeapon : WeaponBase
             }
         }
 
+        audioSource.PlayOneShot(shotSound, 0.4f);
+
         // wait one frame
         yield return new WaitForEndOfFrame();
 

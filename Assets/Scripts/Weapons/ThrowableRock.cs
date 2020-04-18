@@ -11,6 +11,9 @@ public class ThrowableRock : WeaponBase
     {
         yield return new WaitForSeconds(fireAnimationStartDelay);
 
+
+        audioSource.PlayOneShot(shotSound, 1f * PlayerManager.instance.soundMultiplier);
+
         EventManager.TriggerAmmoCountChanged(roundsInCurrentMag);
 
         //instantiate grenade

@@ -23,9 +23,14 @@ public class FirstPersonMovement : MonoBehaviour
     [SerializeField] private CurveControlledBob m_HeadBob = new CurveControlledBob();
     [SerializeField] private LerpControlledBob m_JumpBob = new LerpControlledBob();
     [SerializeField] private float m_StepInterval;
-    [SerializeField] public AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
-    [SerializeField] public AudioClip m_JumpSound;           // the sound played when character leaves the ground.
-    [SerializeField] public AudioClip m_LandSound;           // the sound played when character touches back on ground.
+    private float m_SoundMultiplier;
+    [SerializeField] private float walkingAudibleDistance;
+    [SerializeField] private float runningAudibleDistance;
+    [SerializeField] private float jumpingAudibleDistance;
+    [SerializeField] public AudioClip[] m_FootstepSounds;    // an array of walking sounds that will be randomly selected from.
+    [SerializeField] public AudioClip[] m_RunningFootstepSounds;    // an array of running sounds that will be randomly selected from.
+    [SerializeField] public AudioClip[] m_JumpingSounds;           // the sound played when character leaves the ground.
+    [SerializeField] public AudioClip[] m_LandingSounds;           // the sound played when character touches back on ground.
 
     private Camera m_Camera;
     private bool m_Jump;
@@ -66,6 +71,8 @@ public class FirstPersonMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        m_SoundMultiplier = PlayerManager.instance.soundMultiplier;
+
         RotateView();
         // the jump state needs to read here to make sure it is not missed
         if (!m_Jump && !m_Jumping)
@@ -94,8 +101,18 @@ public class FirstPersonMovement : MonoBehaviour
 
     private void PlayLandingSound()
     {
-        m_AudioSource.clip = m_LandSound;
-        m_AudioSource.Play();
+        //running sounds
+        // excluding sound at index 0
+        int n = Random.Range(1, m_LandingSounds.Length);
+        m_AudioSource.clip = m_LandingSounds[n];
+        m_AudioSource.PlayOneShot(m_AudioSource.clip, 0.3f * m_SoundMultiplier);
+
+        EventManager.TriggerSoundGenerated(this.transform.position, jumpingAudibleDistance);
+
+        // move picked sound to index 0 so it's not picked next time
+        m_LandingSounds[n] = m_LandingSounds[0];
+        m_LandingSounds[0] = m_AudioSource.clip;
+
         m_NextStep = m_StepCycle + .5f;
     }
 
@@ -144,8 +161,15 @@ public class FirstPersonMovement : MonoBehaviour
 
     private void PlayJumpSound()
     {
-        m_AudioSource.clip = m_JumpSound;
-        m_AudioSource.Play();
+        //jumping sounds
+        // excluding sound at index 0
+        int n = Random.Range(1, m_JumpingSounds.Length);
+        m_AudioSource.clip = m_JumpingSounds[n];
+        m_AudioSource.PlayOneShot(m_AudioSource.clip, 0.2f * m_SoundMultiplier);
+
+        // move picked sound to index 0 so it's not picked next time
+        m_JumpingSounds[n] = m_JumpingSounds[0];
+        m_JumpingSounds[0] = m_AudioSource.clip;
     }
 
 
@@ -174,15 +198,35 @@ public class FirstPersonMovement : MonoBehaviour
         {
             return;
         }
-        // pick & play a random footstep sound from the array,
-        // excluding sound at index 0
-        int n = Random.Range(1, m_FootstepSounds.Length);
-        m_AudioSource.clip = m_FootstepSounds[n];
-        m_AudioSource.PlayOneShot(m_AudioSource.clip, 0.2f);
 
-        // move picked sound to index 0 so it's not picked next time
-        m_FootstepSounds[n] = m_FootstepSounds[0];
-        m_FootstepSounds[0] = m_AudioSource.clip;
+        if (!m_IsWalking)
+        {
+            //running sounds
+            // excluding sound at index 0
+            int n = Random.Range(1, m_RunningFootstepSounds.Length);
+            m_AudioSource.clip = m_RunningFootstepSounds[n];
+            m_AudioSource.PlayOneShot(m_AudioSource.clip, 0.3f * m_SoundMultiplier);
+
+            EventManager.TriggerSoundGenerated(this.transform.position, runningAudibleDistance);
+
+            // move picked sound to index 0 so it's not picked next time
+            m_RunningFootstepSounds[n] = m_RunningFootstepSounds[0];
+            m_RunningFootstepSounds[0] = m_AudioSource.clip;
+        }
+        else
+        {
+            //walking sounds
+            // excluding sound at index 0
+            int n = Random.Range(1, m_FootstepSounds.Length);
+            m_AudioSource.clip = m_FootstepSounds[n];
+            m_AudioSource.PlayOneShot(m_AudioSource.clip, 0.3f * m_SoundMultiplier);
+
+            EventManager.TriggerSoundGenerated(this.transform.position, walkingAudibleDistance);
+
+            // move picked sound to index 0 so it's not picked next time
+            m_FootstepSounds[n] = m_FootstepSounds[0];
+            m_FootstepSounds[0] = m_AudioSource.clip;
+        }
     }
 
 
