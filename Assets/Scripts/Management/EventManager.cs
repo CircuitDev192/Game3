@@ -44,6 +44,13 @@ public static class EventManager
     #endregion
 
     #region Player Info Events
+    
+    // Player damaged event
+    // DIFFERENT FROM HEALTH CHANGED
+    //  This one triggers on damage (or healing),
+    //    the other triggers once the player's new health has been calculated
+    public static Action<float> PlayerDamaged;
+    public static void TriggerPlayerDamaged(float damage) { PlayerDamaged?.Invoke(damage); }
 
     // Player health changed event
     public static Action<float> PlayerHealthChanged;

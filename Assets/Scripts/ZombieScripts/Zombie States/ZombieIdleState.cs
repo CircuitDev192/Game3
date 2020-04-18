@@ -32,6 +32,8 @@ public class ZombieIdleState : ZombieBaseState
 
         if (base.ShouldDie(context)) return context.deadState;
 
+        if (context.playerDead) return this;
+
         if (base.SeesPlayer(context)) return context.chaseState;
 
         if (Time.time > timeToPatrol) return context.patrolState;
