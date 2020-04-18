@@ -34,6 +34,14 @@ public class WeaponSwapState : WeaponBaseState
         EventManager.TriggerAmmoCountChanged(context.currentWeapon.roundsInCurrentMag);
         EventManager.TriggerTotalAmmoChanged(PlayerManager.instance.GetTotalAmmoOfType(context.currentWeapon.ammoType), context.currentWeapon.ammoType);
 
+        if (context.currentWeapon.equippedSuppressor)
+        {
+            context.currentWeapon.equippedSuppressor.GetComponent<Suppressor>().UpdateDurability(0);
+        } else
+        {
+            EventManager.TriggerSuppressorDurabilityChanged(0f);
+        }
+
         context.playerAnimator.SetInteger("WeaponType_int", context.currentWeapon.weaponAnimation);
         context.playerAnimator.SetInteger("MeleeType_int", context.currentWeapon.meleeType);
         timeToFinishSwap = Time.time + context.weaponSwapTime;

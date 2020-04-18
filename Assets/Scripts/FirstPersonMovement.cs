@@ -59,6 +59,7 @@ public class FirstPersonMovement : MonoBehaviour
         m_MouseLook.Init(transform, m_Camera.transform);
 
         EventManager.MouseShouldHide += MouseShouldHide;
+        
     }
 
 

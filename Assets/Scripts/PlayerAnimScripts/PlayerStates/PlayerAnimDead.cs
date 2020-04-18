@@ -6,6 +6,7 @@ public class PlayerAnimDead : PlayerAnimBase
     {
         //Debug.Log("Player entered dead state.");
         player.GetComponent<FirstPersonMovement>().enabled = false;
+        player.GetComponent<WeaponController>().enabled = false;
         player.playerAnimator.SetBool("Death_b", true);
         EventManager.TriggerPlayerKilled();
     }

@@ -44,6 +44,13 @@ public static class EventManager
     #endregion
 
     #region Player Info Events
+    
+    // Player damaged event
+    // DIFFERENT FROM HEALTH CHANGED
+    //  This one triggers on damage (or healing),
+    //    the other triggers once the player's new health has been calculated
+    public static Action<float> PlayerDamaged;
+    public static void TriggerPlayerDamaged(float damage) { PlayerDamaged?.Invoke(damage); }
 
     // Player health changed event
     public static Action<float> PlayerHealthChanged;
@@ -73,9 +80,17 @@ public static class EventManager
     public static Action<float> FlashLightPowerChanged;
     public static void TriggerFlashLightPowerChanged(float power) { FlashLightPowerChanged?.Invoke(power); }
 
+    // Player picked up a suppressor
+    public static Action PlayerPickedUpSuppressor;
+    public static void TriggerPlayerPickedUpSuppressor() { PlayerPickedUpSuppressor?.Invoke(); }
+
     // Suppressor durability changed event
     public static Action<float> SuppressorDurabilityChanged;
     public static void TriggerSuppressorDurabilityChanged(float durability) { SuppressorDurabilityChanged?.Invoke(durability); }
+
+    // Suppressor Broken
+    public static Action SuppressorBroken;
+    public static void TriggerSuppressorBroken() { SuppressorBroken?.Invoke(); }
 
     // Player walks into weapon pickup
     public static Action<string> PlayerCollidedWithPickup;

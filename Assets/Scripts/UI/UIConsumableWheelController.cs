@@ -14,6 +14,7 @@ public class UIConsumableWheelController : MonoBehaviour
     [SerializeField] private Text selectedItem;
     [SerializeField] private GameObject[] itemCounts;
     [SerializeField] private string[] itemNames;
+    [SerializeField] private GameObject suppressors;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class UIConsumableWheelController : MonoBehaviour
         medkitButton.gameObject.SetActive(false);
         flashButton.gameObject.SetActive(false);
         selectedItem.gameObject.SetActive(false);
+        suppressors.gameObject.SetActive(false);
 
         EventManager.TriggerPlayerChangedConsumable(selectedItem.text);
         EventManager.TriggerMouseShouldHide(true);
@@ -53,6 +55,7 @@ public class UIConsumableWheelController : MonoBehaviour
             medkitButton.gameObject.SetActive(true);
             flashButton.gameObject.SetActive(true);
             selectedItem.gameObject.SetActive(true);
+            suppressors.gameObject.SetActive(true);
 
             EventManager.TriggerMouseShouldHide(false);       
 
@@ -67,6 +70,7 @@ public class UIConsumableWheelController : MonoBehaviour
             medkitButton.gameObject.SetActive(false);
             flashButton.gameObject.SetActive(false);
             selectedItem.gameObject.SetActive(false);
+            suppressors.gameObject.SetActive(false);
 
             EventManager.TriggerPlayerChangedConsumable(selectedItem.text);
             EventManager.TriggerMouseShouldHide(true);
