@@ -130,6 +130,11 @@ public class FirstPersonMovement : MonoBehaviour
                            m_CharacterController.height / 2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
         desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
 
+        if (Input.GetKey(KeyCode.LeftControl) && m_IsWalking)
+        {
+            speed /= 2f;
+        }
+
         m_MoveDir.x = desiredMove.x * speed;
         m_MoveDir.z = desiredMove.z * speed;
 

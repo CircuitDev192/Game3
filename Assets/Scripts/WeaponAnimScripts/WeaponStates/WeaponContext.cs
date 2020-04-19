@@ -46,9 +46,6 @@ public class WeaponContext : Context<WeaponContext>
     {
         mainCamera = Camera.main;
 
-        currentState = idleState;
-        currentState.EnterState(this);
-
         foreach (WeaponBase weapon in weaponPrefabs)
         {
             if (weapon.name == "AK-47" || weapon.name == "Deagle" || weapon.name == "Katana")
@@ -80,6 +77,9 @@ public class WeaponContext : Context<WeaponContext>
         EventManager.PlayerChangedConsumable += PlayerChangedConsumable;
         EventManager.PlayerPickedUpSuppressor += PlayerPickedUpSuppressor;
         EventManager.SuppressorBroken += SuppressorBroken;
+
+        currentState = swapState;
+        currentState.EnterState(this);
     }
 
     private void SuppressorBroken()

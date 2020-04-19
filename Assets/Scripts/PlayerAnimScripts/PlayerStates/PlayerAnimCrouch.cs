@@ -2,27 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimJump : PlayerAnimBase
+public class PlayerAnimCrouch : PlayerAnimBase
 {
     public override void EnterState(PlayerAnimFSM context)
     {
-        context.playerAnimator.SetBool("Jump_b", true);
+        context.playerAnimator.SetBool("Crouch_b", true);
     }
 
     public override BaseState<PlayerAnimFSM> UpdateState(PlayerAnimFSM context)
     {
-        if (!Input.GetKey(KeyCode.Space))
+        context.weaponContext.currentWeapon.SetWalkValues(context.playerAnimator);
+
+        if (!Input.GetKey(KeyCode.LeftControl))
         {
             return context.idleState;
         }
         else
         {
-            return context.jumpState;
+            return context.crouchState;
         }
     }
 
     public override void ExitState(PlayerAnimFSM context)
     {
-        context.playerAnimator.SetBool("Jump_b", false);
+        context.playerAnimator.SetBool("Crouch_b", false);
     }
 }

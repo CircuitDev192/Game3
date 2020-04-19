@@ -2,17 +2,22 @@
 
 public class PlayerAnimDead : PlayerAnimBase
 {
-    public override void EnterState(PlayerAnimFSM player)
+    public override void EnterState(PlayerAnimFSM context)
     {
         //Debug.Log("Player entered dead state.");
-        player.GetComponent<FirstPersonMovement>().enabled = false;
-        player.GetComponent<WeaponController>().enabled = false;
-        player.playerAnimator.SetBool("Death_b", true);
+        context.GetComponent<FirstPersonMovement>().enabled = false;
+        context.GetComponent<WeaponController>().enabled = false;
+        context.playerAnimator.SetBool("Death_b", true);
         EventManager.TriggerPlayerKilled();
     }
 
-    public override void Update(PlayerAnimFSM player)
+    public override BaseState<PlayerAnimFSM> UpdateState(PlayerAnimFSM context)
     {
-        return;
+        return context.deadState;
+    }
+
+    public override void ExitState(PlayerAnimFSM context)
+    {
+        
     }
 }
