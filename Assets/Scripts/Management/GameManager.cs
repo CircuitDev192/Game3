@@ -9,6 +9,7 @@ public enum GameState
     MainMenu,
     Play,
     Paused,
+    Controls,
     Credits
 }
 
