@@ -64,13 +64,18 @@ public class SingleRoundWeapon : WeaponBase
             muzzleFlashLight.transform.position += this.transform.forward * 0.55f;
             muzzleFlashLight.intensity /= 5f;
 
-            audioSource.PlayOneShot(audioClips[0], 0.2f);
+            // AudioSource.pitch does not affect AudioSource.PlayOneShot. Leaving it here for later though.
+            audioSource.pitch = Random.Range(0.75f, 1.25f);
+            audioSource.PlayOneShot(suppressedShotSound, 0.5f * PlayerManager.instance.soundMultiplier);
         }
         else
         {
-            audioSource.PlayOneShot(audioClips[0], 0.2f);
+            audioSource.pitch = Random.Range(0.75f, 1.25f);
+            audioSource.PlayOneShot(shotSound, 0.7f * PlayerManager.instance.soundMultiplier);
         }
-        
+
+        audioSource.pitch = 1f;
+
         muzzleFlashRenderer.enabled = true;
         muzzleFlashLight.enabled = true;
 

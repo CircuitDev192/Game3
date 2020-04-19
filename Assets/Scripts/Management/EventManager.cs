@@ -60,6 +60,10 @@ public static class EventManager
     public static Action PlayerKilled;
     public static void TriggerPlayerKilled() { PlayerKilled?.Invoke(); }
 
+    // Flashbang Detonated
+    public static Action<Vector3, float> FlashbangDetonated;
+    public static void TriggerFlashbangDetonated(Vector3 flashbangPosition, float stunDistance) { FlashbangDetonated?.Invoke(flashbangPosition, stunDistance); }
+
     // Weapon ammo count changed event
     public static Action<int> AmmoCountChanged;
     public static void TriggerAmmoCountChanged(int ammoCount) { AmmoCountChanged?.Invoke(ammoCount); }

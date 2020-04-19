@@ -14,11 +14,13 @@ public class Flashbang : MonoBehaviour
     [SerializeField]
     private AudioClip explosionSound;
     [SerializeField]
-    private AudioClip collisionSound;
+    private AudioClip[] collisionSounds;
     [SerializeField]
     private float collisionAudibleDistance;
     [SerializeField]
     private float explosionAudibleDistance;
+    [SerializeField]
+    private float stunDistance;
 
     // Update is called once per frame
     void Update()
@@ -30,8 +32,9 @@ public class Flashbang : MonoBehaviour
             Instantiate(explosion, this.gameObject.transform);
             audioSource.pitch = 1f;
             audioSource.maxDistance = explosionAudibleDistance;
-            audioSource.PlayOneShot(explosionSound, 1f);
+            audioSource.PlayOneShot(explosionSound, 1f * PlayerManager.instance.soundMultiplier);
             EventManager.TriggerSoundGenerated(this.transform.position, explosionAudibleDistance);
+            EventManager.TriggerFlashbangDetonated(this.transform.position, stunDistance);
             this.gameObject.GetComponent<MeshRenderer>().enabled = false;
             isExploded = true;
             Destroy(this.gameObject, 4f);
@@ -42,7 +45,7 @@ public class Flashbang : MonoBehaviour
     {
         audioSource.pitch = Random.Range(0.75f, 1.25f);
         audioSource.maxDistance = collisionAudibleDistance * 2;
-        audioSource.PlayOneShot(collisionSound, 0.15f);
+        audioSource.PlayOneShot(collisionSounds[Random.Range(0, collisionSounds.Length)], 0.25f * PlayerManager.instance.soundMultiplier);
         EventManager.TriggerSoundGenerated(this.transform.position, collisionAudibleDistance);
     }
 }

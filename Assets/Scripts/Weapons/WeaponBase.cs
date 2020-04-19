@@ -69,7 +69,15 @@ public abstract class WeaponBase : MonoBehaviour
     #endregion
 
     public AudioSource audioSource;
-    public AudioClip[] audioClips;
+    public AudioClip shotSound;
+    public AudioClip suppressedShotSound;
+    public AudioClip holsterSound;
+    public AudioClip unholsterSound;
+    public AudioClip removeMagSound;
+    public AudioClip loadMagSound;
+    public AudioClip[] cockingSounds;
+    public AudioClip flashlightOnSound;
+    public AudioClip flashlightOffSound;
 
     public int roundsInCurrentMag;
     public FireMode currentFireMode;
@@ -92,10 +100,20 @@ public abstract class WeaponBase : MonoBehaviour
             if (totalAmmo < 0) totalAmmo = 0;
         }
 
-        audioSource.PlayOneShot(audioClips[1], 0.25f);
+        StartCoroutine(PlayReloadSounds());
 
         EventManager.TriggerAmmoCountChanged(roundsInCurrentMag);
         EventManager.TriggerTotalAmmoChanged(totalAmmo, ammoType);
+    }
+
+    private IEnumerator PlayReloadSounds()
+    {
+        audioSource.PlayOneShot(removeMagSound, 0.5f);
+        yield return new WaitForSeconds(0.75f);
+        audioSource.PlayOneShot(loadMagSound, 0.5f);
+        yield return new WaitForSeconds(0.75f);
+        audioSource.PlayOneShot(cockingSounds[Random.Range(0, cockingSounds.Length)], 0.5f);
+        yield return new WaitForSeconds(0.75f);
     }
 
     public void SetIdleValues(Animator playerAnimator)

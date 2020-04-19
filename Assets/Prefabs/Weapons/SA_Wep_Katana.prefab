@@ -111,8 +111,10 @@ MonoBehaviour:
   name: Katana
   weaponTypeInt: 2
   ammoType: 7
+  equippedSuppressor: {fileID: 0}
+  suppressorFatigue: 0
   damage: 150
-  fireRate: 1.5
+  fireRate: 1
   roundsPerMag: 1
   range: 3
   impactForce: 50
@@ -146,12 +148,19 @@ MonoBehaviour:
   weaponRenderer: {fileID: 3349718103785855749}
   flashlightRenderer: {fileID: 0}
   opticRenderer: {fileID: 0}
+  suppressorRenderer: {fileID: 0}
   audioSource: {fileID: 1230092820096490381}
-  audioClips:
-  - {fileID: 8300000, guid: 1425c5c8f171c6c4d975e03903fc9aa8, type: 3}
-  - {fileID: 8300000, guid: 5da41b04974cf5b4a94b6f262ce6542c, type: 3}
+  shotSound: {fileID: 8300000, guid: 5d1719bb67f68db49b342b6df8b16c97, type: 3}
+  suppressedShotSound: {fileID: 8300000, guid: 5d1719bb67f68db49b342b6df8b16c97, type: 3}
+  holsterSound: {fileID: 8300000, guid: 523231946ac5b234f816229d871b1b72, type: 3}
+  unholsterSound: {fileID: 8300000, guid: 0fc1d35358c52194fbe9acd1dfd283ce, type: 3}
+  removeMagSound: {fileID: 8300000, guid: 5d1719bb67f68db49b342b6df8b16c97, type: 3}
+  loadMagSound: {fileID: 8300000, guid: 5d1719bb67f68db49b342b6df8b16c97, type: 3}
+  cockingSounds:
+  - {fileID: 8300000, guid: 5d1719bb67f68db49b342b6df8b16c97, type: 3}
+  flashlightOnSound: {fileID: 8300000, guid: 540d449e8c9da694e94203cdcdc72fc4, type: 3}
+  flashlightOffSound: {fileID: 8300000, guid: 540d449e8c9da694e94203cdcdc72fc4, type: 3}
   roundsInCurrentMag: 1
-  totalAmmo: 0
   currentFireMode: 0
 --- !u!82 &1230092820096490381
 AudioSource:

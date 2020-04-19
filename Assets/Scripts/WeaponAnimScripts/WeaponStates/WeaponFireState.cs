@@ -9,8 +9,6 @@ public class WeaponFireState : WeaponBaseState
     {
         Debug.Log("Weapon entered fire state.");
 
-        EventManager.TriggerSoundGenerated(context.transform.position, context.weapons[context.currentWeaponIndex].audibleDistance);
-
         context.playerAnimator.SetBool("Shoot_b", true);
         nextShotTime = (nextShotTime > Time.time) ? nextShotTime : Time.time;
     }
@@ -42,6 +40,16 @@ public class WeaponFireState : WeaponBaseState
         {
             // Delegate firing to the weapon
             context.StartCoroutine(context.currentWeapon.Fire(context.mainCamera.transform));
+
+            if (context.currentWeapon.equippedSuppressor)
+            {
+                EventManager.TriggerSoundGenerated(context.currentWeapon.transform.position, context.weapons[context.currentWeaponIndex].audibleDistance * 0.10f);
+            }
+            else
+            {
+                EventManager.TriggerSoundGenerated(context.currentWeapon.transform.position, context.weapons[context.currentWeaponIndex].audibleDistance);
+            }
+
             nextShotTime = Time.time + context.currentWeapon.fireRate;
         }
         // No ammo in mag, reload

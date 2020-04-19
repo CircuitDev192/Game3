@@ -111,6 +111,8 @@ MonoBehaviour:
   name: Flare
   weaponTypeInt: 4
   ammoType: 6
+  equippedSuppressor: {fileID: 0}
+  suppressorFatigue: 0
   damage: 0
   fireRate: 0.56
   roundsPerMag: 1
@@ -144,10 +146,16 @@ MonoBehaviour:
   weaponRenderer: {fileID: 6561768724543204134}
   flashlightRenderer: {fileID: 0}
   opticRenderer: {fileID: 0}
+  suppressorRenderer: {fileID: 0}
   audioSource: {fileID: 2633684811056639136}
-  audioClips:
-  - {fileID: 8300000, guid: 0d0640256413f124ea5df50c4ad59fad, type: 3}
-  - {fileID: 8300000, guid: 5da41b04974cf5b4a94b6f262ce6542c, type: 3}
+  shotSound: {fileID: 8300000, guid: f8cc983acbd97094589de1187505cffc, type: 3}
+  suppressedShotSound: {fileID: 8300000, guid: f8cc983acbd97094589de1187505cffc, type: 3}
+  holsterSound: {fileID: 8300000, guid: 3b06c38bb4636f54fb420c62200f655d, type: 3}
+  unholsterSound: {fileID: 8300000, guid: 6f743b9f0e3e44b4cab6fc8304763ee4, type: 3}
+  removeMagSound: {fileID: 8300000, guid: e7f733f048afb1f4b9821ffcd42c5f88, type: 3}
+  loadMagSound: {fileID: 8300000, guid: 078e0b006fe052d4fb13a44678e6154d, type: 3}
+  cockingSounds:
+  - {fileID: 8300000, guid: c719b52bc5a288545963bf4497607229, type: 3}
   roundsInCurrentMag: 1
   currentFireMode: 0
   flarePrefab: {fileID: 7957489420411926333, guid: 5f14647b09ad3e2469bf5c286f3d8507,

@@ -111,6 +111,8 @@ MonoBehaviour:
   name: Frag Grenade
   weaponTypeInt: 3
   ammoType: 3
+  equippedSuppressor: {fileID: 0}
+  suppressorFatigue: 0
   damage: 0
   fireRate: 2
   roundsPerMag: 1
@@ -144,12 +146,17 @@ MonoBehaviour:
   weaponRenderer: {fileID: 4476665866154459488}
   flashlightRenderer: {fileID: 0}
   opticRenderer: {fileID: 0}
+  suppressorRenderer: {fileID: 0}
   audioSource: {fileID: -6315438011976629087}
-  audioClips:
-  - {fileID: 8300000, guid: 1425c5c8f171c6c4d975e03903fc9aa8, type: 3}
-  - {fileID: 8300000, guid: 5da41b04974cf5b4a94b6f262ce6542c, type: 3}
+  shotSound: {fileID: 8300000, guid: 5ce2eba16d5ed70459f740a5c90623a2, type: 3}
+  suppressedShotSound: {fileID: 8300000, guid: 5ce2eba16d5ed70459f740a5c90623a2, type: 3}
+  holsterSound: {fileID: 8300000, guid: 3b06c38bb4636f54fb420c62200f655d, type: 3}
+  unholsterSound: {fileID: 8300000, guid: 6f743b9f0e3e44b4cab6fc8304763ee4, type: 3}
+  removeMagSound: {fileID: 8300000, guid: 6f743b9f0e3e44b4cab6fc8304763ee4, type: 3}
+  loadMagSound: {fileID: 8300000, guid: 540d449e8c9da694e94203cdcdc72fc4, type: 3}
+  cockingSounds:
+  - {fileID: 8300000, guid: 540d449e8c9da694e94203cdcdc72fc4, type: 3}
   roundsInCurrentMag: 1
-  totalAmmo: 3
   currentFireMode: 0
   grenadeThrown: {fileID: 2895562861935675056, guid: 99c8486b38e7b234aa7c39d54ac6aab4,
     type: 3}

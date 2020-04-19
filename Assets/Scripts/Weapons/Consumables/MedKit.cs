@@ -14,6 +14,8 @@ public class MedKit : WeaponBase
 
         roundsInCurrentMag--;
 
+        audioSource.PlayOneShot(shotSound, 0.7f * PlayerManager.instance.soundMultiplier);
+
         EventManager.TriggerPlayerDamaged(-healAmount);
 
         // wait one frame

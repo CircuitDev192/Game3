@@ -126,7 +126,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: -3096242573380676591}
-  collisionSound: {fileID: 8300000, guid: 42e65e088b3f4374e851b8dbd38f3df9, type: 3}
+  collisionSounds:
+  - {fileID: 8300000, guid: e2b51f84f2959724ea23f9e2477036cf, type: 3}
+  - {fileID: 8300000, guid: 6481498e7aa9ea34196388f4f63ec304, type: 3}
+  - {fileID: 8300000, guid: bb2de35c01a7757478d1d592312f6d8f, type: 3}
+  - {fileID: 8300000, guid: 57a8f3af37745cc4d847b02bfe065af6, type: 3}
+  - {fileID: 8300000, guid: dd8f191d9170fc1428d3c26508234b3f, type: 3}
+  - {fileID: 8300000, guid: f4761cd416ceddb42bb85b817528f8e1, type: 3}
+  - {fileID: 8300000, guid: ce287373b9aa4c44f9128b9a7936bb0e, type: 3}
+  - {fileID: 8300000, guid: d8a7b7ec8a2c8e44ea1fe5f7043c1be9, type: 3}
   audibleDistance: 20
 --- !u!82 &-3096242573380676591
 AudioSource:

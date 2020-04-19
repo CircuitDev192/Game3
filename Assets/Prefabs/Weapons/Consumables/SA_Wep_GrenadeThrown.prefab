@@ -128,8 +128,16 @@ MonoBehaviour:
   timer: 5
   explosion: {fileID: 191186, guid: 3ada67b7fad601e498038e8679ab5aac, type: 3}
   audioSource: {fileID: -2995412913744963152}
-  explosionSound: {fileID: 8300000, guid: 5897aeed9b676024fbb8c694b421a861, type: 3}
-  collisionSound: {fileID: 8300000, guid: 42e65e088b3f4374e851b8dbd38f3df9, type: 3}
+  explosionSound: {fileID: 8300000, guid: 99063342b001e75479c059f03b13c965, type: 3}
+  collisionSounds:
+  - {fileID: 8300000, guid: e2b51f84f2959724ea23f9e2477036cf, type: 3}
+  - {fileID: 8300000, guid: 6481498e7aa9ea34196388f4f63ec304, type: 3}
+  - {fileID: 8300000, guid: bb2de35c01a7757478d1d592312f6d8f, type: 3}
+  - {fileID: 8300000, guid: 57a8f3af37745cc4d847b02bfe065af6, type: 3}
+  - {fileID: 8300000, guid: dd8f191d9170fc1428d3c26508234b3f, type: 3}
+  - {fileID: 8300000, guid: f4761cd416ceddb42bb85b817528f8e1, type: 3}
+  - {fileID: 8300000, guid: ce287373b9aa4c44f9128b9a7936bb0e, type: 3}
+  - {fileID: 8300000, guid: d8a7b7ec8a2c8e44ea1fe5f7043c1be9, type: 3}
   collisionAudibleDistance: 20
   explosionAudibleDistance: 150
 --- !u!82 &-2995412913744963152

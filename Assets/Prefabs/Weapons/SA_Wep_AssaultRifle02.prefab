@@ -634,9 +634,16 @@ MonoBehaviour:
   opticRenderer: {fileID: 7352011040421379325}
   suppressorRenderer: {fileID: 7352011040421344585}
   audioSource: {fileID: 8832912375273639616}
-  audioClips:
-  - {fileID: 8300000, guid: 1425c5c8f171c6c4d975e03903fc9aa8, type: 3}
-  - {fileID: 8300000, guid: 5da41b04974cf5b4a94b6f262ce6542c, type: 3}
+  shotSound: {fileID: 8300000, guid: a4f67ab3f5541d4438d49e3c975b3eae, type: 3}
+  suppressedShotSound: {fileID: 8300000, guid: 57da90bf10f5e9e4788f4a9a9030de57, type: 3}
+  holsterSound: {fileID: 8300000, guid: 117f7ff7619049949b5e7ec7a88bcc73, type: 3}
+  unholsterSound: {fileID: 8300000, guid: a0ce0762ed570624c843a0f0fe9b4c6f, type: 3}
+  removeMagSound: {fileID: 8300000, guid: 60b22c27582417146bf62ceb4bfbb61e, type: 3}
+  loadMagSound: {fileID: 8300000, guid: 8068663a1380ddd449225b31af0943f3, type: 3}
+  cockingSounds:
+  - {fileID: 8300000, guid: c97b349eda97fdc4ebbbb40cc48263e8, type: 3}
+  flashlightOnSound: {fileID: 8300000, guid: 21161f87d98917f4eb0f356e0588f84f, type: 3}
+  flashlightOffSound: {fileID: 8300000, guid: 61931192c6f9a054983403822410b4ca, type: 3}
   roundsInCurrentMag: 30
   currentFireMode: 2
   lineRenderer: {fileID: 1273215274056676959}
