@@ -11,7 +11,7 @@ public class PlayerAnimWalk : PlayerAnimBase
 
     public override BaseState<PlayerAnimFSM> UpdateState(PlayerAnimFSM context)
     {
-        context.weaponContext.currentWeapon.SetIdleValues(context.playerAnimator);
+        context.weaponContext.currentWeapon.SetWalkValues(context.playerAnimator);
 
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
@@ -24,6 +24,10 @@ public class PlayerAnimWalk : PlayerAnimBase
         else if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
         {
             return context.runState;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            return context.crouchState;
         }
         else
         {

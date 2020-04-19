@@ -10,6 +10,7 @@ public class PlayerAnimFSM : Context<PlayerAnimFSM>, IDamageAble
     public PlayerAnimRun runState = new PlayerAnimRun();
     public PlayerAnimWalk walkState = new PlayerAnimWalk();
     public PlayerAnimDead deadState = new PlayerAnimDead();
+    public PlayerAnimCrouch crouchState = new PlayerAnimCrouch();
 
     [HideInInspector]
     public Animator playerAnimator;

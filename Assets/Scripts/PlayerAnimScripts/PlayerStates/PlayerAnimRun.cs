@@ -11,7 +11,7 @@ public class PlayerAnimRun : PlayerAnimBase
 
     public override BaseState<PlayerAnimFSM> UpdateState(PlayerAnimFSM context)
     {
-        context.weaponContext.currentWeapon.SetIdleValues(context.playerAnimator);
+        context.weaponContext.currentWeapon.SetRunValues(context.playerAnimator);
 
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {

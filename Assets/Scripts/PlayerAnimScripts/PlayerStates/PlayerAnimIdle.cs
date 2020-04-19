@@ -21,6 +21,10 @@ public class PlayerAnimIdle : PlayerAnimBase
         {
             return context.jumpState;
         }
+        else if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            return context.crouchState;
+        }
         else
         {
             return context.idleState;
