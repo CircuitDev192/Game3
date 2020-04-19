@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class PlayerAnimJump : PlayerAnimBase
 {
-    public override void EnterState(PlayerAnimFSM player)
+    public override void EnterState(PlayerAnimFSM context)
     {
-        player.playerAnimator.SetBool("Jump_b", true);
+        context.playerAnimator.SetBool("Jump_b", true);
     }
 
-    public override void Update(PlayerAnimFSM player)
+    public override BaseState<PlayerAnimFSM> UpdateState(PlayerAnimFSM context)
     {
         if (!Input.GetKey(KeyCode.Space))
         {
-            player.playerAnimator.SetBool("Jump_b", false);
-            player.TransitionToState(player.idleState);
+            return context.idleState;
         }
+        else
+        {
+            return context.jumpState;
+        }
+    }
+
+    public override void ExitState(PlayerAnimFSM context)
+    {
+        context.playerAnimator.SetBool("Jump_b", false);
     }
 }
