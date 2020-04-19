@@ -600,7 +600,7 @@ MonoBehaviour:
   damage: 45
   fireRate: 0.11
   roundsPerMag: 30
-  range: 125
+  range: 150
   impactForce: 90
   fullAuto: 1
   flashlightOn: 0
