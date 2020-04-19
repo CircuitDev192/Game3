@@ -595,6 +595,8 @@ MonoBehaviour:
   name: M-16
   weaponTypeInt: 0
   ammoType: 0
+  equippedSuppressor: {fileID: 0}
+  suppressorFatigue: 7.5
   damage: 45
   fireRate: 0.11
   roundsPerMag: 30
@@ -630,6 +632,7 @@ MonoBehaviour:
   weaponRenderer: {fileID: 7352011040421823293}
   flashlightRenderer: {fileID: 7352011040421800915}
   opticRenderer: {fileID: 7352011040421379325}
+  suppressorRenderer: {fileID: 7352011040421344585}
   audioSource: {fileID: 8832912375273639616}
   audioClips:
   - {fileID: 8300000, guid: 1425c5c8f171c6c4d975e03903fc9aa8, type: 3}
@@ -812,7 +815,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7352011040423749459
 Transform:
   m_ObjectHideFlags: 0

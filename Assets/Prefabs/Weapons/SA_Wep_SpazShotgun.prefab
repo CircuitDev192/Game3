@@ -1208,6 +1208,8 @@ MonoBehaviour:
   name: Spas-12
   weaponTypeInt: 0
   ammoType: 1
+  equippedSuppressor: {fileID: 0}
+  suppressorFatigue: 34
   damage: 67
   fireRate: 0.675
   roundsPerMag: 1
@@ -1243,6 +1245,7 @@ MonoBehaviour:
   weaponRenderer: {fileID: 6132034752448678912}
   flashlightRenderer: {fileID: 6132034752448675000}
   opticRenderer: {fileID: 6132034752448678030}
+  suppressorRenderer: {fileID: 6132034752448667120}
   audioSource: {fileID: 3856031629462493671}
   audioClips:
   - {fileID: 8300000, guid: 928932d277a7fef4081dce583075c438, type: 3}
@@ -1372,7 +1375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6132034752450442700
 Transform:
   m_ObjectHideFlags: 0

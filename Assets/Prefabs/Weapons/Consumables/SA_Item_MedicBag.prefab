@@ -121,7 +121,7 @@ MonoBehaviour:
   audibleDistance: 0
   weaponAnimation: 10
   meleeType: 0
-  fireAnimationStartDelay: 1.5
+  fireAnimationStartDelay: 1.2
   reloadTime: 0
   idleBodyHorizontal: 0
   idleBodyVertical: 0
@@ -144,8 +144,7 @@ MonoBehaviour:
   weaponRenderer: {fileID: 29788995442891963}
   flashlightRenderer: {fileID: 0}
   opticRenderer: {fileID: 0}
-  audioSource: {fileID: 2140302637969019941, guid: 1a0192c7eb52d0148a5ecc2f345b5f30,
-    type: 3}
+  audioSource: {fileID: 1976080299307338738}
   audioClips:
   - {fileID: 8300000, guid: 5a9383dda6cabc047b7a297602e93eb4, type: 3}
   - {fileID: 8300000, guid: e9714160ce34f2b4ab63ff8c27bd68e1, type: 3}

@@ -14,7 +14,7 @@ public class MedKit : WeaponBase
 
         roundsInCurrentMag--;
 
-        EventManager.TriggerPlayerHealthChanged(healAmount);
+        EventManager.TriggerPlayerDamaged(-healAmount);
 
         // wait one frame
         yield return new WaitForEndOfFrame();

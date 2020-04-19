@@ -15,6 +15,7 @@ public class PlayerManager : MonoBehaviour
         FLASH,
         MEDKITS,
         FLARES,
+        SUPPRESSOR,
         INF_OR_MELEE
     }
 
@@ -30,6 +31,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private int flashbangGrenades;
     [SerializeField] private int medkits;
     [SerializeField] private int flares;
+    [SerializeField] private int suppressors;
 
     #endregion
 
@@ -44,6 +46,18 @@ public class PlayerManager : MonoBehaviour
         EventManager.TotalAmmoChanged += TotalAmmoChanged;
         EventManager.TotalAmmoChangedSwap += TotalAmmoChangedSwap;
         EventManager.PlayerPickedUpAmmo += PlayerPickedUpAmmo;
+        EventManager.PlayerPickedUpSuppressor += PlayerPickedUpSuppressor;
+        EventManager.SuppressorBroken += SuppressorBroken;
+    }
+
+    private void PlayerPickedUpSuppressor()
+    {
+        SetAmmoValue(suppressors + 1, AmmoType.SUPPRESSOR);
+    }
+
+    private void SuppressorBroken()
+    {
+        SetAmmoValue(suppressors - 1, AmmoType.SUPPRESSOR);
     }
 
     private void PlayerPickedUpAmmo(AmmoType ammoType, int addedAmmo)
@@ -94,6 +108,8 @@ public class PlayerManager : MonoBehaviour
                 return medkits;
             case AmmoType.FLARES:
                 return flares;
+            case AmmoType.SUPPRESSOR:
+                return suppressors;
             default:
                 return 0;
         }
@@ -117,6 +133,8 @@ public class PlayerManager : MonoBehaviour
                 return "Medkit";
             case AmmoType.FLARES:
                 return "Flare";
+            case AmmoType.SUPPRESSOR:
+                return "Suppressor";
             default:
                 return "";
         }
@@ -165,6 +183,10 @@ public class PlayerManager : MonoBehaviour
             case AmmoType.FLARES:
                 flares = updatedAmmo;
                 EventManager.TriggerUpdateItemCountUI("Flare", updatedAmmo + 1);
+                break;
+            case AmmoType.SUPPRESSOR:
+                suppressors = updatedAmmo;
+                EventManager.TriggerUpdateItemCountUI("Suppressor", updatedAmmo);
                 break;
             default:
                 break;
