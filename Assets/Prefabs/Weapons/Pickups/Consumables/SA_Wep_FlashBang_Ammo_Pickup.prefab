@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7778780849152216958}
   - component: {fileID: 7778780849152216959}
   - component: {fileID: 7778780849152216956}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SA_Wep_FlashBang_Ammo_Pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}

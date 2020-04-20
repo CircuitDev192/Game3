@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1037128816967550246}
   - component: {fileID: 2515199962717753663}
   - component: {fileID: 1650925788516443791}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SA_Item_Ammo_AssaultRifle_Pickup_Magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}

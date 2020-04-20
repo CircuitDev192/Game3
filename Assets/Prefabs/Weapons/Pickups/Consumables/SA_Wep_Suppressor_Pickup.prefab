@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2206207796235922971}
   - component: {fileID: 4550247942433512913}
   - component: {fileID: 6264886294440792599}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SA_Wep_Suppressor_Pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
