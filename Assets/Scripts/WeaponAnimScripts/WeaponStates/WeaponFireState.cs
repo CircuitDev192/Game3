@@ -7,22 +7,19 @@ public class WeaponFireState : WeaponBaseState
 
     public override void EnterState(WeaponContext context)
     {
-        Debug.Log("Weapon entered fire state.");
-
         context.playerAnimator.SetBool("Shoot_b", true);
         nextShotTime = (nextShotTime > Time.time) ? nextShotTime : Time.time;
     }
 
     public override void ExitState(WeaponContext context)
     {
-        Debug.Log("Weapon exited fire state.");
-
         context.playerAnimator.SetBool("Shoot_b", false);
     }
 
     public override BaseState<WeaponContext> UpdateState(WeaponContext context)
     {
-        
+        base.ManageFlashlightDrain(context);
+
         // We can fire another shot
         if (Time.time < nextShotTime) return this;
 

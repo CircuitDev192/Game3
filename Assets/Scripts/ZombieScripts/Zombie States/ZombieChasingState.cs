@@ -28,7 +28,9 @@ public class ZombieChasingState : ZombieBaseState
     public override BaseState<ZombieContext> UpdateState(ZombieContext context)
     {
         if (base.ShouldDie(context)) return context.deadState;
-        
+
+        if (base.ShouldFlee(context)) return context.fleeState;
+
         context.PlayTimedSound(this);
 
         context.currentTarget = context.playerTransform.position;

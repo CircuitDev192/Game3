@@ -4,17 +4,19 @@ public class WeaponIdleState : WeaponBaseState
 {
     public override void EnterState(WeaponContext context)
     {
-        Debug.Log("Weapon entered idle state.");
+        
     }
 
     public override void ExitState(WeaponContext context)
     {
-        Debug.Log("Weapon exited idle state.");
+        
     }
 
     public override BaseState<WeaponContext> UpdateState(WeaponContext context)
     {
         if (context.gameState == GameState.Paused) return this;
+
+        base.ManageFlashlightDrain(context);
 
         // Weapon should fire or reload
         if(Input.GetMouseButtonDown(0))
@@ -108,6 +110,8 @@ public class WeaponIdleState : WeaponBaseState
         // Enable Flashlight
         if (Input.GetKeyDown(KeyCode.F))
         {
+            if (context.flashlightDead) return this;
+
             context.flashlightOn = !context.flashlightOn;
             context.currentWeapon.flashLight.enabled = context.flashlightOn;
             context.currentWeapon.flashlightOn = context.flashlightOn;
@@ -120,6 +124,16 @@ public class WeaponIdleState : WeaponBaseState
                 context.currentWeapon.GetComponent<AudioSource>().PlayOneShot(context.currentWeapon.flashlightOffSound, 0.7f * PlayerManager.instance.soundMultiplier);
 
             }
+        }
+
+        // Flashlight recharge
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            context.currentFlashlightBattery = Mathf.Clamp(context.currentFlashlightBattery + context.flashlightRechargeRate, 0, 100);
+
+            if (context.currentFlashlightBattery == 100f) context.flashlightDead = false;
+
+            EventManager.TriggerFlashLightPowerChanged(context.currentFlashlightBattery);
         }
 
         return this;
