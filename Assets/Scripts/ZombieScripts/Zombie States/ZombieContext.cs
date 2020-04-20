@@ -18,6 +18,7 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
     public ZombieAttackingState attackState = new ZombieAttackingState();
     public ZombieDeadState deadState = new ZombieDeadState();
     public ZombieDespawnState despawnState = new ZombieDespawnState();
+    public ZombieFleeState fleeState = new ZombieFleeState();
 
     #endregion
 
@@ -47,6 +48,11 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
     public float visionDistance;
     public float deadDespawnDistance;
     public float livingDespawnDistance;
+
+    // Illumination Intensity Flee Threshold
+    public float fleeThreshold = 10f;
+    // Flee vector
+    public Vector3 fleeVector;
 
     // Idle time range
     public float minimumIdleTime;

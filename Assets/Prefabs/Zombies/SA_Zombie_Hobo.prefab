@@ -6294,6 +6294,7 @@ MonoBehaviour:
   visionDistance: 30
   deadDespawnDistance: 40
   livingDespawnDistance: 125
+  fleeThreshold: 10
   minimumIdleTime: 0
   maximumIdleTime: 8
   playerTransform: {fileID: 0}

@@ -24,13 +24,15 @@ public class ZombieIdleState : ZombieBaseState
 
     public override BaseState<ZombieContext> UpdateState(ZombieContext context)
     {
-        if (context.heardSound) return context.investigateState;
+        if (base.ShouldDie(context)) return context.deadState;
 
         float distance = Vector3.Distance(context.transform.position, context.playerTransform.position);
 
         if (distance > context.livingDespawnDistance) return context.despawnState;
 
-        if (base.ShouldDie(context)) return context.deadState;
+        if (base.ShouldFlee(context)) return context.fleeState;
+
+        if (context.heardSound) return context.investigateState;
 
         if (context.playerDead) return this;
 

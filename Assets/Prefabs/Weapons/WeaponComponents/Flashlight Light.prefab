@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6098307425005541686}
   - component: {fileID: 2193003379401516096}
-  - component: {fileID: -5398595327443464768}
+  - component: {fileID: 35006276447367045}
+  - component: {fileID: 1250924271490972643}
   m_Layer: 0
   m_Name: Flashlight Light
   m_TagString: Untagged
@@ -44,8 +45,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 47.746483
-  m_Range: 30
+  m_Intensity: 652.0667
+  m_Range: 50
   m_SpotAngle: 90
   m_InnerSpotAngle: 71.41338
   m_CookieSize: 10
@@ -75,7 +76,7 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
+  m_Cookie: {fileID: 2800000, guid: 2c29c08dd1c0b6749b7cd0fcff7a29fd, type: 3}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
@@ -93,7 +94,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &-5398595327443464768
+--- !u!114 &35006276447367045
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,12 +114,12 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
-  m_EnableSpotReflector: 0
+  m_Intensity: 1200
+  m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
   m_LightDimmer: 1
-  m_VolumetricDimmer: 1
+  m_VolumetricDimmer: 0.005
   m_LightUnit: 0
   m_FadeDistance: 10000
   m_AffectDiffuse: 1
@@ -200,6 +201,19 @@ MonoBehaviour:
   useOldInspector: 0
   useVolumetric: 1
   featuresFoldout: 1
-  showAdditionalSettings: 0
+  showAdditionalSettings: 4
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
+--- !u!114 &1250924271490972643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1962252961230641831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e84329a17d00c1429efddb35c40fc2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  managedLight: {fileID: 2193003379401516096}

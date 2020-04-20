@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6860268054421660113}
   - component: {fileID: 8985324784053903907}
-  - component: {fileID: 2344791335403362915}
+  - component: {fileID: 3477874393457340878}
   m_Layer: 0
   m_Name: Muzzle Flash Light
   m_TagString: Untagged
@@ -93,7 +93,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &2344791335403362915
+--- !u!114 &3477874393457340878
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
   m_LightDimmer: 1
-  m_VolumetricDimmer: 1
+  m_VolumetricDimmer: 0.1
   m_LightUnit: 0
   m_FadeDistance: 10000
   m_AffectDiffuse: 1

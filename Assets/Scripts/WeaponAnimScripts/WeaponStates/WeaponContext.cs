@@ -29,6 +29,10 @@ public class WeaponContext : Context<WeaponContext>
     public int currentWeaponIndex;
     public int currentConsumableIndex;
     public bool flashlightOn = false;
+    public float flashlightDrainRate = 1f;
+    public float currentFlashlightBattery = 100f;
+    public float flashlightRechargeRate = 10f;
+    public bool flashlightDead = false;
     public bool consumableEquipped = false;
     private bool isInPickupRange = false;
 

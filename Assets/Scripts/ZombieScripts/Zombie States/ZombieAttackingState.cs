@@ -22,6 +22,8 @@ public class ZombieAttackingState : ZombieBaseState
     {
         if (base.ShouldDie(context)) return context.deadState;
 
+        if(base.ShouldFlee(context)) return context.fleeState;
+
         float distance = Vector3.Distance(context.transform.position, context.playerTransform.position);
 
         if (distance / 3 > context.zombieNavMeshAgent.stoppingDistance) return context.chaseState;

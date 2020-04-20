@@ -40,4 +40,17 @@ public abstract class ZombieBaseState : BaseState<ZombieContext>
 
         return false;
     }
+
+    public bool ShouldFlee(ZombieContext context)
+    {
+        context.fleeVector = LightManager.CalculateIllumination(context.transform.position);
+
+        float illumination = context.fleeVector.magnitude;
+
+        //Debug.Log("Zombie Illumination: " + illumination.ToString());
+
+        if (illumination > context.fleeThreshold) return true;
+
+        return false;
+    }
 }

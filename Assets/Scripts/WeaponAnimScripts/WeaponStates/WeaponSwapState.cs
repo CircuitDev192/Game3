@@ -6,8 +6,6 @@ public class WeaponSwapState : WeaponBaseState
 
     public override void EnterState(WeaponContext context)
     {
-        Debug.Log("Weapon entered swap state.");
-
         context.currentWeapon.audioSource.PlayOneShot(context.currentWeapon.holsterSound, 0.5f * PlayerManager.instance.soundMultiplier);
                 
         context.currentWeapon.enabled = false;
@@ -49,11 +47,13 @@ public class WeaponSwapState : WeaponBaseState
 
     public override void ExitState(WeaponContext context)
     {
-        Debug.Log("Weapon exited swap state.");
+        
     }
 
     public override BaseState<WeaponContext> UpdateState(WeaponContext context)
     {
+        base.ManageFlashlightDrain(context);
+
         if (Time.time > timeToFinishSwap)
         {
             context.currentWeapon.audioSource.PlayOneShot(context.currentWeapon.unholsterSound, 0.5f * PlayerManager.instance.soundMultiplier);
