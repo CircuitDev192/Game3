@@ -19,6 +19,7 @@ public class FragGrenade : MonoBehaviour
     private float collisionAudibleDistance;
     [SerializeField]
     private float explosionAudibleDistance;
+    private List<GameObject> targets = new List<GameObject>();
 
 
     // Update is called once per frame
@@ -29,6 +30,13 @@ public class FragGrenade : MonoBehaviour
         {
             //explode
             Instantiate(explosion, this.gameObject.transform);
+
+            foreach (GameObject target in targets)
+            {
+                target.GetComponentInParent<IDamageAble>().Damage(1000f);
+                target.GetComponent<Rigidbody>().AddExplosionForce(1000f, this.transform.position, this.GetComponent<SphereCollider>().radius);
+            }
+
             audioSource.pitch = 1f;
             audioSource.maxDistance = explosionAudibleDistance;
             audioSource.PlayOneShot(explosionSound, 1f * PlayerManager.instance.soundMultiplier);
@@ -45,5 +53,25 @@ public class FragGrenade : MonoBehaviour
         audioSource.maxDistance = collisionAudibleDistance * 2;
         audioSource.PlayOneShot(collisionSounds[Random.Range(0, collisionSounds.Length)], 0.25f * PlayerManager.instance.soundMultiplier);
         EventManager.TriggerSoundGenerated(this.transform.position, collisionAudibleDistance);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        IDamageAble script = other.transform.gameObject.GetComponent<IDamageAble>();
+        if (script != null)
+        {
+            Debug.LogError("Target Added to list");
+            targets.Add(other.transform.gameObject);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        IDamageAble script = other.transform.gameObject.GetComponent<IDamageAble>();
+        if (script != null)
+        {
+            Debug.LogError("Target removed from list");
+            targets.Remove(other.transform.gameObject);
+        }
     }
 }
