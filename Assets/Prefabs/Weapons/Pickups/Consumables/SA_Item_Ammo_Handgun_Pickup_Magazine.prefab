@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9118475280400116601}
   - component: {fileID: 8762026224238252334}
   - component: {fileID: 2623374418484402421}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SA_Item_Ammo_Handgun_Pickup_Magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}

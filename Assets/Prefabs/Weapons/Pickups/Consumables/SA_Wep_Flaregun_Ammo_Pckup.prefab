@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4945471472271673947}
   - component: {fileID: 4211201918338580112}
   - component: {fileID: 9090745657979243150}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SA_Wep_Flaregun_Ammo_Pckup
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 679010738290806831}
   - component: {fileID: 1659692434835366589}
   - component: {fileID: 3882451161816460537}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SA_Item_Ammo_Shotgun_Pickup_Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}

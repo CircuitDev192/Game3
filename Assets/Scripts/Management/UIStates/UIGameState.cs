@@ -7,6 +7,7 @@ public class UIGameState : UIBaseState
     public override void EnterState(UIManager context)
     {
         context.GameUI.SetActive(true);
+        EventManager.TriggerMouseShouldHide(true);
     }
 
     public override void ExitState(UIManager context)
