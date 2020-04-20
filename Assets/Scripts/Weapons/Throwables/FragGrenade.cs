@@ -34,7 +34,7 @@ public class FragGrenade : MonoBehaviour
             foreach (GameObject target in targets)
             {
                 target.GetComponentInParent<IDamageAble>().Damage(1000f);
-                target.GetComponent<Rigidbody>().AddExplosionForce(1000f, this.transform.position, this.GetComponent<SphereCollider>().radius);
+                target.GetComponent<Rigidbody>().AddExplosionForce(2000f, this.transform.position, this.GetComponent<SphereCollider>().radius);
             }
 
             audioSource.pitch = 1f;
@@ -57,11 +57,11 @@ public class FragGrenade : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        IDamageAble script = other.transform.gameObject.GetComponent<IDamageAble>();
+        IDamageAble script = other.gameObject.GetComponentInParent<IDamageAble>();
         if (script != null)
         {
             Debug.LogError("Target Added to list");
-            targets.Add(other.transform.gameObject);
+            targets.Add(other.gameObject);
         }
     }
 
@@ -71,7 +71,7 @@ public class FragGrenade : MonoBehaviour
         if (script != null)
         {
             Debug.LogError("Target removed from list");
-            targets.Remove(other.transform.gameObject);
+            targets.Remove(other.gameObject);
         }
     }
 }
