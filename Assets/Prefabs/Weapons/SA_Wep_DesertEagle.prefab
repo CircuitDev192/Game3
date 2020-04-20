@@ -761,7 +761,7 @@ MonoBehaviour:
   runBodyVertical: 0
   runHeadHorizontal: 0
   runHeadVertical: 0
-  flashLight: {fileID: 6283738038217787992}
+  flashLight: {fileID: 926881350065563393}
   muzzleFlashLight: {fileID: 7907257375361837889}
   muzzleFlashRenderer: {fileID: 315000128876319732}
   shotOrigin: {fileID: 305823935942181936}
@@ -817,7 +817,7 @@ Transform:
   m_LocalPosition: {x: 0.11877168, y: 0.2725217, z: 0.6916155}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2160255357492180782}
+  - {fileID: 5049211467723168375}
   m_Father: {fileID: 8527565352046903365}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1111,7 +1111,7 @@ MeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 315000128874509424}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &5285904932092882456
+--- !u!1001 &1347681680288301889
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1180,15 +1180,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f6f28ec94fb9dd47b4c04843afbd1de, type: 3}
---- !u!108 &6283738038217787992 stripped
+--- !u!108 &926881350065563393 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 2193003379401516096, guid: 8f6f28ec94fb9dd47b4c04843afbd1de,
     type: 3}
-  m_PrefabInstance: {fileID: 5285904932092882456}
+  m_PrefabInstance: {fileID: 1347681680288301889}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2160255357492180782 stripped
+--- !u!4 &5049211467723168375 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6098307425005541686, guid: 8f6f28ec94fb9dd47b4c04843afbd1de,
     type: 3}
-  m_PrefabInstance: {fileID: 5285904932092882456}
+  m_PrefabInstance: {fileID: 1347681680288301889}
   m_PrefabAsset: {fileID: 0}
