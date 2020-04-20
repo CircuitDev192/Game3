@@ -7,6 +7,7 @@ public class UIPauseState : UIBaseState
     public override void EnterState(UIManager context)
     {
         context.PauseUI.SetActive(true);
+        EventManager.TriggerMouseShouldHide(false);
     }
 
     public override void ExitState(UIManager context)

@@ -568,7 +568,7 @@ MonoBehaviour:
   damage: 35
   fireRate: 0.56
   roundsPerMag: 15
-  range: 50
+  range: 100
   impactForce: 70
   fullAuto: 0
   flashlightOn: 0

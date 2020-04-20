@@ -13,6 +13,14 @@ public static class EventManager
     public static Action UIQuitClicked;
     public static void TriggerUIQuitClicked() { UIQuitClicked?.Invoke(); }
 
+    // Show Controls Menu
+    public static Action UIControlsClicked;
+    public static void TriggerUIControlsClicked() { UIControlsClicked?.Invoke(); }
+
+    // Show Controls Menu
+    public static Action UIControlsBackClicked;
+    public static void TriggerUIControlsBackClicked() { UIControlsBackClicked?.Invoke(); }
+
     // Should mouse be hidden/locked
     public static Action<bool> MouseShouldHide;
     public static void TriggerMouseShouldHide(bool shouldHide) { MouseShouldHide?.Invoke(shouldHide); }
