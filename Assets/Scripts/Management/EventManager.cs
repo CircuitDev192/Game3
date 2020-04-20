@@ -49,6 +49,10 @@ public static class EventManager
     public static Action<string, string> MissionChanged;
     public static void TriggerMissionChanged(string missionTitle, string missionDescription) { MissionChanged?.Invoke(missionTitle, missionDescription); }
 
+    // Mission waypoint changed
+    public static Action<Vector3> MissionWaypointChanged;
+    public static void TriggerMissionWaypointChanged(Vector3 missionWaypointPosition) { MissionWaypointChanged?.Invoke(missionWaypointPosition); }
+
     // Mission Completed Event
     public static Action MissionCompleted;
     public static void TriggerMissionCompleted() { MissionCompleted?.Invoke(); }

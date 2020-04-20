@@ -3169,6 +3169,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06696c43eb7849b49a2420afb9061aee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8847084667305425969
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6478433907372298532}
+  m_Layer: 0
+  m_Name: MissionObjectiveWaypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6478433907372298532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8847084667305425969}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -174.38, y: 0, z: 170.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4041512645750729253}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9071897499109556220
 GameObject:
   m_ObjectHideFlags: 0
@@ -3202,6 +3232,7 @@ Transform:
   - {fileID: 3866466363042916654}
   - {fileID: 7396005878830740581}
   - {fileID: 1401674109}
+  - {fileID: 6478433907372298532}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3223,6 +3254,7 @@ MonoBehaviour:
   missionStartCollider: {fileID: 8528687694652845933}
   missionObjectiveAreaCollider: {fileID: 4831076731052134529}
   missionEndCollider: {fileID: 3227978966284180199}
+  missionObjectiveLocation: {fileID: 6478433907372298532}
   spawnPoints:
   - {fileID: 1619840425}
   - {fileID: 346336179}
