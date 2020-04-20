@@ -25,6 +25,8 @@ public class ZombieFleeState : ZombieBaseState
 
         Vector3 fleeDestination = context.transform.position + distancePerSegment * context.fleeVector.normalized;
 
+        fleeDestination.y = 0;
+
         context.zombieNavMeshAgent.destination = fleeDestination;
 
         context.zombieAnimator.SetFloat("Speed_f", context.runSpeed);
@@ -45,6 +47,7 @@ public class ZombieFleeState : ZombieBaseState
             if(currentSegment == segments) return context.idleState;
 
             Vector3 fleeDestination = context.transform.position + distancePerSegment * context.fleeVector.normalized;
+            fleeDestination.y = 0;
 
             context.zombieNavMeshAgent.destination = fleeDestination;
         }
