@@ -47,7 +47,7 @@ public abstract class ZombieBaseState : BaseState<ZombieContext>
 
         float illumination = context.fleeVector.magnitude;
 
-        //Debug.Log("Zombie Illumination: " + illumination.ToString());
+        Debug.Log("Zombie Illumination: " + illumination.ToString());
 
         if (illumination > context.fleeThreshold) return true;
 
