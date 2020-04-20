@@ -11,6 +11,7 @@ public class Mission1 : MonoBehaviour
     [SerializeField] private GameObject missionStartCollider;
     [SerializeField] private GameObject missionObjectiveAreaCollider;
     [SerializeField] private GameObject missionEndCollider;
+    [SerializeField] private Transform missionObjectiveLocation;
     [SerializeField] private GameObject[] spawnPoints;
     [SerializeField] private int zombiesToSpawn;
     [SerializeField] private bool shouldSpawnZombiesAtMissionArea;
@@ -33,6 +34,7 @@ public class Mission1 : MonoBehaviour
     {
         missionStartCollider.gameObject.SetActive(false);
         EventManager.TriggerMissionChanged(missionTitle, missionDescription);
+        EventManager.TriggerMissionWaypointChanged(missionObjectiveLocation.position);
     }
 
     private void EndMission()
@@ -46,6 +48,8 @@ public class Mission1 : MonoBehaviour
     {
         missionEndCollider.gameObject.SetActive(true);
         EventManager.TriggerMissionChanged(missionTitle, returnToBaseDescription);
+        missionObjectiveLocation = missionEndCollider.transform;
+        EventManager.TriggerMissionWaypointChanged(missionObjectiveLocation.position);
     }
 
     // Update is called once per frame
