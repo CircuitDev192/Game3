@@ -226,7 +226,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This is a sample description of a mission.
+  m_Text: Select your weapons for the next mission
 --- !u!1 &704685660657970953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1828,7 +1828,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: MISSION TITLE
+  m_Text: Gear Up
 --- !u!1 &3515179890018745303
 GameObject:
   m_ObjectHideFlags: 0

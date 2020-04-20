@@ -37,14 +37,46 @@ public static class EventManager
 
     #region Mission Events
 
-    // Mission changed event
+    // Mission info changed event
     public static Action<string, string> MissionChanged;
     public static void TriggerMissionChanged(string missionTitle, string missionDescription) { MissionChanged?.Invoke(missionTitle, missionDescription); }
+
+    // Mission Completed Event
+    public static Action MissionCompleted;
+    public static void TriggerMissionCompleted() { MissionCompleted?.Invoke(); }
+
+    // Mission Started
+    public static Action StartMission;
+    public static void TriggerStartMission() { StartMission?.Invoke(); }
+
+    // Player at mission area
+    public static Action PlayerAtMissionArea;
+    public static void TriggerPlayerAtMissionArea() { PlayerAtMissionArea?.Invoke(); }
+
+    // Mission Ended
+    public static Action EndMission;
+    public static void TriggerEndMission() { EndMission?.Invoke(); }
+
+    // Player collided with mission item
+    public static Action<string> PlayerCollidedWithMissionItem;
+    public static void TriggerPlayerCollidedWithMissionItem(string itemName) { PlayerCollidedWithMissionItem?.Invoke(itemName); }
+
+    // Player picked up mission item
+    public static Action PlayerPickedUpMissionItem;
+    public static void TriggerPlayerPickedUpMissionItem() { PlayerPickedUpMissionItem?.Invoke(); }
+
+    // Player left mission item
+    public static Action PlayerLeftMissionItem;
+    public static void TriggerPlayerLeftMissionItem() { PlayerLeftMissionItem?.Invoke(); }
+
+    // Game Ended
+    public static Action GameEnded;
+    public static void TriggerGameEnded() { GameEnded?.Invoke(); }
 
     #endregion
 
     #region Player Info Events
-    
+
     // Player damaged event
     // DIFFERENT FROM HEALTH CHANGED
     //  This one triggers on damage (or healing),
