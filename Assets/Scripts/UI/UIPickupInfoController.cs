@@ -16,6 +16,21 @@ public class UIPickupInfoController : MonoBehaviour
         EventManager.PlayerCollidedWithPickup += PlayerCollidedWithPickup;
         EventManager.PlayerLeftPickup += PlayerLeftPickup;
         EventManager.PlayerCollidedWithAmmo += PlayerCollidedWithAmmo;
+        EventManager.PlayerCollidedWithMissionItem += PlayerCollidedWithMissionItem;
+        EventManager.PlayerLeftMissionItem += PlayerLeftMissionItem;
+    }
+
+    private void PlayerCollidedWithMissionItem(string itemName)
+    {
+        promptText.gameObject.SetActive(true);
+        pickupText.gameObject.SetActive(true);
+        pickupText.text = itemName;
+    }
+
+    private void PlayerLeftMissionItem()
+    {
+        promptText.gameObject.SetActive(false);
+        pickupText.gameObject.SetActive(false);
     }
 
     private void PlayerCollidedWithAmmo(PlayerManager.AmmoType ammoType, int addedAmmo)
@@ -37,7 +52,6 @@ public class UIPickupInfoController : MonoBehaviour
     {
         promptText.gameObject.SetActive(false);
         pickupText.gameObject.SetActive(false);
-        Debug.LogError("Player Left Pickup.");
     }
 
 }
