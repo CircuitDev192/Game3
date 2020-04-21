@@ -156,9 +156,11 @@ MonoBehaviour:
   loadMagSound: {fileID: 8300000, guid: 078e0b006fe052d4fb13a44678e6154d, type: 3}
   cockingSounds:
   - {fileID: 8300000, guid: c719b52bc5a288545963bf4497607229, type: 3}
+  flashlightOnSound: {fileID: 0}
+  flashlightOffSound: {fileID: 0}
   roundsInCurrentMag: 1
   currentFireMode: 0
-  flarePrefab: {fileID: 7957489420411926333, guid: 5f14647b09ad3e2469bf5c286f3d8507,
+  flarePrefab: {fileID: 7957489420411926333, guid: f94a612e0ff8a4049b32e813a116f9a1,
     type: 3}
 --- !u!82 &2633684811056639136
 AudioSource:
