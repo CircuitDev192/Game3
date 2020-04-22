@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8909574081999771297}
   - component: {fileID: 4221137990918721352}
   - component: {fileID: -2995412913744963152}
+  - component: {fileID: -8602998157405432536}
   m_Layer: 0
   m_Name: SA_Wep_GrenadeThrown
   m_TagString: Untagged
@@ -126,7 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 5
-  explosion: {fileID: 191186, guid: 3ada67b7fad601e498038e8679ab5aac, type: 3}
+  explosion: {fileID: 7331432874848523671, guid: 61d7bf7c294636649a0921cd8af72ede,
+    type: 3}
   audioSource: {fileID: -2995412913744963152}
   explosionSound: {fileID: 8300000, guid: 99063342b001e75479c059f03b13c965, type: 3}
   collisionSounds:
@@ -236,3 +238,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &-8602998157405432536
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2895562861935675056}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 15
+  m_Center: {x: -0.011594772, y: -0.00000047683716, z: 0}
