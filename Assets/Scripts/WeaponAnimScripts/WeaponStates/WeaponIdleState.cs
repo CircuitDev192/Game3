@@ -19,7 +19,7 @@ public class WeaponIdleState : WeaponBaseState
         base.ManageFlashlightDrain(context);
 
         // Weapon should fire or reload
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && !Input.GetKey(KeyCode.LeftShift))
         {
             if (context.currentWeapon.roundsInCurrentMag > 0) return context.fireState;
 

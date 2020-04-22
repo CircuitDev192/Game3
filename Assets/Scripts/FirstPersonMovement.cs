@@ -226,7 +226,10 @@ public class FirstPersonMovement : MonoBehaviour
             m_AudioSource.clip = m_FootstepSounds[n];
             m_AudioSource.PlayOneShot(m_AudioSource.clip, 0.3f * m_SoundMultiplier);
 
-            EventManager.TriggerSoundGenerated(this.transform.position, walkingAudibleDistance);
+            if (!Input.GetKey(KeyCode.LeftControl))
+            {
+                EventManager.TriggerSoundGenerated(this.transform.position, walkingAudibleDistance);
+            }
 
             // move picked sound to index 0 so it's not picked next time
             m_FootstepSounds[n] = m_FootstepSounds[0];
