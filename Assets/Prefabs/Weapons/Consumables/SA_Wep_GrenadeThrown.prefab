@@ -127,7 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 5
-  explosion: {fileID: 191186, guid: 3ada67b7fad601e498038e8679ab5aac, type: 3}
+  explosion: {fileID: 7331432874848523671, guid: 61d7bf7c294636649a0921cd8af72ede,
+    type: 3}
   audioSource: {fileID: -2995412913744963152}
   explosionSound: {fileID: 8300000, guid: 99063342b001e75479c059f03b13c965, type: 3}
   collisionSounds:

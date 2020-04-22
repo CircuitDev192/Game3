@@ -29,7 +29,7 @@ public class FragGrenade : MonoBehaviour
         if (timer <= 0f && !isExploded)
         {
             //explode
-            Instantiate(explosion, this.gameObject.transform);
+            Instantiate(explosion, this.transform.position, Quaternion.identity, this.transform);
 
             foreach (GameObject target in targets)
             {
@@ -43,7 +43,7 @@ public class FragGrenade : MonoBehaviour
             EventManager.TriggerSoundGenerated(this.transform.position, explosionAudibleDistance);
             this.gameObject.GetComponent<MeshRenderer>().enabled = false;
             isExploded = true;
-            Destroy(this.gameObject, 4f);
+            Destroy(this.gameObject, 1.5f);
         }
     }
 
