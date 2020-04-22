@@ -35,19 +35,22 @@ public class WeaponFireState : WeaponBaseState
         // Make sure we have ammo
         if (context.currentWeapon.roundsInCurrentMag > 0)
         {
-            // Delegate firing to the weapon
-            context.StartCoroutine(context.currentWeapon.Fire(context.mainCamera.transform));
-
-            if (context.currentWeapon.equippedSuppressor)
+            if (!Input.GetKey(KeyCode.LeftShift))
             {
-                EventManager.TriggerSoundGenerated(context.currentWeapon.transform.position, context.weapons[context.currentWeaponIndex].audibleDistance * 0.10f);
-            }
-            else
-            {
-                EventManager.TriggerSoundGenerated(context.currentWeapon.transform.position, context.weapons[context.currentWeaponIndex].audibleDistance);
-            }
+                // Delegate firing to the weapon
+                context.StartCoroutine(context.currentWeapon.Fire(context.mainCamera.transform));
 
-            nextShotTime = Time.time + context.currentWeapon.fireRate;
+                if (context.currentWeapon.equippedSuppressor)
+                {
+                    EventManager.TriggerSoundGenerated(context.currentWeapon.transform.position, context.weapons[context.currentWeaponIndex].audibleDistance * 0.10f);
+                }
+                else
+                {
+                    EventManager.TriggerSoundGenerated(context.currentWeapon.transform.position, context.weapons[context.currentWeaponIndex].audibleDistance);
+                }
+
+                nextShotTime = Time.time + context.currentWeapon.fireRate;
+            }
         }
         // No ammo in mag, reload
         else return context.reloadState;

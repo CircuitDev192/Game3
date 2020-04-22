@@ -7,7 +7,7 @@ public class WeaponSwapState : WeaponBaseState
     public override void EnterState(WeaponContext context)
     {
         context.currentWeapon.audioSource.PlayOneShot(context.currentWeapon.holsterSound, 0.5f * PlayerManager.instance.soundMultiplier);
-                
+        
         context.currentWeapon.enabled = false;
 
         if (!context.consumableEquipped)
@@ -18,8 +18,9 @@ public class WeaponSwapState : WeaponBaseState
             }
 
             context.currentWeapon = context.weapons[context.currentWeaponIndex];
-            context.currentWeapon.flashlightOn = context.flashlightOn;
             context.currentWeapon.enabled = true;
+            context.currentWeapon.flashlightOn = context.flashlightOn;
+            context.currentWeapon.flashLight.enabled = context.flashlightOn;
         }
         else
         {
