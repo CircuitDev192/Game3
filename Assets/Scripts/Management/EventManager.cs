@@ -53,6 +53,17 @@ public static class EventManager
     public static Action<Vector3> MissionWaypointChanged;
     public static void TriggerMissionWaypointChanged(Vector3 missionWaypointPosition) { MissionWaypointChanged?.Invoke(missionWaypointPosition); }
 
+    // Player at mission giver
+    public static Action PlayerAtMissionGiver;
+    public static void TriggerPlayerAtMissionGiver() { PlayerAtMissionGiver?.Invoke(); }
+
+    // Player left mission giver
+    public static Action PlayerLeftMissionGiver;
+    public static void TriggerPlayerLeftMissionGiver() { PlayerLeftMissionGiver?.Invoke(); }
+
+    public static Action<string> PlayerSpokeToMissionGiver;
+    public static void TriggerPlayerSpokeToMissionGiver(string npcDialog) { PlayerSpokeToMissionGiver?.Invoke(npcDialog); }
+
     // Mission Completed Event
     public static Action MissionCompleted;
     public static void TriggerMissionCompleted() { MissionCompleted?.Invoke(); }
@@ -60,6 +71,10 @@ public static class EventManager
     // Mission Started
     public static Action StartMission;
     public static void TriggerStartMission() { StartMission?.Invoke(); }
+
+    // Instantiate Next Mission
+    public static Action InstantiateNextMission;
+    public static void TriggerInstantiateNextMission() { InstantiateNextMission?.Invoke(); }
 
     // Player at mission area
     public static Action PlayerAtMissionArea;
