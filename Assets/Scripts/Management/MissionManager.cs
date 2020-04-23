@@ -39,7 +39,7 @@ public class MissionManager : MonoBehaviour
         if (canTalkToMissionGiver)
         {
             canTalkToMissionGiver = false;
-            EventManager.TriggerPlayerSpokeToMissionGiver(missionPrefabs[currentMission].GetComponent<Mission1>().npcDialog);
+            EventManager.TriggerPlayerSpokeToMissionGiver(missionPrefabs[currentMission].GetComponent<MissionFetch>().npcDialog);
         }
     }
 
