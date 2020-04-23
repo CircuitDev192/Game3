@@ -451,7 +451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4918621894866882622
 Transform:
   m_ObjectHideFlags: 0
@@ -474,7 +474,7 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4918621894866447916}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 3
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -3426,7 +3426,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300076, guid: dbbc53a6bc8f5c64bb234194ce1380aa, type: 3}
+  m_Mesh: {fileID: -5610635485136337728, guid: 8aa6a363766bf374392701cef858bff1, type: 3}
   m_Bones:
   - {fileID: 4918621894866812934}
   - {fileID: 4918621894866776400}
@@ -6021,8 +6021,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7875051051269138220}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.8, z: 0}
+  m_LocalRotation: {x: -5.597724e-25, y: -5.597724e-25, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.8000002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7875051051268782862}
@@ -6052,7 +6052,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 150
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -6099,13 +6099,7 @@ GameObject:
   - component: {fileID: 7875051051255927534}
   - component: {fileID: 7875051051263804494}
   - component: {fileID: 7875051051262033614}
-  - component: {fileID: 359667304959359679}
-  - component: {fileID: 7761039926420205556}
-  - component: {fileID: 8185281423055743996}
-  - component: {fileID: 4710992666373230599}
   - component: {fileID: 6594044691682805308}
-  - component: {fileID: 8384940020830759092}
-  - component: {fileID: -2889890027625095901}
   - component: {fileID: -5723019715818057944}
   - component: {fileID: 1779465425897055526}
   m_Layer: 0
@@ -6186,9 +6180,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 150
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -6261,80 +6255,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &359667304959359679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7875051051269138222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  m_AssetId: 
---- !u!114 &7761039926420205556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7875051051269138222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  clientAuthority: 1
-  localPositionSensitivity: 0.01
-  localRotationSensitivity: 0.01
-  localScaleSensitivity: 0.01
-  compressRotation: 1
---- !u!114 &8185281423055743996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7875051051269138222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9147dc3ea365579458c9e36aac445874, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  behavioursToDisable:
-  - {fileID: -5723019715818057944}
-  - {fileID: 7875051051268285710}
-  - {fileID: 7875051051262196014}
-  - {fileID: 6594044691682805308}
-  - {fileID: 1779465425897055526}
---- !u!114 &4710992666373230599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7875051051269138222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  clientAuthority: 1
-  localPositionSensitivity: 0.01
-  localRotationSensitivity: 0.01
-  localScaleSensitivity: 0.01
-  compressRotation: 1
-  target: {fileID: 7875051051268782860}
 --- !u!114 &6594044691682805308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6350,43 +6270,6 @@ MonoBehaviour:
   playerAnimator: {fileID: 0}
   health: 100
   weaponContext: {fileID: 1779465425897055526}
---- !u!114 &8384940020830759092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7875051051269138222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  clientAuthority: 1
-  animator: {fileID: 4918621894857046644}
---- !u!114 &-2889890027625095901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7875051051269138222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9da30b0cb1ad10a4995145688657ea6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  footsteps:
-  - {fileID: 8300000, guid: 42e65e088b3f4374e851b8dbd38f3df9, type: 3}
-  - {fileID: 8300000, guid: 8bc94ec6ed537e743b481638bdcd503d, type: 3}
-  - {fileID: 8300000, guid: 5a9383dda6cabc047b7a297602e93eb4, type: 3}
-  - {fileID: 8300000, guid: e9714160ce34f2b4ab63ff8c27bd68e1, type: 3}
-  landingSound: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
-  jumpingSound: {fileID: 8300000, guid: 5897aeed9b676024fbb8c694b421a861, type: 3}
 --- !u!114 &-5723019715818057944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6412,8 +6295,8 @@ MonoBehaviour:
     clampVerticalRotation: 1
     MinimumX: -90
     MaximumX: 90
-    smooth: 0
-    smoothTime: 5
+    smooth: 1
+    smoothTime: 30
     lockCursor: 1
   m_UseFovKick: 1
   m_FovKick:
@@ -6446,7 +6329,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  m_UseHeadBob: 1
+  m_UseHeadBob: 0
   m_HeadBob:
     HorizontalBobRange: 0.1
     VerticalBobRange: 0.1
@@ -6506,13 +6389,62 @@ MonoBehaviour:
     BobDuration: 0.2
     BobAmount: 0.1
   m_StepInterval: 5
+  walkingAudibleDistance: 5
+  runningAudibleDistance: 20
+  jumpingAudibleDistance: 25
   m_FootstepSounds:
-  - {fileID: 8300000, guid: 42e65e088b3f4374e851b8dbd38f3df9, type: 3}
-  - {fileID: 8300000, guid: 8bc94ec6ed537e743b481638bdcd503d, type: 3}
-  - {fileID: 8300000, guid: 5a9383dda6cabc047b7a297602e93eb4, type: 3}
-  - {fileID: 8300000, guid: e9714160ce34f2b4ab63ff8c27bd68e1, type: 3}
-  m_JumpSound: {fileID: 8300000, guid: 5897aeed9b676024fbb8c694b421a861, type: 3}
-  m_LandSound: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
+  - {fileID: 8300000, guid: 4555a1d830f928d42835f8cfd26c44ba, type: 3}
+  - {fileID: 8300000, guid: 69160f549e31a7e47b0bbeb7a1f49aa1, type: 3}
+  - {fileID: 8300000, guid: 6eca504f72c033a4b81c0db50f528c20, type: 3}
+  - {fileID: 8300000, guid: 84f1ae35daf9be349b61e4ea677a1559, type: 3}
+  - {fileID: 8300000, guid: b07905f070636db40b416d26f6c225dd, type: 3}
+  - {fileID: 8300000, guid: 8ac38cdc615f76d428887a0f49ef40d4, type: 3}
+  - {fileID: 8300000, guid: e98bc1d586ae4e74ebcab6df98a01d15, type: 3}
+  - {fileID: 8300000, guid: e195d02b7a93f7c408e7f3b8fbff1d16, type: 3}
+  - {fileID: 8300000, guid: 045418744ca92bf4c872671faf15af06, type: 3}
+  - {fileID: 8300000, guid: 3aab6ea08cd481848904cf9bc039cc73, type: 3}
+  - {fileID: 8300000, guid: 5e4334d4ca3f2de4386076cf4bf1db56, type: 3}
+  - {fileID: 8300000, guid: b17ce146f3a249b4c925d2c3a03c7087, type: 3}
+  - {fileID: 8300000, guid: 4ab2888ef6c577249b1047ce1bc8815a, type: 3}
+  - {fileID: 8300000, guid: d2cffae8d7f9fe04eafae5c576ab5101, type: 3}
+  - {fileID: 8300000, guid: 8ba821d6652619646b28551f3284d82d, type: 3}
+  m_RunningFootstepSounds:
+  - {fileID: 8300000, guid: 328fab068aad10f488bb9d1a840ce765, type: 3}
+  - {fileID: 8300000, guid: b9b77f1d572d9b849b80151430b6d98f, type: 3}
+  - {fileID: 8300000, guid: 01f3c4839f3455c4cbc87d3633025d02, type: 3}
+  - {fileID: 8300000, guid: 86f1c87247ec5db4dbfe76becb0a2787, type: 3}
+  - {fileID: 8300000, guid: 3c490a2c762e61f41a4dfaeb57d5da00, type: 3}
+  - {fileID: 8300000, guid: 1ccfbc17d298e5246a05ec673433a366, type: 3}
+  - {fileID: 8300000, guid: 02e19c63616b89b4ebec16d176122037, type: 3}
+  - {fileID: 8300000, guid: ecb5dab31a5b82e4abe11ef9d1fc2fd2, type: 3}
+  - {fileID: 8300000, guid: 597465c8bca3e3d48bbd9bf94c3b0fe8, type: 3}
+  - {fileID: 8300000, guid: 2506898f0a89a654fa259eb35a0e72d7, type: 3}
+  - {fileID: 8300000, guid: f4170a21db6f8144c83252cb9f5ac416, type: 3}
+  - {fileID: 8300000, guid: 0d210353ad62b27429889955a21f9962, type: 3}
+  - {fileID: 8300000, guid: 6b1a550ba44a3c94dabb71ad2e4598eb, type: 3}
+  - {fileID: 8300000, guid: 70359d4f7338da2438d1b5688fbff31d, type: 3}
+  - {fileID: 8300000, guid: 60d684bd9cbf3cf4f8fb491cad0dd6bd, type: 3}
+  m_JumpingSounds:
+  - {fileID: 8300000, guid: 0739f22895262aa4a99faa2c940d4cbc, type: 3}
+  - {fileID: 8300000, guid: de6c262e538fe1042b2593abbfa43114, type: 3}
+  - {fileID: 8300000, guid: b4644d10561e8d04fb256d92fa07eff1, type: 3}
+  m_LandingSounds:
+  - {fileID: 8300000, guid: 4555a1d830f928d42835f8cfd26c44ba, type: 3}
+  - {fileID: 8300000, guid: 69160f549e31a7e47b0bbeb7a1f49aa1, type: 3}
+  - {fileID: 8300000, guid: 6eca504f72c033a4b81c0db50f528c20, type: 3}
+  - {fileID: 8300000, guid: 84f1ae35daf9be349b61e4ea677a1559, type: 3}
+  - {fileID: 8300000, guid: b07905f070636db40b416d26f6c225dd, type: 3}
+  - {fileID: 8300000, guid: 8ac38cdc615f76d428887a0f49ef40d4, type: 3}
+  - {fileID: 8300000, guid: e98bc1d586ae4e74ebcab6df98a01d15, type: 3}
+  - {fileID: 8300000, guid: e195d02b7a93f7c408e7f3b8fbff1d16, type: 3}
+  - {fileID: 8300000, guid: 045418744ca92bf4c872671faf15af06, type: 3}
+  - {fileID: 8300000, guid: 3aab6ea08cd481848904cf9bc039cc73, type: 3}
+  - {fileID: 8300000, guid: 5e4334d4ca3f2de4386076cf4bf1db56, type: 3}
+  - {fileID: 8300000, guid: b17ce146f3a249b4c925d2c3a03c7087, type: 3}
+  - {fileID: 8300000, guid: 4ab2888ef6c577249b1047ce1bc8815a, type: 3}
+  - {fileID: 8300000, guid: d2cffae8d7f9fe04eafae5c576ab5101, type: 3}
+  - {fileID: 8300000, guid: 8ba821d6652619646b28551f3284d82d, type: 3}
+  headJoint: {fileID: 4918621894866810648}
 --- !u!114 &1779465425897055526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6530,8 +6462,29 @@ MonoBehaviour:
   weaponPrefabs:
   - {fileID: -1127146355948526244, guid: 87b620f1dc834ec498b57cd476e5d89c, type: 3}
   - {fileID: 799428311574423752, guid: 4226a54658385e946b62fa8882e8f798, type: 3}
+  - {fileID: -5297264611972941881, guid: 38fd1a58031d2944cb1676c193ba7c4f, type: 3}
+  - {fileID: 7801393464093590516, guid: d32cf9afe7195294e8af3651b2653832, type: 3}
+  - {fileID: 4624678529073616633, guid: 0aec694b0c0c3a446acbce119be443f0, type: 3}
   - {fileID: 65264894889758074, guid: 4d0463a185c782b4f83578cee3221993, type: 3}
+  - {fileID: 572241145689354226, guid: d7d16aafc56e8104badde3d4a6fe87ae, type: 3}
+  consumablePrefabs:
+  - {fileID: -5020903799860781653, guid: 1a0192c7eb52d0148a5ecc2f345b5f30, type: 3}
+  - {fileID: 572241145689354226, guid: d7d16aafc56e8104badde3d4a6fe87ae, type: 3}
+  - {fileID: 2261001177301076415, guid: 1220b9b205e853e4a850d2f6ce25ca56, type: 3}
+  - {fileID: 7102301656092795077, guid: fae7a5aa7fd0d814d93ca1cc198eda55, type: 3}
+  - {fileID: 8003956396084438916, guid: 9a53a5e4d5b4a8542b0700946af4ebd6, type: 3}
+  suppressorPrefab: {fileID: 3681972861932359040, guid: 6fafd39498ee97c4e809446ff1f91ec4,
+    type: 3}
+  equippedConsumable: Rock
   weapons: []
+  consumables: []
+  suppressors: []
+  currentWeapon: {fileID: 0}
   currentWeaponIndex: 0
+  currentConsumableIndex: 0
+  flashlightOn: 0
+  consumableEquipped: 0
   weaponSwapTime: 0.5
   currentScrollDelta: 0
+  mainCamera: {fileID: 0}
+  gameState: 0

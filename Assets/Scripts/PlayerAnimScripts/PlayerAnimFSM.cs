@@ -1,16 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimFSM : MonoBehaviour
+public class PlayerAnimFSM : Context<PlayerAnimFSM>, IDamageAble
 {
-
-    private PlayerAnimBase currentState;
-    public readonly PlayerAnimIdle idleState = new PlayerAnimIdle();
-    public readonly PlayerAnimJump jumpState = new PlayerAnimJump();
-    public readonly PlayerAnimRun runState = new PlayerAnimRun();
-    public readonly PlayerAnimWalk walkState = new PlayerAnimWalk();
-    public readonly PlayerAnimDead deadState = new PlayerAnimDead();
+    public PlayerAnimIdle idleState = new PlayerAnimIdle();
+    public PlayerAnimJump jumpState = new PlayerAnimJump();
+    public PlayerAnimRun runState = new PlayerAnimRun();
+    public PlayerAnimWalk walkState = new PlayerAnimWalk();
+    public PlayerAnimDead deadState = new PlayerAnimDead();
+    public PlayerAnimCrouch crouchState = new PlayerAnimCrouch();
 
     [HideInInspector]
     public Animator playerAnimator;
@@ -21,27 +21,31 @@ public class PlayerAnimFSM : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    public override void InitializeContext()
     {
+        EventManager.TriggerPlayerHealthChanged(health);
+
         playerAnimator = GetComponentInChildren<Animator>();
         playerCam = GetComponentInChildren<Camera>();
-        TransitionToState(idleState);
+        currentState = idleState;
+        currentState.EnterState(this);
+
+        EventManager.PlayerDamaged += Damage;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        InitializeContext();
     }
 
     // Update is called once per frame
     void Update()
     {
         cameraAngle = playerCam.transform.rotation.eulerAngles.x;
-        cameraAngle = (cameraAngle > 180) ? (cameraAngle - 360)/90f : cameraAngle/90f;
-        playerAnimator.SetFloat("Head_Vertical_f", -cameraAngle);
-
-        currentState.Update(this);
-    }
-
-    public void TransitionToState(PlayerAnimBase state)
-    {
-        currentState = state;
-        currentState.EnterState(this);
+        cameraAngle = (cameraAngle > 180) ? (cameraAngle - 360) / 90f : cameraAngle / 90f;
+        playerAnimator.SetFloat("Body_Vertical_f", -cameraAngle);
+        ManageState(this);
     }
 
     public void Damage(float damage)

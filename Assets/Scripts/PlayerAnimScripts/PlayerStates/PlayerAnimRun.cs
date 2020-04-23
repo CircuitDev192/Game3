@@ -4,26 +4,35 @@ using UnityEngine;
 
 public class PlayerAnimRun : PlayerAnimBase
 {
-    public override void EnterState(PlayerAnimFSM player)
+    public override void EnterState(PlayerAnimFSM context)
     {
-        player.playerAnimator.SetFloat("Speed_f", 1f);
+        context.playerAnimator.SetFloat("Speed_f", 1f);
     }
 
-    public override void Update(PlayerAnimFSM player)
+    public override BaseState<PlayerAnimFSM> UpdateState(PlayerAnimFSM context)
     {
-        player.weaponContext.weapons[player.weaponContext.currentWeaponIndex].SetRunValues(player.playerAnimator);
+        context.weaponContext.currentWeapon.SetRunValues(context.playerAnimator);
 
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
-            player.TransitionToState(player.idleState);
+            return context.idleState;
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            player.TransitionToState(player.jumpState);
+            return context.jumpState;
         }
-        else if (!Input.GetKey(KeyCode.LeftShift))
+        else if (!Input.GetKey(KeyCode.LeftShift) || !Input.GetKey(KeyCode.W))
         {
-            player.TransitionToState(player.walkState);
+            return context.walkState;
         }
+        else
+        {
+            return context.runState;
+        }
+    }
+
+    public override void ExitState(PlayerAnimFSM context)
+    {
+        
     }
 }

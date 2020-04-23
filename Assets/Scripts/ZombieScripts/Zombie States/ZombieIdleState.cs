@@ -9,6 +9,7 @@ public class ZombieIdleState : ZombieBaseState
 
     public override void EnterState(ZombieContext context)
     {
+        Debug.Log("Zombie entered Idle state!");
         context.zombieNavMeshAgent.enabled = false;
         context.zombieAnimator.SetFloat("Speed_f", 0f);
 
@@ -23,15 +24,23 @@ public class ZombieIdleState : ZombieBaseState
 
     public override BaseState<ZombieContext> UpdateState(ZombieContext context)
     {
+        if (base.ShouldDie(context)) return context.deadState;
+
         float distance = Vector3.Distance(context.transform.position, context.playerTransform.position);
 
         if (distance > context.livingDespawnDistance) return context.despawnState;
 
-        if (base.ShouldDie(context)) return context.deadState;
+        if (base.ShouldFlee(context)) return context.fleeState;
+
+        if (context.heardSound) return context.investigateState;
+
+        if (context.playerDead) return this;
 
         if (base.SeesPlayer(context)) return context.chaseState;
 
         if (Time.time > timeToPatrol) return context.patrolState;
+        
+        context.PlayTimedSound(this);
 
         return this;
     }

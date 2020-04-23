@@ -9,7 +9,8 @@ public class ZombieAttackingState : ZombieBaseState
 
     public override void EnterState(ZombieContext context)
     {
-        timeToAttack = Time.time;
+        Debug.Log("Zombie entered Attack state!");
+        timeToAttack = (timeToAttack > Time.time) ? timeToAttack : Time.time;
     }
 
     public override void ExitState(ZombieContext context)
@@ -21,17 +22,25 @@ public class ZombieAttackingState : ZombieBaseState
     {
         if (base.ShouldDie(context)) return context.deadState;
 
+        if(base.ShouldFlee(context)) return context.fleeState;
+
         float distance = Vector3.Distance(context.transform.position, context.playerTransform.position);
 
-        if (distance > context.zombieNavMeshAgent.stoppingDistance) return context.chaseState;
+        if (distance / 3 > context.zombieNavMeshAgent.stoppingDistance) return context.chaseState;
 
         if(Time.time > timeToAttack)
         {
-            context.playerTransform.gameObject.GetComponent<IDamageAble>().Damage(context.damage);
+            context.PlaySound(context.attackSounds);
+
+            EventManager.TriggerPlayerDamaged(context.damage);
+
             timeToAttack = Time.time + attackDelay;
         }
 
-        if (context.playerDead) context.zombieAnimator.SetBool("Eating_b", true);
+        if (context.playerDead){
+            context.zombieAnimator.SetBool("Eating_b", true);
+            return context.idleState;
+        }
 
         return this;
     }

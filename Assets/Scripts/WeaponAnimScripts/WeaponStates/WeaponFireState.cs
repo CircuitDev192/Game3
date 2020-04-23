@@ -7,38 +7,53 @@ public class WeaponFireState : WeaponBaseState
 
     public override void EnterState(WeaponContext context)
     {
-        Debug.Log("Weapon entered fire state.");
-
         context.playerAnimator.SetBool("Shoot_b", true);
         nextShotTime = (nextShotTime > Time.time) ? nextShotTime : Time.time;
     }
 
     public override void ExitState(WeaponContext context)
     {
-        Debug.Log("Weapon exited fire state.");
-
         context.playerAnimator.SetBool("Shoot_b", false);
     }
 
     public override BaseState<WeaponContext> UpdateState(WeaponContext context)
     {
-        // We can fire another shot
-        if(Time.time > nextShotTime)
-        {
-            WeaponBase weapon = context.weapons[context.currentWeaponIndex];
+        base.ManageFlashlightDrain(context);
 
-            // Make sure we have ammo
-            if (weapon.roundsInCurrentMag > 0)
+        // We can fire another shot
+        if (Time.time < nextShotTime) return this;
+
+        if (!Input.GetMouseButton(0))
+        {
+            if (context.currentWeapon.roundsInCurrentMag == 0)
             {
-                // Delegate firing to the weapon
-                context.StartCoroutine(weapon.Fire());
-                nextShotTime = Time.time + weapon.fireRate;
+                return context.reloadState;
             }
-            // No ammo in mag, reload
-            else return context.reloadState;
+            else return context.idleState;
         }
 
-        if (Input.GetMouseButtonUp(0)) return context.idleState;
+        // Make sure we have ammo
+        if (context.currentWeapon.roundsInCurrentMag > 0)
+        {
+            if (!Input.GetKey(KeyCode.LeftShift))
+            {
+                // Delegate firing to the weapon
+                context.StartCoroutine(context.currentWeapon.Fire(context.mainCamera.transform));
+
+                if (context.currentWeapon.equippedSuppressor)
+                {
+                    EventManager.TriggerSoundGenerated(context.currentWeapon.transform.position, context.weapons[context.currentWeaponIndex].audibleDistance * 0.10f);
+                }
+                else
+                {
+                    EventManager.TriggerSoundGenerated(context.currentWeapon.transform.position, context.weapons[context.currentWeaponIndex].audibleDistance);
+                }
+
+                nextShotTime = Time.time + context.currentWeapon.fireRate;
+            }
+        }
+        // No ammo in mag, reload
+        else return context.reloadState;
 
         return this;
     }

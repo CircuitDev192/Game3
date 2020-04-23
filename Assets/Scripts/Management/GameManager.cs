@@ -1,39 +1,135 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public enum GameState
 {
-    [SerializeField]
-    private Texture2D cursor;
+    MainMenu,
+    Play,
+    Paused,
+    Controls,
+    Credits
+}
 
-    private int zombiesEliminated;
+public class GameManager : Context<GameManager>
+{
+    #region States
 
-    // Start is called before the first frame update
-    void Start()
+    public GameMenuState menuState = new GameMenuState();
+    public GamePlayState playState = new GamePlayState();
+    public GamePauseState pauseState = new GamePauseState();
+    public GameCreditsState creditsState = new GameCreditsState();
+
+    #endregion
+
+    #region Fields
+
+    public static GameManager instance;
+
+    [SerializeField] private GameObject[] managerPrefabs;
+    private List<GameObject> managers;
+    [SerializeField] private GameObject[] weaponPickupPrefabs;
+    private GameObject player;
+
+    private string sceneToLoad;
+    private string sceneToUnLoad;
+
+    #endregion
+
+    private void Awake()
     {
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.SetCursor(cursor, new Vector2(cursor.width / 2f, cursor.height / 2f), CursorMode.Auto);
-        zombiesEliminated = 0;
+        instance = this;
 
-        EventManager.ZombieKilled += ZombieEliminated;
+        managers = new List<GameObject>();
+
+        foreach (GameObject manager in managerPrefabs)
+        {
+            managers.Add(Instantiate(manager, this.transform));
+        }
+
+        DontDestroyOnLoad(this);
+        InitializeContext();
+
+        EventManager.UIResumeClicked += UIResumeClicked;
+        EventManager.UIQuitClicked += UIQuitClicked;
+        EventManager.PlayerPickedUpWeapon += PlayerPickedUpWeapon;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        player = PlayerManager.instance.player;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        
+        ManageState(this);
     }
 
-    private void ZombieEliminated()
+    public override void InitializeContext()
     {
-        zombiesEliminated++;
-        EventManager.TriggerScoreChanged(zombiesEliminated);
+        currentState = playState;
+        currentState.EnterState(this);
     }
+
+    private void PlayerPickedUpWeapon(string previousWeaponName)
+    {
+
+        foreach (GameObject pickup in weaponPickupPrefabs)
+        {
+            if (pickup.GetComponentInChildren<WeaponPickup>().weaponName == previousWeaponName)
+            {
+                float offset = 2f;
+                GameObject weap = Instantiate(pickup, player.transform.position + (player.transform.forward * offset), Quaternion.identity);
+                weap.GetComponentInChildren<Rigidbody>().AddForce(player.transform.forward * 300f);
+                break;
+            }
+        }
+    }
+
+    #region Scene Methods
+
+    public void LoadScene(string sceneName)
+    {
+        sceneToLoad = sceneName;
+        AsyncOperation loadOp = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        loadOp.completed += SceneLoadCompleted;
+    }
+
+    private void SceneLoadCompleted(AsyncOperation obj)
+    {
+        EventManager.TriggerSceneLoaded(sceneToLoad);
+    }
+
+    public void UnLoadScene(string sceneName)
+    {
+        sceneToUnLoad = sceneName;
+        AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(sceneName);
+        unloadOp.completed += SceneUnLoadCompleted;
+    }
+
+    private void SceneUnLoadCompleted(AsyncOperation obj)
+    {
+        EventManager.TriggerSceneUnLoaded(sceneToUnLoad);
+    }
+
+    #endregion
+
+    #region UIEvents
+
+    private void UIResumeClicked()
+    {
+        currentState.ExitState(this);
+
+        currentState = playState;
+        currentState.EnterState(this);
+    }
+
+    private void UIQuitClicked()
+    {
+        Application.Quit();
+    }
+
+    #endregion
 }

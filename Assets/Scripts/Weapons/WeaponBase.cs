@@ -14,19 +14,25 @@ public abstract class WeaponBase : MonoBehaviour
     #region Weapon Intrinsics
 
     public string name;
+    public int weaponTypeInt; // 0 = Primary, 1 = Secondary, 2 = Melee, 3 = (Not yet implemented)Throwable
+    public PlayerManager.AmmoType ammoType;
+    public GameObject equippedSuppressor;
+    public float suppressorFatigue = 0f;
     public float damage;
     public float fireRate;
     public int roundsPerMag;
     public float range;
     public float impactForce;
     public bool fullAuto;
-    public float shotVolume;
+    public bool flashlightOn;
+    public float audibleDistance;
 
     #endregion
 
     #region Animation Values
 
     public int weaponAnimation;
+    public int meleeType;
     public float fireAnimationStartDelay;
     public float reloadTime;
 
@@ -57,47 +63,66 @@ public abstract class WeaponBase : MonoBehaviour
     public GameObject bloodSplatter;
     public Renderer weaponRenderer;
     public Renderer flashlightRenderer;
+    public Renderer opticRenderer;
+    public Renderer suppressorRenderer;
 
     #endregion
 
-    public WeaponSoundSync weaponSoundSync;
     public AudioSource audioSource;
-    public AudioClip[] audioClips;
+    public AudioClip shotSound;
+    public AudioClip suppressedShotSound;
+    public AudioClip holsterSound;
+    public AudioClip unholsterSound;
+    public AudioClip removeMagSound;
+    public AudioClip loadMagSound;
+    public AudioClip[] cockingSounds;
+    public AudioClip flashlightOnSound;
+    public AudioClip flashlightOffSound;
 
     public int roundsInCurrentMag;
-    public int totalAmmo;
     public FireMode currentFireMode;
 
-    public abstract IEnumerator Fire();
+    public abstract IEnumerator Fire(Transform directionTransform);
     
     public void Reload()
     {
-        //int roundsUsedInMag = roundsPerMag - roundsInCurrentMag;
+        int totalAmmo = PlayerManager.instance.GetTotalAmmoOfType(ammoType);
 
-        //if(totalAmmo < roundsUsedInMag)
-        //{
-        //    roundsInCurrentMag += totalAmmo;
-        //    totalAmmo = 0;
-        //}
-        //else
-        //{
-        //    roundsInCurrentMag = roundsPerMag;
-        //    totalAmmo -= roundsUsedInMag;
-        //}
+        if (totalAmmo < roundsPerMag)
+        {
+            roundsInCurrentMag = totalAmmo;
+            totalAmmo = 0;
+        }
+        else
+        {
+            roundsInCurrentMag = roundsPerMag;
+            totalAmmo -= roundsPerMag;
+            if (totalAmmo < 0) totalAmmo = 0;
+        }
 
-        audioSource.PlayOneShot(audioClips[1], 0.25f);
-        //weaponSoundSync.PlaySound(1);
-        roundsInCurrentMag = roundsPerMag;
+        StartCoroutine(PlayReloadSounds());
 
         EventManager.TriggerAmmoCountChanged(roundsInCurrentMag);
+        EventManager.TriggerTotalAmmoChanged(totalAmmo, ammoType);
+    }
+
+    private IEnumerator PlayReloadSounds()
+    {
+        audioSource.PlayOneShot(removeMagSound, 0.5f);
+        yield return new WaitForSeconds(0.75f);
+        audioSource.PlayOneShot(loadMagSound, 0.5f);
+        yield return new WaitForSeconds(0.75f);
+        audioSource.PlayOneShot(cockingSounds[Random.Range(0, cockingSounds.Length)], 0.5f);
+        yield return new WaitForSeconds(0.75f);
     }
 
     public void SetIdleValues(Animator playerAnimator)
     {
         playerAnimator.SetFloat("Head_Horizontal_f", idleHeadHorizontal);
+        playerAnimator.SetFloat("Head_Vertical_f", idleHeadVertical);
 
         playerAnimator.SetFloat("Body_Horizontal_f", idleBodyHorizontal);
-        playerAnimator.SetFloat("Body_Vertical_f", idleBodyVertical);
+        //playerAnimator.SetFloat("Body_Vertical_f", idleBodyVertical);
 
         playerAnimator.SetBool("FullAuto_b", fullAuto);
     }
@@ -105,9 +130,10 @@ public abstract class WeaponBase : MonoBehaviour
     public void SetWalkValues(Animator playerAnimator)
     {
         playerAnimator.SetFloat("Head_Horizontal_f", walkHeadHorizontal);
+        playerAnimator.SetFloat("Head_Vertical_f", walkHeadVertical);
 
         playerAnimator.SetFloat("Body_Horizontal_f", walkBodyHorizontal);
-        playerAnimator.SetFloat("Body_Vertical_f", walkBodyVertical);
+        //playerAnimator.SetFloat("Body_Vertical_f", walkBodyVertical);
 
         playerAnimator.SetBool("FullAuto_b", fullAuto);
     }
@@ -115,9 +141,10 @@ public abstract class WeaponBase : MonoBehaviour
     public void SetRunValues(Animator playerAnimator)
     {
         playerAnimator.SetFloat("Head_Horizontal_f", runHeadHorizontal);
+        playerAnimator.SetFloat("Head_Vertical_f", runHeadVertical);
 
         playerAnimator.SetFloat("Body_Horizontal_f", runBodyHorizontal);
-        playerAnimator.SetFloat("Body_Vertical_f", runBodyVertical);
+        //playerAnimator.SetFloat("Body_Vertical_f", runBodyVertical);
 
         playerAnimator.SetBool("FullAuto_b", fullAuto);
     }

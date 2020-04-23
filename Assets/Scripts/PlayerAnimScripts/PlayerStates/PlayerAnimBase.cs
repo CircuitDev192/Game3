@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public abstract class PlayerAnimBase
+public abstract class PlayerAnimBase : BaseState<PlayerAnimFSM>
 {
-    public abstract void EnterState(PlayerAnimFSM player);
-    public abstract void Update(PlayerAnimFSM player);
+    
 }
+

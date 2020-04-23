@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
@@ -7,7 +7,6 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(AudioSource))]
-[RequireComponent(typeof(PlayerSoundSync))]
 public class FirstPersonMovement : MonoBehaviour
 {
     [SerializeField] private bool m_IsWalking;
@@ -24,9 +23,14 @@ public class FirstPersonMovement : MonoBehaviour
     [SerializeField] private CurveControlledBob m_HeadBob = new CurveControlledBob();
     [SerializeField] private LerpControlledBob m_JumpBob = new LerpControlledBob();
     [SerializeField] private float m_StepInterval;
-    [SerializeField] public AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
-    [SerializeField] public AudioClip m_JumpSound;           // the sound played when character leaves the ground.
-    [SerializeField] public AudioClip m_LandSound;           // the sound played when character touches back on ground.
+    private float m_SoundMultiplier;
+    [SerializeField] private float walkingAudibleDistance;
+    [SerializeField] private float runningAudibleDistance;
+    [SerializeField] private float jumpingAudibleDistance;
+    [SerializeField] public AudioClip[] m_FootstepSounds;    // an array of walking sounds that will be randomly selected from.
+    [SerializeField] public AudioClip[] m_RunningFootstepSounds;    // an array of running sounds that will be randomly selected from.
+    [SerializeField] public AudioClip[] m_JumpingSounds;           // the sound played when character leaves the ground.
+    [SerializeField] public AudioClip[] m_LandingSounds;           // the sound played when character touches back on ground.
 
     private Camera m_Camera;
     private bool m_Jump;
@@ -41,7 +45,9 @@ public class FirstPersonMovement : MonoBehaviour
     private float m_NextStep;
     private bool m_Jumping;
     private AudioSource m_AudioSource;
-    private PlayerSoundSync playerSoundSync;
+
+    [SerializeField]
+    private Transform headJoint;
 
     // Use this for initialization
     private void Start()
@@ -56,16 +62,20 @@ public class FirstPersonMovement : MonoBehaviour
         m_Jumping = false;
         m_AudioSource = GetComponent<AudioSource>();
         m_MouseLook.Init(transform, m_Camera.transform);
-        playerSoundSync = GetComponent<PlayerSoundSync>();
+
+        EventManager.MouseShouldHide += MouseShouldHide;
+        
     }
 
 
     // Update is called once per frame
     private void Update()
     {
+        m_SoundMultiplier = PlayerManager.instance.soundMultiplier;
+
         RotateView();
         // the jump state needs to read here to make sure it is not missed
-        if (!m_Jump)
+        if (!m_Jump && !m_Jumping)
         {
             m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
         }
@@ -83,14 +93,26 @@ public class FirstPersonMovement : MonoBehaviour
         }
 
         m_PreviouslyGrounded = m_CharacterController.isGrounded;
+
+        //Keep Camera located above the head joint of the player
+        m_Camera.transform.position = headJoint.position + new Vector3(0, 0.5f, 0);
     }
 
 
     private void PlayLandingSound()
     {
-        m_AudioSource.clip = m_LandSound;
-        //m_AudioSource.Play();
-        playerSoundSync.PlayLanding();
+        //running sounds
+        // excluding sound at index 0
+        int n = Random.Range(1, m_LandingSounds.Length);
+        m_AudioSource.clip = m_LandingSounds[n];
+        m_AudioSource.PlayOneShot(m_AudioSource.clip, 0.3f * m_SoundMultiplier);
+
+        EventManager.TriggerSoundGenerated(this.transform.position, jumpingAudibleDistance);
+
+        // move picked sound to index 0 so it's not picked next time
+        m_LandingSounds[n] = m_LandingSounds[0];
+        m_LandingSounds[0] = m_AudioSource.clip;
+
         m_NextStep = m_StepCycle + .5f;
     }
 
@@ -107,6 +129,11 @@ public class FirstPersonMovement : MonoBehaviour
         Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
                            m_CharacterController.height / 2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
         desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
+
+        if (Input.GetKey(KeyCode.LeftControl) && m_IsWalking)
+        {
+            speed /= 2f;
+        }
 
         m_MoveDir.x = desiredMove.x * speed;
         m_MoveDir.z = desiredMove.z * speed;
@@ -139,9 +166,15 @@ public class FirstPersonMovement : MonoBehaviour
 
     private void PlayJumpSound()
     {
-        m_AudioSource.clip = m_JumpSound;
-        //m_AudioSource.Play();
-        playerSoundSync.PlayJumping();
+        //jumping sounds
+        // excluding sound at index 0
+        int n = Random.Range(1, m_JumpingSounds.Length);
+        m_AudioSource.clip = m_JumpingSounds[n];
+        m_AudioSource.PlayOneShot(m_AudioSource.clip, 0.2f * m_SoundMultiplier);
+
+        // move picked sound to index 0 so it's not picked next time
+        m_JumpingSounds[n] = m_JumpingSounds[0];
+        m_JumpingSounds[0] = m_AudioSource.clip;
     }
 
 
@@ -170,16 +203,38 @@ public class FirstPersonMovement : MonoBehaviour
         {
             return;
         }
-        // pick & play a random footstep sound from the array,
-        // excluding sound at index 0
-        int n = Random.Range(1, m_FootstepSounds.Length);
-        m_AudioSource.clip = m_FootstepSounds[n];
-        //m_AudioSource.PlayOneShot(m_AudioSource.clip, 0.2f);
-        playerSoundSync.PlayFootStep(n);
 
-        // move picked sound to index 0 so it's not picked next time
-        m_FootstepSounds[n] = m_FootstepSounds[0];
-        m_FootstepSounds[0] = m_AudioSource.clip;
+        if (!m_IsWalking)
+        {
+            //running sounds
+            // excluding sound at index 0
+            int n = Random.Range(1, m_RunningFootstepSounds.Length);
+            m_AudioSource.clip = m_RunningFootstepSounds[n];
+            m_AudioSource.PlayOneShot(m_AudioSource.clip, 0.3f * m_SoundMultiplier);
+
+            EventManager.TriggerSoundGenerated(this.transform.position, runningAudibleDistance);
+
+            // move picked sound to index 0 so it's not picked next time
+            m_RunningFootstepSounds[n] = m_RunningFootstepSounds[0];
+            m_RunningFootstepSounds[0] = m_AudioSource.clip;
+        }
+        else
+        {
+            //walking sounds
+            // excluding sound at index 0
+            int n = Random.Range(1, m_FootstepSounds.Length);
+            m_AudioSource.clip = m_FootstepSounds[n];
+            m_AudioSource.PlayOneShot(m_AudioSource.clip, 0.3f * m_SoundMultiplier);
+
+            if (!Input.GetKey(KeyCode.LeftControl))
+            {
+                EventManager.TriggerSoundGenerated(this.transform.position, walkingAudibleDistance);
+            }
+
+            // move picked sound to index 0 so it's not picked next time
+            m_FootstepSounds[n] = m_FootstepSounds[0];
+            m_FootstepSounds[0] = m_AudioSource.clip;
+        }
     }
 
 
@@ -218,7 +273,7 @@ public class FirstPersonMovement : MonoBehaviour
 #if !MOBILE_INPUT
         // On standalone builds, walk/run speed is modified by a key press.
         // keep track of whether or not the character is walking or running
-        m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
+        m_IsWalking = !(Input.GetKey(KeyCode.LeftShift) && vertical > Mathf.Epsilon);
 #endif
         // set the desired speed to be walking or running
         speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
@@ -260,5 +315,10 @@ public class FirstPersonMovement : MonoBehaviour
             return;
         }
         body.AddForceAtPosition(m_CharacterController.velocity * 0.1f, hit.point, ForceMode.Impulse);
+    }
+
+    private void MouseShouldHide(bool shouldHide)
+    {
+        m_MouseLook.SetCursorLock(shouldHide);
     }
 }
