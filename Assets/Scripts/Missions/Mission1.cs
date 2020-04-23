@@ -8,6 +8,7 @@ public class Mission1 : MonoBehaviour
     [SerializeField] private string missionTitle;
     [SerializeField] private string missionDescription;
     [SerializeField] private string returnToBaseDescription; //Shows after the player completes the objective
+    [SerializeField] public string npcDialog; //What the NPC tells the player at the start of the mission
     [SerializeField] private GameObject missionStartCollider;
     [SerializeField] private GameObject missionObjectiveAreaCollider;
     [SerializeField] private GameObject missionEndCollider;
@@ -41,7 +42,8 @@ public class Mission1 : MonoBehaviour
     {
         missionEndCollider.gameObject.SetActive(false);
         EventManager.TriggerMissionChanged("", "");
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
+        //Destroy(this.gameObject);
     }
 
     private void PlayerPickedUpMissionItem()
