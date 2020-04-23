@@ -5,14 +5,42 @@ using UnityEngine;
 
 public class MissionManager : MonoBehaviour
 {
+
     [SerializeField] private GameObject[] missionPrefabs;
     [SerializeField] private int currentMission;
+    private bool canTalkToMissionGiver = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(missionPrefabs[currentMission], Vector3.zero, Quaternion.identity);
         EventManager.EndMission += EndMission;
+        EventManager.PlayerAtMissionGiver += PlayerAtMissionGiver;
+        EventManager.PlayerLeftMissionGiver += PlayerLeftMissionGiver;
+        EventManager.InstantiateNextMission += InstantiateNextMission;
+    }
+
+    private void InstantiateNextMission()
+    {
+        Instantiate(missionPrefabs[currentMission], Vector3.zero, Quaternion.identity);
+    }
+
+    private void PlayerAtMissionGiver()
+    {
+        StartCoroutine(WaitForPlayerToTalk());
+    }
+
+    private void PlayerLeftMissionGiver()
+    {
+        StopAllCoroutines();
+    }
+
+    private void PlayerSpokeToMissionGiver()
+    {
+        if (canTalkToMissionGiver)
+        {
+            canTalkToMissionGiver = false;
+            EventManager.TriggerPlayerSpokeToMissionGiver(missionPrefabs[currentMission].GetComponent<Mission1>().npcDialog);
+        }
     }
 
     private void EndMission()
@@ -20,7 +48,7 @@ public class MissionManager : MonoBehaviour
         if (currentMission != missionPrefabs.Length - 1)
         {
             currentMission++;
-            Instantiate(missionPrefabs[currentMission], Vector3.zero, Quaternion.identity);
+            canTalkToMissionGiver = true;
         }
         else
         {
@@ -33,5 +61,14 @@ public class MissionManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    IEnumerator WaitForPlayerToTalk()
+    {
+        while (!Input.GetKeyDown(KeyCode.E))
+        {
+            yield return null;
+        }
+        PlayerSpokeToMissionGiver();
     }
 }

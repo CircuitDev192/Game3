@@ -3251,6 +3251,11 @@ MonoBehaviour:
   missionTitle: Black Box Down
   missionDescription: Explore the crashed airliner to find a means of communication.
   returnToBaseDescription: Return to the police station with the transceiver.
+  npcDialog: As you know, we haven't had a way to communicate with the rest of the
+    world since yesterday. However, looks like that airliner that brought us this
+    plague also brought our salvation. There should have been a transceiver on board,
+    and I doubt anyone has taken it since. Go over there and see if you can find
+    it.
   missionStartCollider: {fileID: 8528687694652845933}
   missionObjectiveAreaCollider: {fileID: 4831076731052134529}
   missionEndCollider: {fileID: 3227978966284180199}
