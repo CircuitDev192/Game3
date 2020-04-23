@@ -20,7 +20,10 @@ public class WeaponSwapState : WeaponBaseState
             context.currentWeapon = context.weapons[context.currentWeaponIndex];
             context.currentWeapon.enabled = true;
             context.currentWeapon.flashlightOn = context.flashlightOn;
-            context.currentWeapon.flashLight.enabled = context.flashlightOn;
+            if (context.currentWeapon.flashLight != null)
+            {
+                context.currentWeapon.flashLight.enabled = context.flashlightOn;
+            }
         }
         else
         {
