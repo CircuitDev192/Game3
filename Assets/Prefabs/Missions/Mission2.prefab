@@ -3858,8 +3858,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 3.09
+  m_Center: {x: 2.5, y: 1.38, z: 0.34}
 --- !u!114 &1592991679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4103,14 +4103,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca95ae69387816a4ab02253d0127fdc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionTitle: Black Box Down 2
-  missionDescription: Explore the crashed airliner to find a means of communication.
-  returnToBaseDescription: Return to the police station with the transceiver.
-  npcDialog: As you know, we haven't had a way to communicate with the rest of the
-    world since yesterday. However, looks like that airliner that brought us this
-    plague also brought our salvation. There should have been a transceiver on board,
-    and I doubt anyone has taken it since. Go over there and see if you can find
-    it.
+  missionTitle: Plenty of Fish
+  missionDescription: Investigate the beached cargo ship and find supplies for the
+    survivors.
+  returnToBaseDescription: Return to the police station with the supplies.
+  npcDialog: Great work getting that transceiver. Someone here will get it working
+    shortly. Until then, I need you to find us some supplies. We need food, water,
+    and ammunition. There's a cargo ship not too far away that might have been carrying
+    just what we need. Go check it out.
   missionStartCollider: {fileID: 8528687694652845933}
   missionObjectiveAreaCollider: {fileID: 4831076731052134529}
   missionEndCollider: {fileID: 3227978966284180199}
@@ -4150,5 +4150,5 @@ MonoBehaviour:
   - {fileID: 1748133655}
   - {fileID: 512424149}
   - {fileID: 97502512}
-  zombiesToSpawn: 20
+  zombiesToSpawn: 25
   shouldSpawnZombiesAtMissionArea: 1
