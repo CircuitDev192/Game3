@@ -4103,7 +4103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca95ae69387816a4ab02253d0127fdc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionTitle: Plenty of Fish
+  missionTitle: Death's A Beach
   missionDescription: Investigate the beached cargo ship and find supplies for the
     survivors.
   returnToBaseDescription: Return to the police station with the supplies.
