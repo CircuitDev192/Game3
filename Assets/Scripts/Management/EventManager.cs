@@ -89,6 +89,10 @@ public static class EventManager
     public static Action PlayerAtMissionArea;
     public static void TriggerPlayerAtMissionArea() { PlayerAtMissionArea?.Invoke(); }
 
+    // Player cleared zombie area
+    public static Action PlayerClearedArea;
+    public static void TriggerPlayerClearedArea() { PlayerClearedArea?.Invoke(); }
+
     // Mission Ended
     public static Action EndMission;
     public static void TriggerEndMission() { EndMission?.Invoke(); }
@@ -195,8 +199,12 @@ public static class EventManager
     #endregion
 
     // Zombie killed event
-    public static Action ZombieKilled;
-    public static void TriggerZombieKilled() { ZombieKilled?.Invoke(); }
+    public static Action<GameObject> ZombieKilled;
+    public static void TriggerZombieKilled(GameObject zombie) { ZombieKilled?.Invoke(zombie); }
+
+    // Mission Zombie Spawned
+    public static Action<GameObject> MissionZombieSpawned;
+    public static void TriggerMissionZombieSpawned(GameObject zombie) { MissionZombieSpawned?.Invoke(zombie); }
 
     // Zombie should despawn event
     public static Action<GameObject> zombieShouldDespawn;
