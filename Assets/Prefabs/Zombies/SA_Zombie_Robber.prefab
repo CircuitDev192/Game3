@@ -6295,6 +6295,7 @@ MonoBehaviour:
   deadDespawnDistance: 40
   livingDespawnDistance: 125
   fleeThreshold: 10
+  fleeVector: {x: 0, y: 0, z: 0}
   minimumIdleTime: 0
   maximumIdleTime: 8
   playerTransform: {fileID: 0}
@@ -6379,7 +6380,8 @@ AudioSource:
   m_GameObject: {fileID: 8903468910888543363}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 82bb022af1fb626409731e7f21f3a6d1,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

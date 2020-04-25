@@ -94,7 +94,7 @@ MeshCollider:
   m_Enabled: 0
   serializedVersion: 3
   m_Convex: 1
-  m_CookingOptions: 30
+  m_CookingOptions: 14
   m_Mesh: {fileID: 43211868059199626, guid: cb34a8250e3605c43828e51d8126eb28, type: 2}
 --- !u!114 &-5297264611972941881
 MonoBehaviour:
@@ -171,7 +171,8 @@ AudioSource:
   m_GameObject: {fileID: 3349718103788114011}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 82bb022af1fb626409731e7f21f3a6d1,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

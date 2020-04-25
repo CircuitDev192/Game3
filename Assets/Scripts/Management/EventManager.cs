@@ -17,9 +17,17 @@ public static class EventManager
     public static Action UIControlsClicked;
     public static void TriggerUIControlsClicked() { UIControlsClicked?.Invoke(); }
 
-    // Show Controls Menu
+    // Show Settings Menu
+    public static Action UISettingsClicked;
+    public static void TriggerUISettingsClicked() { UISettingsClicked?.Invoke(); }
+
+    // Leave Controls Menu
     public static Action UIControlsBackClicked;
     public static void TriggerUIControlsBackClicked() { UIControlsBackClicked?.Invoke(); }
+
+    // Leave Settings Menu
+    public static Action UISettingsBackClicked;
+    public static void TriggerUISettingsBackClicked() { UISettingsBackClicked?.Invoke(); }
 
     // Should mouse be hidden/locked
     public static Action<bool> MouseShouldHide;
@@ -61,6 +69,7 @@ public static class EventManager
     public static Action PlayerLeftMissionGiver;
     public static void TriggerPlayerLeftMissionGiver() { PlayerLeftMissionGiver?.Invoke(); }
 
+    // Player spoke to mission giver NPC
     public static Action<string> PlayerSpokeToMissionGiver;
     public static void TriggerPlayerSpokeToMissionGiver(string npcDialog) { PlayerSpokeToMissionGiver?.Invoke(npcDialog); }
 
