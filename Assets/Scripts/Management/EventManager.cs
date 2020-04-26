@@ -109,6 +109,22 @@ public static class EventManager
     public static Action PlayerLeftMissionItem;
     public static void TriggerPlayerLeftMissionItem() { PlayerLeftMissionItem?.Invoke(); }
 
+    // Player collided with mission vehicle
+    public static Action<string> PlayerCollidedWithMissionVehicle;
+    public static void TriggerPlayerCollidedWithMissionVehicle(string vehicleName) { PlayerCollidedWithMissionVehicle?.Invoke(vehicleName); }
+
+    // Player left mission vehicle
+    public static Action PlayerLeftMissionVehicle;
+    public static void TriggerPlayerLeftMissionVehicle() { PlayerLeftMissionVehicle?.Invoke(); }
+
+    // Player Entered mission vehicle
+    public static Action PlayerEnteredMissionVehicle;
+    public static void TriggerPlayerEnteredMissionVehicle() { PlayerEnteredMissionVehicle?.Invoke(); }
+
+    // Final Mission Instantiated
+    public static Action FinalMissionInstantiated;
+    public static void TriggerFinalMissionInstantiated() { FinalMissionInstantiated?.Invoke(); }
+
     // Game Ended
     public static Action GameEnded;
     public static void TriggerGameEnded() { GameEnded?.Invoke(); }

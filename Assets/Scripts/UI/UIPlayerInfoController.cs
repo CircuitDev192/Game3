@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,6 +29,13 @@ public class UIPlayerInfoController : MonoBehaviour
 
         EventManager.FlashLightPowerChanged += FlashLightPowerChanged;
         EventManager.SuppressorDurabilityChanged += SuppressorDurabilityChanged;
+
+        EventManager.PlayerEnteredMissionVehicle += PlayerEnteredMissionVehicle;
+    }
+
+    private void PlayerEnteredMissionVehicle()
+    {
+        this.gameObject.SetActive(false);
     }
 
     private void PlayerHealthChanged(float health)
