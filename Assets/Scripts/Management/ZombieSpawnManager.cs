@@ -6,19 +6,16 @@ public class ZombieSpawnManager : MonoBehaviour
 {
     public static ZombieSpawnManager instance;
 
-    [SerializeField]
-    private int maxZombies = 50;
-    [SerializeField]
-    private float spawnRadius = 20.0f;
-    [SerializeField]
-    private float minSpawnDistance = 50.0f;
-    [SerializeField]
-    private float maxSpawnDistance = 200.0f;
+    [SerializeField] private int maxLivingZombies = 50;
+    [SerializeField] private int maxDeadZombies = 15;
+    [SerializeField] private float spawnRadius = 20.0f;
+    [SerializeField] private float minSpawnDistance = 50.0f;
+    [SerializeField] private float maxSpawnDistance = 200.0f;
 
-    [SerializeField]
-    private GameObject[] zombiePrefabs;
+    [SerializeField] private GameObject[] zombiePrefabs;
     private List<GameObject> zombies = new List<GameObject>();
     private List<GameObject> missionZombies = new List<GameObject>();
+    private Queue<GameObject> deadZombies = new Queue<GameObject>();
 
     [SerializeField]
     private GameObject[] spawnPoints;
@@ -40,6 +37,7 @@ public class ZombieSpawnManager : MonoBehaviour
     {
         player = PlayerManager.instance.player;
         EventManager.zombieShouldDespawn += DespawnZombie;
+        EventManager.ZombieKilled += ZombieDied;
     }
 
     private void FixedUpdate()
@@ -65,7 +63,7 @@ public class ZombieSpawnManager : MonoBehaviour
     private void HandleSpawning()
     {
         //Debug.Log("Zombies: " + zombies.Count.ToString());
-        if (zombies.Count >= maxZombies) return;
+        if (zombies.Count >= maxLivingZombies) return;
 
         List<GameObject> validSpawns = new List<GameObject>();
 
@@ -159,5 +157,14 @@ public class ZombieSpawnManager : MonoBehaviour
         missionZombies.Add(missionZombie);
         EventManager.TriggerMissionZombieSpawned(missionZombie);
         
+    }
+
+    private void ZombieDied(GameObject zombie)
+    {
+        if (!zombies.Remove(zombie)) missionZombies.Remove(zombie);
+
+        deadZombies.Enqueue(zombie);
+
+        if (deadZombies.Count > maxDeadZombies) Destroy(deadZombies.Dequeue());
     }
 }
