@@ -77,6 +77,7 @@ public class MissionManager : MonoBehaviour
 
     private void DisablePoliceStationLights()
     {
+        EventManager.TriggerDisableFloodLightSounds();
         foreach (GameObject light in policeStationLights)
         {
             Destroy(light.gameObject);

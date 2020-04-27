@@ -125,6 +125,10 @@ public static class EventManager
     public static Action FinalMissionInstantiated;
     public static void TriggerFinalMissionInstantiated() { FinalMissionInstantiated?.Invoke(); }
 
+    // Disable flood light generator sounds 
+    public static Action DisableFloodLightSounds;
+    public static void TriggerDisableFloodLightSounds() { DisableFloodLightSounds?.Invoke(); }
+
     // Start Survival Countdown
     public static Action StartSurvivalCountdown;
     public static void TriggerStartSurvivalCountdown() { StartSurvivalCountdown?.Invoke(); }
