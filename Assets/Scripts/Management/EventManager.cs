@@ -137,6 +137,14 @@ public static class EventManager
     public static Action StartHelicopterMove;
     public static void TriggerStartHelicopterMove() { StartHelicopterMove?.Invoke(); }
 
+    // Trigger Fade to black anim
+    public static Action FadeToBlack;
+    public static void TriggerFadeToBlack() { FadeToBlack?.Invoke(); }
+
+    // Start next credits sequence
+    public static Action StartNextCreditsSequence;
+    public static void TriggerStartNextCreditsSequence() { StartNextCreditsSequence?.Invoke(); }
+
     // Game Ended
     public static Action GameEnded;
     public static void TriggerGameEnded() { GameEnded?.Invoke(); }

@@ -55,6 +55,7 @@ public class GameManager : Context<GameManager>
         EventManager.UIResumeClicked += UIResumeClicked;
         EventManager.UIQuitClicked += UIQuitClicked;
         EventManager.PlayerPickedUpWeapon += PlayerPickedUpWeapon;
+        EventManager.GameEnded += GameEnded;
     }
 
     private void Start()
@@ -71,6 +72,11 @@ public class GameManager : Context<GameManager>
     {
         currentState = playState;
         currentState.EnterState(this);
+    }
+
+    private void GameEnded()
+    {
+        StartCoroutine(EndGameSequence());
     }
 
     private void PlayerPickedUpWeapon(string previousWeaponName)
@@ -95,6 +101,11 @@ public class GameManager : Context<GameManager>
         sceneToLoad = sceneName;
         AsyncOperation loadOp = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         loadOp.completed += SceneLoadCompleted;
+    }
+
+    public void LoadSceneSynchronous(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 
     private void SceneLoadCompleted(AsyncOperation obj)
@@ -132,4 +143,21 @@ public class GameManager : Context<GameManager>
     }
 
     #endregion
+
+    IEnumerator EndGameSequence()
+    {
+        yield return new WaitForSeconds(3f);
+        LoadSceneSynchronous("Ending");
+
+        currentState.ExitState(this);
+        currentState = creditsState;
+        currentState.EnterState(this);
+
+        for (int i = 0; i < 3; i++)
+        {
+            yield return new WaitForSeconds(7f);
+            EventManager.TriggerFadeToBlack();
+            EventManager.TriggerStartNextCreditsSequence();
+        }
+    }
 }
