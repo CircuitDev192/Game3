@@ -3152,7 +3152,7 @@ GameObject:
   - component: {fileID: 7396005878830740581}
   - component: {fileID: 8090263841090261716}
   - component: {fileID: 766863431991206935}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MissionEndCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3585,7 +3585,7 @@ GameObject:
   - component: {fileID: 7624529793986528392}
   - component: {fileID: 7319927642837520323}
   - component: {fileID: 945364120212639709}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MissionObjectiveAreaCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4088,7 +4088,7 @@ GameObject:
   - component: {fileID: 8226214898147825471}
   - component: {fileID: 4301193740062409910}
   - component: {fileID: 1739137294356440533}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MissionStartCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

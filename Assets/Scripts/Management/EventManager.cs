@@ -89,6 +89,10 @@ public static class EventManager
     public static Action PlayerAtMissionArea;
     public static void TriggerPlayerAtMissionArea() { PlayerAtMissionArea?.Invoke(); }
 
+    // Player cleared zombie area
+    public static Action PlayerClearedArea;
+    public static void TriggerPlayerClearedArea() { PlayerClearedArea?.Invoke(); }
+
     // Mission Ended
     public static Action EndMission;
     public static void TriggerEndMission() { EndMission?.Invoke(); }
@@ -104,6 +108,34 @@ public static class EventManager
     // Player left mission item
     public static Action PlayerLeftMissionItem;
     public static void TriggerPlayerLeftMissionItem() { PlayerLeftMissionItem?.Invoke(); }
+
+    // Player collided with mission vehicle
+    public static Action<string> PlayerCollidedWithMissionVehicle;
+    public static void TriggerPlayerCollidedWithMissionVehicle(string vehicleName) { PlayerCollidedWithMissionVehicle?.Invoke(vehicleName); }
+
+    // Player left mission vehicle
+    public static Action PlayerLeftMissionVehicle;
+    public static void TriggerPlayerLeftMissionVehicle() { PlayerLeftMissionVehicle?.Invoke(); }
+
+    // Player Entered mission vehicle
+    public static Action PlayerEnteredMissionVehicle;
+    public static void TriggerPlayerEnteredMissionVehicle() { PlayerEnteredMissionVehicle?.Invoke(); }
+
+    // Final Mission Instantiated
+    public static Action FinalMissionInstantiated;
+    public static void TriggerFinalMissionInstantiated() { FinalMissionInstantiated?.Invoke(); }
+
+    // Disable flood light generator sounds 
+    public static Action DisableFloodLightSounds;
+    public static void TriggerDisableFloodLightSounds() { DisableFloodLightSounds?.Invoke(); }
+
+    // Start Survival Countdown
+    public static Action StartSurvivalCountdown;
+    public static void TriggerStartSurvivalCountdown() { StartSurvivalCountdown?.Invoke(); }
+
+    // Start Helicopter Move
+    public static Action StartHelicopterMove;
+    public static void TriggerStartHelicopterMove() { StartHelicopterMove?.Invoke(); }
 
     // Game Ended
     public static Action GameEnded;
@@ -195,12 +227,20 @@ public static class EventManager
     #endregion
 
     // Zombie killed event
-    public static Action ZombieKilled;
-    public static void TriggerZombieKilled() { ZombieKilled?.Invoke(); }
+    public static Action<GameObject> ZombieKilled;
+    public static void TriggerZombieKilled(GameObject zombie) { ZombieKilled?.Invoke(zombie); }
+
+    // Mission Zombie Spawned
+    public static Action<GameObject> MissionZombieSpawned;
+    public static void TriggerMissionZombieSpawned(GameObject zombie) { MissionZombieSpawned?.Invoke(zombie); }
 
     // Zombie should despawn event
     public static Action<GameObject> zombieShouldDespawn;
-    public static void TriggerZombieShouldDespawn(GameObject zombie) { zombieShouldDespawn?.Invoke(zombie); }    
+    public static void TriggerZombieShouldDespawn(GameObject zombie) { zombieShouldDespawn?.Invoke(zombie); }
+
+    // Zombie charge event
+    public static Action<Transform> ZombieCharge;
+    public static void TriggerZombieCharge(Transform chargeTransform) { ZombieCharge?.Invoke(chargeTransform); }
 
     // Sound Generated Event
     public static Action<Vector3, float> SoundGenerated;

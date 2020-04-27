@@ -8,6 +8,7 @@ public class MissionManager : MonoBehaviour
 
     [SerializeField] private GameObject[] missionPrefabs;
     [SerializeField] private int currentMission;
+    [SerializeField] private GameObject[] policeStationLights;
     private bool canTalkToMissionGiver = true;
 
     // Start is called before the first frame update
@@ -17,6 +18,12 @@ public class MissionManager : MonoBehaviour
         EventManager.PlayerAtMissionGiver += PlayerAtMissionGiver;
         EventManager.PlayerLeftMissionGiver += PlayerLeftMissionGiver;
         EventManager.InstantiateNextMission += InstantiateNextMission;
+        EventManager.PlayerEnteredMissionVehicle += PlayerEnteredMissionVehicle;
+    }
+
+    private void PlayerEnteredMissionVehicle()
+    {
+        PlayerManager.instance.player.SetActive(false);
     }
 
     private void InstantiateNextMission()
@@ -31,7 +38,7 @@ public class MissionManager : MonoBehaviour
 
     private void PlayerLeftMissionGiver()
     {
-        StopAllCoroutines();
+        StopCoroutine(WaitForPlayerToTalk());
     }
 
     private void PlayerSpokeToMissionGiver()
@@ -39,7 +46,18 @@ public class MissionManager : MonoBehaviour
         if (canTalkToMissionGiver)
         {
             canTalkToMissionGiver = false;
-            EventManager.TriggerPlayerSpokeToMissionGiver(missionPrefabs[currentMission].GetComponent<MissionFetch>().npcDialog);
+            if (missionPrefabs[currentMission].TryGetComponent<MissionFetch>(out var fetch))
+            {
+                EventManager.TriggerPlayerSpokeToMissionGiver(fetch.npcDialog);
+            } else if (missionPrefabs[currentMission].TryGetComponent<MissionKill>(out var kill))
+            {
+                EventManager.TriggerPlayerSpokeToMissionGiver(kill.npcDialog);
+            }
+            else if (missionPrefabs[currentMission].TryGetComponent<MissionSurvive>(out var survive))
+            {
+                EventManager.TriggerPlayerSpokeToMissionGiver(survive.npcDialog);
+            }
+            StartCoroutine(StartNextMission());
         }
     }
 
@@ -57,10 +75,31 @@ public class MissionManager : MonoBehaviour
         }
     }
 
+    private void DisablePoliceStationLights()
+    {
+        EventManager.TriggerDisableFloodLightSounds();
+        foreach (GameObject light in policeStationLights)
+        {
+            Destroy(light.gameObject);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    IEnumerator StartNextMission()
+    {
+        yield return new WaitForSeconds(10f);
+        if (missionPrefabs[currentMission].TryGetComponent<MissionSurvive>(out var survive))
+        {
+            DisablePoliceStationLights();
+            EventManager.TriggerPlayerSpokeToMissionGiver(survive.npcDialog2);
+        }
+        yield return new WaitForSeconds(10f);
+        EventManager.TriggerInstantiateNextMission();
     }
 
     IEnumerator WaitForPlayerToTalk()

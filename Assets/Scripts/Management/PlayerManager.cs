@@ -34,6 +34,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private int suppressors;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip flashbangEarRinging;
+    [SerializeField] private AudioClip lastMissionMusic;
     [SerializeField] public float soundMultiplier = 1f;
 
     #endregion
@@ -52,6 +53,12 @@ public class PlayerManager : MonoBehaviour
         EventManager.PlayerPickedUpSuppressor += PlayerPickedUpSuppressor;
         EventManager.SuppressorBroken += SuppressorBroken;
         EventManager.FlashbangDetonated += FlashbangDetonated;
+        EventManager.PlayerEnteredMissionVehicle += PlayerEnteredMissionVehicle;
+    }
+
+    private void PlayerEnteredMissionVehicle()
+    {
+        audioSource.PlayOneShot(lastMissionMusic);
     }
 
     private void FlashbangDetonated(Vector3 flashbangPosition, float stunDistance)

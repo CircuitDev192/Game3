@@ -9,12 +9,19 @@ public class UIMissionDialogController : MonoBehaviour
     [SerializeField] private Text talkPrompt;
     [SerializeField] private Text missionDialog;
 
+
     // Start is called before the first frame update
     void Start()
     {
         EventManager.PlayerAtMissionGiver += PlayerAtMissionGiver;
         EventManager.PlayerLeftMissionGiver += PlayerLeftMissionGiver;
         EventManager.PlayerSpokeToMissionGiver += PlayerSpokeToMissionGiver;
+        EventManager.InstantiateNextMission += InstantiateNextMission;
+    }
+
+    private void InstantiateNextMission()
+    {
+        missionDialog.gameObject.SetActive(false);
     }
 
     private void PlayerSpokeToMissionGiver(string npcDialog)
@@ -22,7 +29,6 @@ public class UIMissionDialogController : MonoBehaviour
         talkPrompt.gameObject.SetActive(false);
         missionDialog.gameObject.SetActive(true);
         missionDialog.text = npcDialog;
-        StartCoroutine(StartNextMission());
     }
 
     private void PlayerLeftMissionGiver()
@@ -33,12 +39,5 @@ public class UIMissionDialogController : MonoBehaviour
     private void PlayerAtMissionGiver()
     {
         talkPrompt.gameObject.SetActive(true);
-    }
-
-    IEnumerator StartNextMission()
-    {
-        yield return new WaitForSeconds(20f);
-        EventManager.TriggerInstantiateNextMission();
-        missionDialog.gameObject.SetActive(false);
     }
 }

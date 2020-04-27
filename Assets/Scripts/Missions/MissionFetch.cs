@@ -28,7 +28,7 @@ public class MissionFetch : MonoBehaviour
 
     private void PlayerAtMissionArea()
     {
-        ZombieSpawnManager.instance.SetMissionZombieSpawns(spawnPoints, zombiesToSpawn, shouldSpawnZombiesAtMissionArea);
+        ZombieSpawnManager.instance.SetMissionZombieSpawns(spawnPoints, zombiesToSpawn, shouldSpawnZombiesAtMissionArea, false);
     }
 
     private void StartMission()

@@ -7,7 +7,8 @@ public class ZombieDeadState : ZombieBaseState
     public override void EnterState(ZombieContext context)
     {
         Debug.Log("Zombie entered Dead state!");
-        EventManager.TriggerZombieKilled();
+        EventManager.TriggerZombieKilled(context.gameObject);
+        context.despawnTimer = 10f;
         context.EnableRagdoll();
     }
 
@@ -20,7 +21,9 @@ public class ZombieDeadState : ZombieBaseState
     {
         float distance = Vector3.Distance(context.transform.position, context.playerTransform.position);
 
-        if (distance > context.deadDespawnDistance) return context.despawnState;
+        context.despawnTimer -= Time.deltaTime;
+
+        if (distance > context.deadDespawnDistance || context.despawnTimer <= 0f) return context.despawnState;
 
         return this;
     }
