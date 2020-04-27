@@ -431,7 +431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 6855304762474609305}
   flareEffect: {fileID: 4967768237494589888}
-  flareDuration: 60
+  flareDuration: 120
   extinguishDuration: 4
   flareLight: {fileID: 1498942324351703916}
   maxLumenUpdateDeviation: 250

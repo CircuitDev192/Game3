@@ -62,12 +62,10 @@ public class TurretController : MonoBehaviour
 
             if (Input.GetMouseButton(0))
             {
-                Debug.LogError("Player is trying to shoot");
                 // We can fire another shot
                 if (Time.time >= nextShotTime)
                 {
                     // Start fire coroutine
-                    Debug.LogError("Starting shoot ienum");
                     StartCoroutine(Fire(turretCamera.transform));
 
                     EventManager.TriggerSoundGenerated(this.transform.position, audibleDistance);
@@ -177,7 +175,7 @@ public class TurretController : MonoBehaviour
 
     public void LookRotation(Transform character, Transform camera)
     {
-        if (lockCursor)
+        if (m_cursorIsLocked)
         {
             float yRot = Input.GetAxis("Mouse X") * XSensitivity;
             float xRot = Input.GetAxis("Mouse Y") * YSensitivity;
@@ -237,13 +235,11 @@ public class TurretController : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            lockCursor = true;
         }
         else if (!m_cursorIsLocked)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            lockCursor = false;
         }
     }
 

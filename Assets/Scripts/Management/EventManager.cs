@@ -125,6 +125,10 @@ public static class EventManager
     public static Action FinalMissionInstantiated;
     public static void TriggerFinalMissionInstantiated() { FinalMissionInstantiated?.Invoke(); }
 
+    // Start Survival Countdown
+    public static Action StartSurvivalCountdown;
+    public static void TriggerStartSurvivalCountdown() { StartSurvivalCountdown?.Invoke(); }
+
     // Game Ended
     public static Action GameEnded;
     public static void TriggerGameEnded() { GameEnded?.Invoke(); }
@@ -224,7 +228,11 @@ public static class EventManager
 
     // Zombie should despawn event
     public static Action<GameObject> zombieShouldDespawn;
-    public static void TriggerZombieShouldDespawn(GameObject zombie) { zombieShouldDespawn?.Invoke(zombie); }    
+    public static void TriggerZombieShouldDespawn(GameObject zombie) { zombieShouldDespawn?.Invoke(zombie); }
+
+    // Zombie charge event
+    public static Action<Transform> ZombieCharge;
+    public static void TriggerZombieCharge(Transform chargeTransform) { ZombieCharge?.Invoke(chargeTransform); }
 
     // Sound Generated Event
     public static Action<Vector3, float> SoundGenerated;

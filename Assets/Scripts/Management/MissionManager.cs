@@ -79,7 +79,7 @@ public class MissionManager : MonoBehaviour
     {
         foreach (GameObject light in policeStationLights)
         {
-            light.gameObject.SetActive(false);
+            Destroy(light.gameObject);
         }
     }
 

@@ -28,7 +28,7 @@ public class MissionKill : MonoBehaviour
 
     private void PlayerAtMissionArea()
     {
-        ZombieSpawnManager.instance.SetMissionZombieSpawns(spawnPoints, zombiesToSpawn, shouldSpawnZombiesAtMissionArea);
+        ZombieSpawnManager.instance.SetMissionZombieSpawns(spawnPoints, zombiesToSpawn, shouldSpawnZombiesAtMissionArea, false);
         missionAreaToClear.gameObject.GetComponent<ZombieAreaToClear>().shouldCountDown = true;
     }
 

@@ -16,6 +16,7 @@ public class MissionSurvive : MonoBehaviour
     [SerializeField] private bool shouldSpawnZombiesAtMissionArea;
     [SerializeField] private GameObject flarePrefab;
     [SerializeField] private Transform[] flareSpawnLocations; // must have 4 total
+    [SerializeField] private Transform chargeTransform; // will lure the zombies inside the police station
 
     // Start is called before the first frame update
     void Start()
@@ -32,10 +33,14 @@ public class MissionSurvive : MonoBehaviour
 
     private void PlayerEnteredMissionVehicle()
     {
-        ZombieSpawnManager.instance.SetMissionZombieSpawns(spawnPoints, zombiesToSpawn, shouldSpawnZombiesAtMissionArea);
+        ZombieSpawnManager.instance.SetMissionZombieSpawns(spawnPoints, zombiesToSpawn, shouldSpawnZombiesAtMissionArea, true);
         EventManager.TriggerMissionWaypointChanged(missionObjective2Location.position);
 
         StartCoroutine(FireFlares());
+
+        StartCoroutine(StartZombieCharge());
+
+        EventManager.TriggerStartSurvivalCountdown();
     }
 
     private void EndMission()
@@ -53,7 +58,17 @@ public class MissionSurvive : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+    }
 
+    IEnumerator StartZombieCharge()
+    {
+        yield return new WaitForSeconds(2f);
+        while (true)
+        {
+            EventManager.TriggerZombieCharge(chargeTransform);
+            yield return new WaitForSeconds(2f);
+        }
     }
 
     IEnumerator FireFlares()

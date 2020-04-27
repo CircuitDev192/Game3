@@ -29,6 +29,7 @@ public class ZombieSpawnManager : MonoBehaviour
     private GameObject[] missionSpawnPoints;
     private int missionZombiesToSpawn;
     private bool shouldSpawnMissionZombies = false;
+    private bool infiniteSpawns = false;
 
     private void Awake()
     {
@@ -110,19 +111,23 @@ public class ZombieSpawnManager : MonoBehaviour
         //Debug.Log("Zombie spawned successfully!");
     }
 
-    public void SetMissionZombieSpawns(GameObject[] missionSpawnPoints, int maxZombies, bool shouldSpawnZombies)
+    public void SetMissionZombieSpawns(GameObject[] missionSpawnPoints, int maxZombies, bool shouldSpawnZombies, bool infiniteSpawns)
     {
         this.missionSpawnPoints = missionSpawnPoints;
         missionZombiesToSpawn = maxZombies;
         shouldSpawnMissionZombies = shouldSpawnZombies;
+        this.infiniteSpawns = infiniteSpawns;
     }
 
     private void HandleMissionSpawning()
     {
-        Debug.LogError("Mission Zombies: " + missionZombies.Count.ToString());
+        
         if (missionZombies.Count >= missionZombiesToSpawn)
         {
-            shouldSpawnMissionZombies = false;
+            if (!infiniteSpawns)
+            {
+                shouldSpawnMissionZombies = false;
+            }
             return;
         }
 
@@ -153,6 +158,6 @@ public class ZombieSpawnManager : MonoBehaviour
         GameObject missionZombie = Instantiate(zombiePrefabs[Random.Range(0, zombiePrefabs.Length)], spawnLoc, Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0));
         missionZombies.Add(missionZombie);
         EventManager.TriggerMissionZombieSpawned(missionZombie);
-        Debug.LogError("Zombie spawned successfully!");
+        
     }
 }

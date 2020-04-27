@@ -845,7 +845,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 803a86867eb18804899eaff436aa2b42, type: 3}
   - {fileID: 8300000, guid: 45b2734fd6f5a564cbf9746be7426c0c, type: 3}
   reloadSound: {fileID: 8300000, guid: c97b349eda97fdc4ebbbb40cc48263e8, type: 3}
-  audibleDistance: 150
+  audibleDistance: 250
   lineRenderer: {fileID: 3617832981102426456}
   muzzleFlashRenderer: {fileID: 1944274823454192079}
   muzzleFlashLight: {fileID: 5676775049437650526}

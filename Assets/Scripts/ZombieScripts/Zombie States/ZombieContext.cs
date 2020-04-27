@@ -19,6 +19,7 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
     public ZombieDeadState deadState = new ZombieDeadState();
     public ZombieDespawnState despawnState = new ZombieDespawnState();
     public ZombieFleeState fleeState = new ZombieFleeState();
+    public ZombieChargeState chargeState = new ZombieChargeState();
 
     #endregion
 
@@ -32,6 +33,7 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
     public float maximumRunSpeed;
     public float runSpeed;
     public float currentSpeed;
+    public Transform chargeTransform;
 
     // Health generation variables
     public float minimumHealth;
@@ -96,6 +98,8 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
 
         EventManager.PlayerKilled += PlayerKilled;
 
+        EventManager.ZombieCharge += ZombieCharge;
+
         playerTransform = PlayerManager.instance.player.transform;
         currentSpeed = walkSpeed;
         runSpeed = Random.Range(minimumRunSpeed, maximumRunSpeed);
@@ -108,6 +112,17 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
 
         currentState = idleState;
         idleState.EnterState(this);
+    }
+
+    private void ZombieCharge(Transform chargeTransform)
+    {
+        if (currentState == idleState || currentState == patrolState || currentState == investigateState)
+        {
+            this.chargeTransform = chargeTransform;
+            currentState.ExitState(this);
+            currentState = chargeState;
+            currentState.EnterState(this);
+        }
     }
 
     public void Damage(float damage)
