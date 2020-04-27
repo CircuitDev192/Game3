@@ -3059,7 +3059,7 @@ MonoBehaviour:
   - {fileID: 5943142975956399412}
   - {fileID: 7503290634431471592}
   - {fileID: 4630739729959696684}
-  zombiesToSpawn: 80
+  zombiesToSpawn: 40
   shouldSpawnZombiesAtMissionArea: 1
   flarePrefab: {fileID: 7957489420411926333, guid: af1a026231f1e6a419aca2bdb5234331,
     type: 3}

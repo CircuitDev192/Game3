@@ -130,8 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09e5b5c6787bcb6419be0971a95d49f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerValue: 135
-  timeToStartHeli: 80
+  timerValue: 80
+  timeToStartHeli: 65
 --- !u!223 &8288778893457525860
 Canvas:
   m_ObjectHideFlags: 0
