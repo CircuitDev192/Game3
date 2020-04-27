@@ -7,8 +7,8 @@ public class ZombieChargeState : ZombieBaseState
     public override void EnterState(ZombieContext context)
     {
         Debug.Log("Zombie entered charge state!");
-        context.deadDespawnDistance = 1f;
         context.livingDespawnDistance = 300f;
+        context.deadDespawnDistance = 60f;
         context.zombieNavMeshAgent.enabled = true;
         context.zombieNavMeshAgent.speed = context.walkSpeed;
         context.currentTarget = context.chargeTransform.position + new Vector3(Random.Range(-10f, 10f), 0, Random.Range(-10f, 10f));

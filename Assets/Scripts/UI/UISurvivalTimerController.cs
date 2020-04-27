@@ -6,14 +6,24 @@ using UnityEngine.UI;
 public class UISurvivalTimerController : MonoBehaviour
 {
     private Text timerText;
+    private Animator fadeToBlackAnim;
     private bool startTimer;
+    private bool heliStarted;
     [SerializeField] private float timerValue = 120f;
+    [SerializeField] private float timeToStartHeli = 45f;
 
     // Start is called before the first frame update
     void Start()
     {
         timerText = GetComponentInChildren<Text>();
+        fadeToBlackAnim = GetComponentInChildren<Animator>();
         EventManager.StartSurvivalCountdown += StartSurvivalCountdown;
+        EventManager.GameEnded += GameEnded;
+    }
+
+    private void GameEnded()
+    {
+        fadeToBlackAnim.SetTrigger("FadeToBlack");
     }
 
     private void StartSurvivalCountdown()
@@ -36,9 +46,15 @@ public class UISurvivalTimerController : MonoBehaviour
 
             timerText.text = string.Format("Time left:  {0}:{1}", minutes.ToString("0"), seconds.ToString("00"));
 
+            if (timerValue < timeToStartHeli && !heliStarted)
+            {
+                EventManager.TriggerStartHelicopterMove();
+                heliStarted = true;
+            }
+
             if (timerValue <= 0f)
             {
-                EventManager.EndMission();
+                EventManager.TriggerEndMission();
                 startTimer = false;
             }
         }

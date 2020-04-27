@@ -49,6 +49,7 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
     public float fieldOfView;
     public float visionDistance;
     public float deadDespawnDistance;
+    public float despawnTimer;
     public float livingDespawnDistance;
 
     // Illumination Intensity Flee Threshold

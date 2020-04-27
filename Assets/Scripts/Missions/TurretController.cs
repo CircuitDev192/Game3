@@ -6,6 +6,7 @@ using UnityEngine;
 public class TurretController : MonoBehaviour
 {
     [SerializeField] private Camera turretCamera;
+    [SerializeField] private Light turretLight;
     private Camera playerCamera;
     private bool playerInVehicle = false;
 
@@ -28,6 +29,8 @@ public class TurretController : MonoBehaviour
     {
         turretCamera.gameObject.GetComponent<AudioListener>().enabled = false;
 
+        turretLight.enabled = false;
+
         playerCamera = PlayerManager.instance.player.GetComponentInChildren<Camera>();
         if (playerCamera == null)
         {
@@ -48,6 +51,8 @@ public class TurretController : MonoBehaviour
 
         playerInVehicle = true;
 
+        turretLight.enabled = true;
+
         audioSource.PlayOneShot(reloadSound, 0.8f * PlayerManager.instance.soundMultiplier);
     }
 
@@ -60,7 +65,7 @@ public class TurretController : MonoBehaviour
 
             nextShotTime = (nextShotTime > Time.time) ? nextShotTime : Time.time;
 
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && lockCursor)
             {
                 // We can fire another shot
                 if (Time.time >= nextShotTime)
@@ -170,12 +175,13 @@ public class TurretController : MonoBehaviour
     {
         m_CharacterTargetRot = character.localRotation;
         m_CameraTargetRot = camera.localRotation;
+        EventManager.MouseShouldHide += SetCursorLock;
     }
 
 
     public void LookRotation(Transform character, Transform camera)
     {
-        if (m_cursorIsLocked)
+        if (lockCursor)
         {
             float yRot = Input.GetAxis("Mouse X") * XSensitivity;
             float xRot = Input.GetAxis("Mouse Y") * YSensitivity;

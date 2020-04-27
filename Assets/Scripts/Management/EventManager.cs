@@ -129,6 +129,10 @@ public static class EventManager
     public static Action StartSurvivalCountdown;
     public static void TriggerStartSurvivalCountdown() { StartSurvivalCountdown?.Invoke(); }
 
+    // Start Helicopter Move
+    public static Action StartHelicopterMove;
+    public static void TriggerStartHelicopterMove() { StartHelicopterMove?.Invoke(); }
+
     // Game Ended
     public static Action GameEnded;
     public static void TriggerGameEnded() { GameEnded?.Invoke(); }

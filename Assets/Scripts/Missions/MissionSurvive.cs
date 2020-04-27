@@ -75,18 +75,18 @@ public class MissionSurvive : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         GameObject flare = Instantiate(flarePrefab, flareSpawnLocations[0].position, Quaternion.identity);
-        flare.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 3000f);
+        flare.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0.05f, 1f, 0.1f) * 3000f);
 
         yield return new WaitForSeconds(1f);
         flare = Instantiate(flarePrefab, flareSpawnLocations[1].position, Quaternion.identity);
-        flare.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 3000f);
+        flare.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(-0.05f, 0.9f, 0.15f) * 3000f);
 
         yield return new WaitForSeconds(0.3f);
         flare = Instantiate(flarePrefab, flareSpawnLocations[2].position, Quaternion.identity);
-        flare.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 3000f);
+        flare.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(-0.05f, 0.9f, 0.05f) * 3000f);
 
         yield return new WaitForSeconds(1f);
         flare = Instantiate(flarePrefab, flareSpawnLocations[3].position, Quaternion.identity);
-        flare.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 3000f);
+        flare.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(-0.05f, 0.8f, 0.05f) * 3000f);
     }
 }
