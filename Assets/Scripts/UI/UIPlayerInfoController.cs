@@ -57,7 +57,8 @@ public class UIPlayerInfoController : MonoBehaviour
 
     private void TotalAmmoChanged(int totalAmmo, PlayerManager.AmmoType ammoType)
     {
-        this.totalAmmo.text = "/" + totalAmmo.ToString("D2");
+        if(PlayerManager.instance.player.GetComponent<WeaponController>().currentWeapon.ammoType == ammoType)
+            this.totalAmmo.text = "/" + totalAmmo.ToString("D2");
     }
 
     #endregion
