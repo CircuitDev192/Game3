@@ -145,6 +145,10 @@ public static class EventManager
     public static Action StartNextCreditsSequence;
     public static void TriggerStartNextCreditsSequence() { StartNextCreditsSequence?.Invoke(); }
 
+    // Start credits UI
+    public static Action CreditsUI;
+    public static void TriggerCreditsUI() { CreditsUI?.Invoke(); }
+
     // Game Ended
     public static Action GameEnded;
     public static void TriggerGameEnded() { GameEnded?.Invoke(); }

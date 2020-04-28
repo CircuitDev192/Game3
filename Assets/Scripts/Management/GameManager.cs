@@ -105,7 +105,7 @@ public class GameManager : Context<GameManager>
 
     public void LoadSceneSynchronous(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
     private void SceneLoadCompleted(AsyncOperation obj)
@@ -148,16 +148,5 @@ public class GameManager : Context<GameManager>
     {
         yield return new WaitForSeconds(3f);
         LoadSceneSynchronous("Ending");
-
-        currentState.ExitState(this);
-        currentState = creditsState;
-        currentState.EnterState(this);
-
-        for (int i = 0; i < 3; i++)
-        {
-            yield return new WaitForSeconds(7f);
-            EventManager.TriggerFadeToBlack();
-            EventManager.TriggerStartNextCreditsSequence();
-        }
     }
 }

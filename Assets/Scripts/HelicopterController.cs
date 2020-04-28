@@ -7,15 +7,14 @@ public class HelicopterController : MonoBehaviour
     [SerializeField] private GameObject mainRotor;
     [SerializeField] private GameObject tailRotor;
     [SerializeField] private Transform endPosition;
-    private AudioSource audioSource;
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip helicopterSound;
-    private bool startMove;
+    public bool startMove;
 
     // Start is called before the first frame update
     void Start()
     {
         EventManager.StartHelicopterMove += StartHelicopterMove;
-        audioSource = GetComponent<AudioSource>();
     }
 
     private void StartHelicopterMove()
