@@ -146,6 +146,7 @@ MonoBehaviour:
   mainRotor: {fileID: 4445853817543844673}
   tailRotor: {fileID: 4445853817543816227}
   endPosition: {fileID: 3296225761563213525}
+  audioSource: {fileID: 1552826876363198510}
   helicopterSound: {fileID: 8300000, guid: 48e186a30a502b44aae65b24ae579791, type: 3}
 --- !u!82 &1552826876363198510
 AudioSource:
