@@ -20,7 +20,7 @@ public class DustCloudController : MonoBehaviour
     {
         Vector3 position = transform.position;
 
-        transform.position = new Vector3(position.x, 0, position.y);
+        transform.position = new Vector3(position.x, 0, position.z);
 
         if (Vector3.Distance(heliTransform.position, transform.position) < heliDistanceToGroundThreshold) dustEffect.enabled = true;
         else dustEffect.enabled = false;
