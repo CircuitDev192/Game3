@@ -488,14 +488,14 @@ MonoBehaviour:
   ammoType: 0
   equippedSuppressor: {fileID: 0}
   suppressorFatigue: 7.5
-  damage: 45
+  damage: 50
   fireRate: 0.11
   roundsPerMag: 30
   range: 150
   impactForce: 90
   fullAuto: 1
   flashlightOn: 0
-  audibleDistance: 100
+  audibleDistance: 50
   weaponAnimation: 2
   meleeType: 0
   fireAnimationStartDelay: 0.03

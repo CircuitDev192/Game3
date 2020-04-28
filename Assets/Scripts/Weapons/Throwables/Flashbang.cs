@@ -50,10 +50,13 @@ public class Flashbang : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        audioSource.pitch = Random.Range(0.75f, 1.25f);
-        audioSource.maxDistance = collisionAudibleDistance * 2;
-        audioSource.PlayOneShot(collisionSounds[Random.Range(0, collisionSounds.Length)], 0.25f * PlayerManager.instance.soundMultiplier);
-        EventManager.TriggerSoundGenerated(this.transform.position, collisionAudibleDistance);
+        if (!other.gameObject.CompareTag("Player"))
+        {
+            audioSource.pitch = Random.Range(0.75f, 1.25f);
+            audioSource.maxDistance = collisionAudibleDistance * 2;
+            audioSource.PlayOneShot(collisionSounds[Random.Range(0, collisionSounds.Length)], 0.25f * PlayerManager.instance.soundMultiplier);
+            EventManager.TriggerSoundGenerated(this.transform.position, collisionAudibleDistance);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
