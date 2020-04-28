@@ -179,6 +179,8 @@ public class PlayerManager : MonoBehaviour
 
     private void SetAmmoValue(int updatedAmmo, AmmoType ammoType)
     {
+        int currentAmmo = player.GetComponent<WeaponController>().currentWeapon.roundsInCurrentMag;
+        
         switch (ammoType)
         {
             case AmmoType.ASSAULTRIFLE:
@@ -192,19 +194,19 @@ public class PlayerManager : MonoBehaviour
                 break;
             case AmmoType.FRAG:
                 fragGrenades = updatedAmmo;
-                EventManager.TriggerUpdateItemCountUI("Frag Grenade", updatedAmmo + 1);
+                EventManager.TriggerUpdateItemCountUI("Frag Grenade", updatedAmmo + currentAmmo);
                 break;
             case AmmoType.FLASH:
                 flashbangGrenades = updatedAmmo;
-                EventManager.TriggerUpdateItemCountUI("Flashbang", updatedAmmo + 1);
+                EventManager.TriggerUpdateItemCountUI("Flashbang", updatedAmmo + currentAmmo);
                 break;
             case AmmoType.MEDKITS:
                 medkits = updatedAmmo;
-                EventManager.TriggerUpdateItemCountUI("Medkit", updatedAmmo + 1);
+                EventManager.TriggerUpdateItemCountUI("Medkit", updatedAmmo + currentAmmo);
                 break;
             case AmmoType.FLARES:
                 flares = updatedAmmo;
-                EventManager.TriggerUpdateItemCountUI("Flare", updatedAmmo + 1);
+                EventManager.TriggerUpdateItemCountUI("Flare", updatedAmmo + currentAmmo);
                 break;
             case AmmoType.SUPPRESSOR:
                 suppressors = updatedAmmo;
