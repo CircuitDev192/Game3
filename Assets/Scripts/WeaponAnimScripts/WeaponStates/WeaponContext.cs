@@ -171,7 +171,10 @@ public class WeaponContext : Context<WeaponContext>
         }
         if (isInPickupRange)
         {
-            EventManager.TriggerPlayerPickedUpAmmo(ammoType, addedAmmo);
+            if (PlayerManager.instance.GetTotalAmmoOfType(ammoType) != PlayerManager.instance.GetMaxAmmoOfType(ammoType))
+            {
+                EventManager.TriggerPlayerPickedUpAmmo(ammoType, addedAmmo);
+            }
         }
     }
 
