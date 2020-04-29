@@ -745,7 +745,7 @@ MonoBehaviour:
   impactForce: 100
   fullAuto: 0
   flashlightOn: 0
-  audibleDistance: 100
+  audibleDistance: 60
   weaponAnimation: 1
   meleeType: 0
   fireAnimationStartDelay: 0.09

@@ -73,10 +73,12 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
     public AudioClip[] attackSounds;
     public AudioClip[] hurtSounds;
     public AudioClip[] deathSounds;
+    public AudioClip[] footstepSounds;
 
     public float minTimeBetweenSounds;
     public float maxTimeBetweenSounds;
     public float nextSoundTime;
+    public float nextFootstepTime;
 
     public AudioSource audioSource;
 
@@ -107,6 +109,7 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         damage = Random.Range(minimumDamage, maximumDamage);
         
         nextSoundTime = Time.time + Random.Range(minTimeBetweenSounds, maxTimeBetweenSounds);
+        nextFootstepTime = Time.time;
 
         EventManager.SoundGenerated += SoundGenerated;
 
@@ -185,6 +188,8 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
     
     public void PlayTimedSound(ZombieBaseState state)
     {
+        PlayFootStepSound(state);
+
         float distance = Vector3.Distance(this.transform.position, this.playerTransform.position);
         if (distance > this.visionDistance) return;
 
@@ -205,6 +210,17 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         }
 
         this.nextSoundTime = Time.time + Random.Range(this.minTimeBetweenSounds, this.maxTimeBetweenSounds) * pauseScale;
+    }
+
+    public void PlayFootStepSound(ZombieBaseState state)
+    {
+        if (nextFootstepTime > Time.time) return;
+
+        if (state == this.idleState) return;
+
+        PlaySound(footstepSounds);
+
+        nextFootstepTime = Time.time + Mathf.Clamp(1.5f / this.zombieNavMeshAgent.speed, 0.4f, 1f);
     }
 
     public void PlaySound(AudioClip[] clipArray){

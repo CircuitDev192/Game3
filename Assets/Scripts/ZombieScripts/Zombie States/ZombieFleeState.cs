@@ -39,6 +39,8 @@ public class ZombieFleeState : ZombieBaseState
 
     public override BaseState<ZombieContext> UpdateState(ZombieContext context)
     {
+        context.PlayTimedSound(this);
+
         //base.ShouldFlee(context);
         if (context.zombieNavMeshAgent.remainingDistance < context.zombieNavMeshAgent.stoppingDistance)
         {

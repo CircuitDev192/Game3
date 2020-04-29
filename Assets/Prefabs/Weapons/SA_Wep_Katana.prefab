@@ -110,10 +110,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Katana
   weaponTypeInt: 2
-  ammoType: 7
+  ammoType: 8
   equippedSuppressor: {fileID: 0}
   suppressorFatigue: 0
-  damage: 150
+  damage: 300
   fireRate: 1
   roundsPerMag: 1
   range: 4
