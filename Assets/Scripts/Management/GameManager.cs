@@ -92,10 +92,12 @@ public class GameManager : Context<GameManager>
 
     IEnumerator MoveCamera()
     {
-        while(cam.transform.localEulerAngles.x < 45f)
+        float timer = 4f;
+        while(timer >= 0)
         {
-            cam.transform.Rotate(Vector3.right, 15f * Time.deltaTime);
-            cam.transform.Translate(Vector3.back * 2f * Time.deltaTime);
+            timer -= Time.deltaTime;
+            cam.transform.LookAt(player.transform);
+            cam.transform.Translate(new Vector3(0, 0.5f, -1f) * 2f * Time.deltaTime, Space.World);
             yield return null;
         }
         yield return new WaitForSeconds(5.5f);
