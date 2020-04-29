@@ -7,7 +7,7 @@ public class MissionManager : MonoBehaviour
 {
 
     [SerializeField] private GameObject[] missionPrefabs;
-    [SerializeField] private int currentMission;
+    [SerializeField] public int currentMission;
     [SerializeField] private GameObject[] policeStationLights;
     private bool canTalkToMissionGiver = true;
 
@@ -19,6 +19,16 @@ public class MissionManager : MonoBehaviour
         EventManager.PlayerLeftMissionGiver += PlayerLeftMissionGiver;
         EventManager.InstantiateNextMission += InstantiateNextMission;
         EventManager.PlayerEnteredMissionVehicle += PlayerEnteredMissionVehicle;
+
+        MissionData data = SaveManager.LoadMissionIndex();
+        if (data != null)
+        {
+            currentMission = data.currentMissionIndex;
+        }
+        else
+        {
+            Debug.LogError("Mission Manager did not receive mission data from save file.");
+        }
     }
 
     private void PlayerEnteredMissionVehicle()
@@ -67,6 +77,7 @@ public class MissionManager : MonoBehaviour
         {
             currentMission++;
             canTalkToMissionGiver = true;
+            SaveManager.SaveMissionIndex(currentMission);
         }
         else
         {
