@@ -19,6 +19,7 @@ public class UISurvivalTimerController : MonoBehaviour
         fadeToBlackAnim = GetComponentInChildren<Animator>();
         EventManager.StartSurvivalCountdown += StartSurvivalCountdown;
         EventManager.GameEnded += GameEnded;
+        EventManager.SurvivalMissionFailed += SurvivalMissionFailed;
     }
 
     private void GameEnded()
@@ -30,6 +31,14 @@ public class UISurvivalTimerController : MonoBehaviour
     {
         timerText.enabled = true;
         startTimer = true;
+    }
+
+    private void SurvivalMissionFailed()
+    {
+        if (timerValue > 10f)
+        {
+            EventManager.TriggerPlayerKilled();
+        }
     }
 
     // Update is called once per frame
@@ -58,5 +67,12 @@ public class UISurvivalTimerController : MonoBehaviour
                 startTimer = false;
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.StartSurvivalCountdown -= StartSurvivalCountdown;
+        EventManager.GameEnded -= GameEnded;
+        EventManager.SurvivalMissionFailed -= SurvivalMissionFailed;
     }
 }

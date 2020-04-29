@@ -2200,7 +2200,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2824258909532187388}
-  m_Layer: 0
+  - component: {fileID: 692453920}
+  - component: {fileID: 692453919}
+  m_Layer: 2
   m_Name: ChargeTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2221,6 +2223,31 @@ Transform:
   m_Father: {fileID: 4041512645750729253}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &692453920
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6732613236891587041}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 24.05, y: 19.63, z: 16.3}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &692453919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6732613236891587041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1135d48ddd9ad54295b461c8db0ccc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7378543225203916648
 GameObject:
   m_ObjectHideFlags: 0

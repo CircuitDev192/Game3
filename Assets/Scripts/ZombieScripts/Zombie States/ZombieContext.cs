@@ -140,7 +140,12 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         else{
             Debug.LogWarning("Played hurt sound.");
             this.PlaySound(hurtSounds);
-            currentState = chaseState;
+            //For the last mission, we dont want the zombies attacking the inactive player object,
+            // so check to make sure the zombie isnt charging first before switching to chase.
+            if (currentState != chargeState)
+            {
+                currentState = chaseState;
+            }
         }
 
         currentState.EnterState(this);
