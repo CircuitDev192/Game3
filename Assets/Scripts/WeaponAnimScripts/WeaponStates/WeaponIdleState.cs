@@ -122,7 +122,7 @@ public class WeaponIdleState : WeaponBaseState
         }
 
         // Enable Flashlight
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && context.currentWeaponIndex != 2 && !context.consumableEquipped)
         {
             if (context.flashlightDead) return this;
 

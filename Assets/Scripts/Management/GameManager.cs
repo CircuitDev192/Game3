@@ -98,7 +98,7 @@ public class GameManager : Context<GameManager>
             cam.transform.Translate(Vector3.back * 2f * Time.deltaTime);
             yield return null;
         }
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(5.5f);
         LoadSceneSynchronous("Game");
     }
 
