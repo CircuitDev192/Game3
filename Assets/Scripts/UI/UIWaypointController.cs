@@ -94,4 +94,12 @@ public class UIWaypointController : MonoBehaviour
         waypointIcon.enabled = uiEnable;
         distanceText.enabled = uiEnable;
     }
+
+    private void OnDestroy()
+    {
+        EventManager.MissionWaypointChanged -= MissionWaypointChanged;
+        EventManager.PlayerEnteredMissionVehicle -= PlayerEnteredMissionVehicle;
+        EventManager.EndMission -= EndMission;
+        EventManager.StartMission -= StartMission;
+    }
 }

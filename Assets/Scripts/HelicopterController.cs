@@ -39,4 +39,9 @@ public class HelicopterController : MonoBehaviour
             }
         }
     }
+
+    private void OnDestroy()
+    {
+        EventManager.StartHelicopterMove -= StartHelicopterMove;
+    }
 }

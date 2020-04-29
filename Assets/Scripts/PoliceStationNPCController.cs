@@ -71,4 +71,9 @@ public class PoliceStationNPCController : MonoBehaviour
         yield return new WaitForSeconds(3.25f);
         navMeshAgent.SetDestination(waypoints[Random.Range(0, waypoints.Length)].position);
     }
+
+    private void OnDestroy()
+    {
+        EventManager.DisableFloodLightSounds -= DisableFloodLightSounds;
+    }
 }

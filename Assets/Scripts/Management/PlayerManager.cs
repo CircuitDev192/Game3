@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,6 +34,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip flashbangEarRinging;
     [SerializeField] private AudioClip lastMissionMusic;
+    [SerializeField] private AudioClip deathMusic;
     [SerializeField] public float soundMultiplier = 1f;
 
     #endregion
@@ -54,6 +54,12 @@ public class PlayerManager : MonoBehaviour
         EventManager.SuppressorBroken += SuppressorBroken;
         EventManager.FlashbangDetonated += FlashbangDetonated;
         EventManager.PlayerEnteredMissionVehicle += PlayerEnteredMissionVehicle;
+        EventManager.PlayerKilled += PlayerKilled;
+    }
+
+    private void PlayerKilled()
+    {
+        audioSource.PlayOneShot(deathMusic);
     }
 
     private void PlayerEnteredMissionVehicle()
@@ -225,5 +231,18 @@ public class PlayerManager : MonoBehaviour
             yield return null;
         }
         soundMultiplier = 1f;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.PlayerHealthChanged -= PlayerHealthChanged;
+        EventManager.TotalAmmoChanged -= TotalAmmoChanged;
+        EventManager.TotalAmmoChangedSwap -= TotalAmmoChangedSwap;
+        EventManager.PlayerPickedUpAmmo -= PlayerPickedUpAmmo;
+        EventManager.PlayerPickedUpSuppressor -= PlayerPickedUpSuppressor;
+        EventManager.SuppressorBroken -= SuppressorBroken;
+        EventManager.FlashbangDetonated -= FlashbangDetonated;
+        EventManager.PlayerEnteredMissionVehicle -= PlayerEnteredMissionVehicle;
+        EventManager.PlayerKilled -= PlayerKilled;
     }
 }

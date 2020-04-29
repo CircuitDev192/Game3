@@ -99,7 +99,7 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         DisableRagdoll();
 
         EventManager.PlayerKilled += PlayerKilled;
-
+        EventManager.SoundGenerated += SoundGenerated;
         EventManager.ZombieCharge += ZombieCharge;
 
         playerTransform = PlayerManager.instance.player.transform;
@@ -110,9 +110,7 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         
         nextSoundTime = Time.time + Random.Range(minTimeBetweenSounds, maxTimeBetweenSounds);
         nextFootstepTime = Time.time;
-
-        EventManager.SoundGenerated += SoundGenerated;
-
+        
         currentState = idleState;
         idleState.EnterState(this);
     }
@@ -230,5 +228,12 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         audioSource.clip = clipToPlay;
         audioSource.pitch = Random.Range(0.75F, 1.25F);
         audioSource.Play();
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.PlayerKilled -= PlayerKilled;
+        EventManager.SoundGenerated -= SoundGenerated;
+        EventManager.ZombieCharge -= ZombieCharge;
     }
 }

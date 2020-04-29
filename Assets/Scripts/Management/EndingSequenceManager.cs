@@ -93,4 +93,9 @@ public class EndingSequenceManager : MonoBehaviour
             EventManager.TriggerStartNextCreditsSequence();
         }
     }
+
+    private void OnDestroy()
+    {
+        EventManager.StartNextCreditsSequence -= StartNextCreditsSequence;
+    }
 }

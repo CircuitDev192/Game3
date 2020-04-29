@@ -12,7 +12,6 @@ public class ZombieFleeState : ZombieBaseState
 
     public override void EnterState(ZombieContext context)
     {
-        Debug.Log("Zombie entered flee state!");
 
         currentSegment = 0;
         context.zombieNavMeshAgent.enabled = true;

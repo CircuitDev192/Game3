@@ -41,7 +41,7 @@ public class MissionFetch : MonoBehaviour
     private void EndMission()
     {
         missionEndCollider.gameObject.SetActive(false);
-        EventManager.TriggerMissionChanged("", "");
+        EventManager.TriggerMissionChanged("Free Roam", "Gear up, explore, or accept the next mission.");
         this.gameObject.SetActive(false);
         //Destroy(this.gameObject);
     }
@@ -58,5 +58,13 @@ public class MissionFetch : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.PlayerPickedUpMissionItem -= PlayerPickedUpMissionItem;
+        EventManager.StartMission -= StartMission;
+        EventManager.EndMission -= EndMission;
+        EventManager.PlayerAtMissionArea -= PlayerAtMissionArea;
     }
 }

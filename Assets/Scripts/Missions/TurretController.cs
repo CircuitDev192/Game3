@@ -266,4 +266,10 @@ public class TurretController : MonoBehaviour
     }
 
     #endregion
+
+    private void OnDestroy()
+    {
+        EventManager.PlayerEnteredMissionVehicle -= PlayerEnteredMissionVehicle;
+        EventManager.MouseShouldHide -= SetCursorLock;
+    }
 }

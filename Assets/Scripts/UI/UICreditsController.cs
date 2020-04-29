@@ -23,4 +23,9 @@ public class UICreditsController : MonoBehaviour
     {
         
     }
+
+    private void OnDestroy()
+    {
+        EventManager.CreditsUI -= CreditsUI;
+    }
 }

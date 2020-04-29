@@ -29,4 +29,9 @@ public class UIFlashbangController : MonoBehaviour
     {
         
     }
+
+    private void OnDestroy()
+    {
+        EventManager.FlashbangDetonated -= FlashbangDetonated;
+    }
 }

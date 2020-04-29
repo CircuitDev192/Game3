@@ -217,4 +217,15 @@ public class WeaponContext : Context<WeaponContext>
     {
         this.gameState = gameState;
     }
+
+    private void OnDestroy()
+    {
+        EventManager.GameStateChanged -= GameStateChanged;
+        EventManager.PlayerCollidedWithPickup -= PlayerCollidedWithPickup;
+        EventManager.PlayerCollidedWithAmmo -= PlayerCollidedWithAmmo;
+        EventManager.PlayerChangedConsumable -= PlayerChangedConsumable;
+        EventManager.PlayerPickedUpSuppressor -= PlayerPickedUpSuppressor;
+        EventManager.SuppressorBroken -= SuppressorBroken;
+        EventManager.PlayerLeftPickup -= PlayerLeftPickup;
+    }
 }

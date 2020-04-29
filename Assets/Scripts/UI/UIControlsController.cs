@@ -17,4 +17,9 @@ public class UIControlsController : MonoBehaviour
     {
         EventManager.TriggerUIControlsBackClicked();
     }
+
+    private void OnDestroy()
+    {
+        backButton.onClick.RemoveListener(BackButtonClicked);
+    }
 }

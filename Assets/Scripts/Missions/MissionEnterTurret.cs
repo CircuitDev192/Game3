@@ -60,4 +60,10 @@ public class MissionEnterTurret : MonoBehaviour
             yield return null;
         }
     }
+
+    private void OnDestroy()
+    {
+        EventManager.FinalMissionInstantiated -= FinalMissionInstantiated;
+        EventManager.PlayerEnteredMissionVehicle -= PlayerEnteredMissionVehicle;
+    }
 }

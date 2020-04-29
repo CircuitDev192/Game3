@@ -28,6 +28,8 @@ public class GameManager : Context<GameManager>
 
     public static GameManager instance;
 
+    private Camera cam;
+
     [SerializeField] private GameObject[] managerPrefabs;
     private List<GameObject> managers;
     [SerializeField] private GameObject[] weaponPickupPrefabs;
@@ -49,18 +51,20 @@ public class GameManager : Context<GameManager>
             managers.Add(Instantiate(manager, this.transform));
         }
 
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
         InitializeContext();
 
         EventManager.UIResumeClicked += UIResumeClicked;
         EventManager.UIQuitClicked += UIQuitClicked;
         EventManager.PlayerPickedUpWeapon += PlayerPickedUpWeapon;
         EventManager.GameEnded += GameEnded;
+        EventManager.PlayerKilled += PlayerKilled;
     }
 
     private void Start()
     {
         player = PlayerManager.instance.player;
+        cam = Camera.main;
     }
 
     private void Update()
@@ -77,6 +81,25 @@ public class GameManager : Context<GameManager>
     private void GameEnded()
     {
         StartCoroutine(EndGameSequence());
+    }
+
+    private void PlayerKilled()
+    {
+        //Player manager also listens to this event to play death music
+        cam.transform.parent = null;
+        StartCoroutine(MoveCamera()); //Will reload the scene when the move is complete
+    }
+
+    IEnumerator MoveCamera()
+    {
+        while(cam.transform.localEulerAngles.x < 45f)
+        {
+            cam.transform.Rotate(Vector3.right, 15f * Time.deltaTime);
+            cam.transform.Translate(Vector3.back * 2f * Time.deltaTime);
+            yield return null;
+        }
+        yield return new WaitForSeconds(5f);
+        LoadSceneSynchronous("Game");
     }
 
     private void PlayerPickedUpWeapon(string previousWeaponName)
@@ -148,5 +171,14 @@ public class GameManager : Context<GameManager>
     {
         yield return new WaitForSeconds(3f);
         LoadSceneSynchronous("Ending");
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.UIResumeClicked -= UIResumeClicked;
+        EventManager.UIQuitClicked -= UIQuitClicked;
+        EventManager.PlayerPickedUpWeapon -= PlayerPickedUpWeapon;
+        EventManager.GameEnded -= GameEnded;
+        EventManager.PlayerKilled -= PlayerKilled;
     }
 }
