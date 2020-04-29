@@ -17,6 +17,18 @@ public class UIMainMenuController : MonoBehaviour
         
     }
 
+    public void Mission5Cheat()
+    {
+        SaveManager.SaveMissionIndex(4);
+        Debug.Log("Mission set to mission 5");
+    }
+
+    public void ResetProgress()
+    {
+        SaveManager.SaveMissionIndex(0);
+        Debug.Log("Mission progress reset");
+    }
+
     public void LoadGame()
     {
         SceneManager.LoadScene("Game");
