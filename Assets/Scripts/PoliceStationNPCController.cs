@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class PoliceStationNPCController : MonoBehaviour
 {
@@ -16,6 +17,12 @@ public class PoliceStationNPCController : MonoBehaviour
     [SerializeField] private Transform retreatPoint; //where they should go for mission 5
     private bool shouldRetreat = false;
 
+    [SerializeField] private GameObject floatingText;
+    [SerializeField] private string[] textsToSay;
+    [SerializeField] private string[] retreatText;
+    [SerializeField] private float minTimeBetweenDialog;
+    [SerializeField] private float maxTimeBetweenDialog;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,11 +33,25 @@ public class PoliceStationNPCController : MonoBehaviour
         animator.SetFloat("Speed_f", 0f);
         timeToWalk = Time.time + Random.Range(minWalkDelay, maxWalkDelay);
         EventManager.DisableFloodLightSounds += DisableFloodLightSounds; //really shouldn't use this event, but its called when the lights go out in mission 5, so it works.
+
+        StartCoroutine(RandomDialog());
     }
 
     // Update is called once per frame
     void Update()
     {
+        floatingText.transform.LookAt(PlayerManager.instance.player.transform, Vector3.up);
+        floatingText.transform.eulerAngles = new Vector3(0, floatingText.transform.eulerAngles.y, 0);
+
+        if (Vector3.Distance(floatingText.transform.position, PlayerManager.instance.player.transform.position) < 30f)
+        {
+            floatingText.gameObject.SetActive(true);
+        }
+        else
+        {
+            floatingText.gameObject.SetActive(false);
+        }
+
         if (waypoints.Length != 0 && !shouldRetreat)
         {
             if (shouldWalk && timeToWalk < Time.time)
@@ -54,6 +75,8 @@ public class PoliceStationNPCController : MonoBehaviour
         animator.SetInteger("Animation_int", 0);
         navMeshAgent.speed = 5f;
         shouldRetreat = true;
+        StopCoroutine(RandomDialog());
+        floatingText.GetComponentInChildren<TextMesh>().text = retreatText[Random.Range(0, retreatText.Length)];
         StartCoroutine(RetreatNavMesh());
     }
 
@@ -64,12 +87,24 @@ public class PoliceStationNPCController : MonoBehaviour
         navMeshAgent.SetDestination(retreatPoint.position);
         yield return new WaitForSeconds(3f);
         navMeshAgent.SetDestination(retreatPoint.position);
+        floatingText.GetComponentInChildren<TextMesh>().text = "";
     }
 
     IEnumerator NavMeshStartDelay()
     {
         yield return new WaitForSeconds(3.25f);
         navMeshAgent.SetDestination(waypoints[Random.Range(0, waypoints.Length)].position);
+    }
+
+    IEnumerator RandomDialog()
+    {
+        while (true)
+        {
+            floatingText.GetComponentInChildren<TextMesh>().text = "";
+            yield return new WaitForSeconds(Random.Range(minTimeBetweenDialog, maxTimeBetweenDialog));
+            floatingText.GetComponentInChildren<TextMesh>().text = textsToSay[Random.Range(0, textsToSay.Length)];
+            yield return new WaitForSeconds(6f);
+        }
     }
 
     private void OnDestroy()
