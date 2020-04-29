@@ -29,4 +29,10 @@ public class UIEndSequenceController : MonoBehaviour
     {
         
     }
+
+    private void OnDestroy()
+    {
+        EventManager.FadeToBlack -= FadeToBlack;
+        EventManager.StartNextCreditsSequence -= StartNextCreditsSequence;
+    }
 }

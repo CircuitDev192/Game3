@@ -139,5 +139,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammoType: 5
-  ammoPickedUp: 1
+  ammoPickedUp: 3
   playerInRange: 0

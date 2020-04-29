@@ -103,4 +103,9 @@ public class UIConsumableWheelController : MonoBehaviour
     {
         selectedItem.text = itemNames[4];
     }
+
+    private void OnDestroy()
+    {
+        EventManager.UpdateItemCountUI -= UpdateItemCountUI;
+    }
 }

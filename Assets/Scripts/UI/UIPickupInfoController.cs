@@ -71,4 +71,14 @@ public class UIPickupInfoController : MonoBehaviour
         pickupText.gameObject.SetActive(false);
     }
 
+    private void OnDestroy()
+    {
+        EventManager.PlayerCollidedWithPickup -= PlayerCollidedWithPickup;
+        EventManager.PlayerLeftPickup -= PlayerLeftPickup;
+        EventManager.PlayerCollidedWithAmmo -= PlayerCollidedWithAmmo;
+        EventManager.PlayerCollidedWithMissionItem -= PlayerCollidedWithMissionItem;
+        EventManager.PlayerLeftMissionItem -= PlayerLeftMissionItem;
+        EventManager.PlayerCollidedWithMissionVehicle -= PlayerCollidedWithMissionVehicle;
+        EventManager.PlayerLeftMissionVehicle -= PlayerLeftMissionVehicle;
+    }
 }

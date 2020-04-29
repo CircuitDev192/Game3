@@ -64,7 +64,6 @@ public class Flashbang : MonoBehaviour
         IDamageAble script = other.gameObject.GetComponentInParent<IDamageAble>();
         if (script != null)
         {
-            Debug.LogError("Target Added to list");
             targets.Add(other.gameObject);
         }
     }
@@ -74,7 +73,6 @@ public class Flashbang : MonoBehaviour
         IDamageAble script = other.transform.gameObject.GetComponent<IDamageAble>();
         if (script != null)
         {
-            Debug.LogError("Target removed from list");
             targets.Remove(other.gameObject);
         }
     }

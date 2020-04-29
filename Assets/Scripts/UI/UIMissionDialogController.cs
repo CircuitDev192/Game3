@@ -40,4 +40,12 @@ public class UIMissionDialogController : MonoBehaviour
     {
         talkPrompt.gameObject.SetActive(true);
     }
+
+    private void OnDestroy()
+    {
+        EventManager.PlayerAtMissionGiver -= PlayerAtMissionGiver;
+        EventManager.PlayerLeftMissionGiver -= PlayerLeftMissionGiver;
+        EventManager.PlayerSpokeToMissionGiver -= PlayerSpokeToMissionGiver;
+        EventManager.InstantiateNextMission -= InstantiateNextMission;
+    }
 }

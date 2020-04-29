@@ -30,4 +30,9 @@ public class FloodLightSoundController : MonoBehaviour
     {
         
     }
+
+    private void OnDestroy()
+    {
+        EventManager.DisableFloodLightSounds -= DisableFloodLightSounds;
+    }
 }

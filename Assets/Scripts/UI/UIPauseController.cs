@@ -38,4 +38,12 @@ public class UIPauseController : MonoBehaviour
     {
         EventManager.TriggerUIQuitClicked();
     }
+
+    private void OnDestroy()
+    {
+        resumeButton.onClick.RemoveListener(ResumeButtonClicked);
+        quitButton.onClick.RemoveListener(QuitButtonClicked);
+        controlsButton.onClick.RemoveListener(ControlsButtonClicked);
+        settingsButton.onClick.RemoveListener(SettingsButtonClicked);
+    }
 }

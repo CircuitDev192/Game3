@@ -95,4 +95,13 @@ public class UIManager : Context<UIManager>
 
         currentState.EnterState(this);
     }
+
+    private void OnDestroy()
+    {
+        EventManager.GameStateChanged -= GameStateChanged;
+        EventManager.UIControlsClicked -= UIControlsButtonClicked;
+        EventManager.UISettingsClicked -= UISettingsButtonClicked;
+        EventManager.UIControlsBackClicked -= UIControlsButtonBackClicked;
+        EventManager.UISettingsBackClicked -= UISettingsButtonBackClicked;
+    }
 }

@@ -42,7 +42,7 @@ public class MissionKill : MonoBehaviour
     private void EndMission()
     {
         missionEndCollider.gameObject.SetActive(false);
-        EventManager.TriggerMissionChanged("", "");
+        EventManager.TriggerMissionChanged("Free Roam", "Gear up, explore, or accept the next mission.");
         this.gameObject.SetActive(false);
         //Destroy(this.gameObject);
     }
@@ -59,5 +59,13 @@ public class MissionKill : MonoBehaviour
     void Update()
     {
 
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.PlayerClearedArea -= PlayerClearedArea;
+        EventManager.StartMission -= StartMission;
+        EventManager.EndMission -= EndMission;
+        EventManager.PlayerAtMissionArea -= PlayerAtMissionArea;
     }
 }

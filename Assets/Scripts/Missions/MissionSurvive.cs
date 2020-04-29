@@ -89,4 +89,11 @@ public class MissionSurvive : MonoBehaviour
         flare = Instantiate(flarePrefab, flareSpawnLocations[3].position, Quaternion.identity);
         flare.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(-0.05f, 0.8f, 0.05f) * 3000f);
     }
+
+    private void OnDestroy()
+    {
+        EventManager.EndMission -= EndMission;
+        EventManager.PlayerEnteredMissionVehicle -= PlayerEnteredMissionVehicle;
+        EventManager.PlayerClearedArea -= PlayerClearedArea;
+    }
 }

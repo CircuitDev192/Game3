@@ -59,4 +59,10 @@ public class NPCController : MonoBehaviour
             EventManager.TriggerPlayerLeftMissionGiver();
         }
     }
+
+    private void OnDestroy()
+    {
+        EventManager.PlayerAtMissionGiver -= PlayerAtMissionGiver;
+        EventManager.PlayerLeftMissionGiver -= PlayerLeftMissionGiver;
+    }
 }

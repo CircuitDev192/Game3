@@ -167,4 +167,10 @@ public class ZombieSpawnManager : MonoBehaviour
 
         if (deadZombies.Count > maxDeadZombies) Destroy(deadZombies.Dequeue());
     }
+
+    private void OnDestroy()
+    {
+        EventManager.zombieShouldDespawn -= DespawnZombie;
+        EventManager.ZombieKilled -= ZombieDied;
+    }
 }

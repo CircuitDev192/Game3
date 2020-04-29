@@ -43,6 +43,20 @@ public class UIPlayerInfoController : MonoBehaviour
         healthBar.transform.localScale = new Vector3(health / 100f, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
     }
 
+    private void OnDestroy()
+    {
+        EventManager.PlayerHealthChanged -= PlayerHealthChanged;
+
+        EventManager.WeaponChanged -= WeaponNameChanged;
+        EventManager.AmmoCountChanged -= RoundsInMagChanged;
+        EventManager.TotalAmmoChanged -= TotalAmmoChanged;
+
+        EventManager.FlashLightPowerChanged -= FlashLightPowerChanged;
+        EventManager.SuppressorDurabilityChanged -= SuppressorDurabilityChanged;
+
+        EventManager.PlayerEnteredMissionVehicle -= PlayerEnteredMissionVehicle;
+    }
+
     #region Weapon Information Events
 
     private void WeaponNameChanged(string weaponName)

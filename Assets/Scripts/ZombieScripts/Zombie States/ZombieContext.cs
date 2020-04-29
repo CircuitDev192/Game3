@@ -99,7 +99,7 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         DisableRagdoll();
 
         EventManager.PlayerKilled += PlayerKilled;
-
+        EventManager.SoundGenerated += SoundGenerated;
         EventManager.ZombieCharge += ZombieCharge;
 
         playerTransform = PlayerManager.instance.player.transform;
@@ -110,9 +110,7 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         
         nextSoundTime = Time.time + Random.Range(minTimeBetweenSounds, maxTimeBetweenSounds);
         nextFootstepTime = Time.time;
-
-        EventManager.SoundGenerated += SoundGenerated;
-
+        
         currentState = idleState;
         idleState.EnterState(this);
     }
@@ -142,7 +140,12 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         else{
             Debug.LogWarning("Played hurt sound.");
             this.PlaySound(hurtSounds);
-            currentState = chaseState;
+            //For the last mission, we dont want the zombies attacking the inactive player object,
+            // so check to make sure the zombie isnt charging first before switching to chase.
+            if (currentState != chargeState)
+            {
+                currentState = chaseState;
+            }
         }
 
         currentState.EnterState(this);
@@ -230,5 +233,12 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         audioSource.clip = clipToPlay;
         audioSource.pitch = Random.Range(0.75F, 1.25F);
         audioSource.Play();
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.PlayerKilled -= PlayerKilled;
+        EventManager.SoundGenerated -= SoundGenerated;
+        EventManager.ZombieCharge -= ZombieCharge;
     }
 }

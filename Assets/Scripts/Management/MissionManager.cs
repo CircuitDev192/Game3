@@ -121,4 +121,13 @@ public class MissionManager : MonoBehaviour
         }
         PlayerSpokeToMissionGiver();
     }
+
+    private void OnDestroy()
+    {
+        EventManager.EndMission -= EndMission;
+        EventManager.PlayerAtMissionGiver -= PlayerAtMissionGiver;
+        EventManager.PlayerLeftMissionGiver -= PlayerLeftMissionGiver;
+        EventManager.InstantiateNextMission -= InstantiateNextMission;
+        EventManager.PlayerEnteredMissionVehicle -= PlayerEnteredMissionVehicle;
+    }
 }
