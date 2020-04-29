@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +8,8 @@ public class UIMissionDialogController : MonoBehaviour
     [SerializeField] private Text talkPrompt;
     [SerializeField] private Text missionDialog;
 
+    private bool canTalk = true;
+
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,12 @@ public class UIMissionDialogController : MonoBehaviour
         EventManager.PlayerLeftMissionGiver += PlayerLeftMissionGiver;
         EventManager.PlayerSpokeToMissionGiver += PlayerSpokeToMissionGiver;
         EventManager.InstantiateNextMission += InstantiateNextMission;
+        EventManager.EndMission += EndMission;
+    }
+
+    private void EndMission()
+    {
+        canTalk = true;
     }
 
     private void InstantiateNextMission()
@@ -29,6 +36,7 @@ public class UIMissionDialogController : MonoBehaviour
         talkPrompt.gameObject.SetActive(false);
         missionDialog.gameObject.SetActive(true);
         missionDialog.text = npcDialog;
+        canTalk = false;
     }
 
     private void PlayerLeftMissionGiver()
@@ -38,7 +46,10 @@ public class UIMissionDialogController : MonoBehaviour
 
     private void PlayerAtMissionGiver()
     {
-        talkPrompt.gameObject.SetActive(true);
+        if (canTalk)
+        {
+            talkPrompt.gameObject.SetActive(true);
+        }
     }
 
     private void OnDestroy()
@@ -47,5 +58,6 @@ public class UIMissionDialogController : MonoBehaviour
         EventManager.PlayerLeftMissionGiver -= PlayerLeftMissionGiver;
         EventManager.PlayerSpokeToMissionGiver -= PlayerSpokeToMissionGiver;
         EventManager.InstantiateNextMission -= InstantiateNextMission;
+        EventManager.EndMission -= EndMission;
     }
 }

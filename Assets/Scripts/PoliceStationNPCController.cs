@@ -22,6 +22,7 @@ public class PoliceStationNPCController : MonoBehaviour
     [SerializeField] private string[] retreatText;
     [SerializeField] private float minTimeBetweenDialog;
     [SerializeField] private float maxTimeBetweenDialog;
+    private Coroutine randomDialog = null;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +35,7 @@ public class PoliceStationNPCController : MonoBehaviour
         timeToWalk = Time.time + Random.Range(minWalkDelay, maxWalkDelay);
         EventManager.DisableFloodLightSounds += DisableFloodLightSounds; //really shouldn't use this event, but its called when the lights go out in mission 5, so it works.
 
-        StartCoroutine(RandomDialog());
+        randomDialog = StartCoroutine(RandomDialog());
     }
 
     // Update is called once per frame
@@ -75,7 +76,7 @@ public class PoliceStationNPCController : MonoBehaviour
         animator.SetInteger("Animation_int", 0);
         navMeshAgent.speed = 5f;
         shouldRetreat = true;
-        StopCoroutine(RandomDialog());
+        StopCoroutine(randomDialog);
         floatingText.GetComponentInChildren<TextMesh>().text = retreatText[Random.Range(0, retreatText.Length)];
         StartCoroutine(RetreatNavMesh());
     }

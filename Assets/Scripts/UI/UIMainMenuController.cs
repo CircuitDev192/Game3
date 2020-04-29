@@ -20,8 +20,8 @@ public class UIMainMenuController : MonoBehaviour
 
     public void Mission5Cheat()
     {
-        SaveManager.SaveMissionIndex(4);
-        Debug.Log("Mission set to mission 5");
+        SaveManager.SaveMissionIndex(3);
+        Debug.Log("Mission set to mission 4");
     }
 
     public void ResetProgress()
