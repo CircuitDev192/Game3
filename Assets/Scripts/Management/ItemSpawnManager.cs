@@ -4,21 +4,13 @@ using UnityEngine;
 
 public class ItemSpawnManager : MonoBehaviour
 {
-    private List<GameObject> items = new List<GameObject>();
-    private List<GameObject> spawnables = new List<GameObject>();
-    private List<Transform> spawnPoints = new List<Transform>();
+    [SerializeField] private Transform[] spawnPoints; //Order of spawns must match the spawnables
+    [SerializeField] private GameObject[] spawnables;
 
     // Start is called before the first frame update
     void Start()
     {
         EventManager.EndMission += EndMission;
-        foreach (Transform childItem in transform)
-        {
-            items.Add(childItem.gameObject);
-            spawnables.Add(childItem.gameObject);
-            spawnPoints.Add(childItem);
-            //get posistion of the items and them to list of transforms or vector3s
-        }
     }
 
     // Update is called once per frame
@@ -29,15 +21,9 @@ public class ItemSpawnManager : MonoBehaviour
 
     private void EndMission()
     {
-        if (items.Count != 0)
+        for (int i = 0; i < spawnPoints.Length; i++)
         {
-            items.Clear();
-        }
-
-        foreach (Transform spawnPoint in spawnPoints)
-        {
-            GameObject newItem = Instantiate(spawnables[spawnPoints.IndexOf(spawnPoint)], spawnPoint.position, Quaternion.identity, this.transform);
-            items.Add(newItem);
+            Instantiate(spawnables[i], spawnPoints[i].position, Quaternion.identity, this.transform);
         }
     }
 
