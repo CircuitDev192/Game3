@@ -16,6 +16,7 @@ public class MissionKill : MonoBehaviour
     [SerializeField] private GameObject[] spawnPoints;
     [SerializeField] private int zombiesToSpawn;
     [SerializeField] private bool shouldSpawnZombiesAtMissionArea;
+    private bool didStart = false;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +45,10 @@ public class MissionKill : MonoBehaviour
         missionEndCollider.gameObject.SetActive(false);
         EventManager.TriggerMissionChanged("Free Roam", "Gear up, explore, or accept the next mission.");
         this.gameObject.SetActive(false);
+        EventManager.PlayerClearedArea -= PlayerClearedArea;
+        EventManager.StartMission -= StartMission;
+        EventManager.EndMission -= EndMission;
+        EventManager.PlayerAtMissionArea -= PlayerAtMissionArea;
         //Destroy(this.gameObject);
     }
 

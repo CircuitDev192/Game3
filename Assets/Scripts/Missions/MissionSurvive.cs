@@ -23,7 +23,6 @@ public class MissionSurvive : MonoBehaviour
     {
         EventManager.EndMission += EndMission;
         EventManager.PlayerEnteredMissionVehicle += PlayerEnteredMissionVehicle;
-        EventManager.PlayerClearedArea += PlayerClearedArea;
 
         EventManager.TriggerMissionChanged(missionTitle, missionDescription);
         EventManager.TriggerMissionWaypointChanged(missionObjectiveLocation.position);
@@ -47,12 +46,9 @@ public class MissionSurvive : MonoBehaviour
     {
         EventManager.TriggerMissionChanged("", "");
         this.gameObject.SetActive(false);
+        EventManager.EndMission -= EndMission;
+        EventManager.PlayerEnteredMissionVehicle -= PlayerEnteredMissionVehicle;
         //Destroy(this.gameObject);
-    }
-
-    private void PlayerClearedArea()
-    {
-        EventManager.TriggerMissionChanged(missionTitle, returnToBaseDescription);
     }
 
     // Update is called once per frame
@@ -94,6 +90,5 @@ public class MissionSurvive : MonoBehaviour
     {
         EventManager.EndMission -= EndMission;
         EventManager.PlayerEnteredMissionVehicle -= PlayerEnteredMissionVehicle;
-        EventManager.PlayerClearedArea -= PlayerClearedArea;
     }
 }

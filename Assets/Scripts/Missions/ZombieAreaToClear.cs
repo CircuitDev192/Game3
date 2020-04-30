@@ -8,6 +8,7 @@ public class ZombieAreaToClear : MonoBehaviour
     private float timer = 5f;
     [HideInInspector]
     public bool shouldCountDown = false;
+    private bool areaCleared = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,11 @@ public class ZombieAreaToClear : MonoBehaviour
         //timer prevents the mission from ending as soon as the player reaches the mission area
         if (ZombieSpawnManager.instance.GetMissionZombies().Count <= 5 && timer <= 0f)
         {
-            EventManager.TriggerPlayerClearedArea();
+            if (!areaCleared)
+            {
+                EventManager.TriggerPlayerClearedArea();
+                areaCleared = true;
+            }
         }
     }
 }
