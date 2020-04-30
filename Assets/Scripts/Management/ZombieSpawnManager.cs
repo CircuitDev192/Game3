@@ -42,10 +42,13 @@ public class ZombieSpawnManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        HandleSpawning();
         if (shouldSpawnMissionZombies)
         {
             HandleMissionSpawning();
+        }
+        else
+        {
+            HandleSpawning();
         }
     }
 
@@ -115,6 +118,11 @@ public class ZombieSpawnManager : MonoBehaviour
         missionZombiesToSpawn = maxZombies;
         shouldSpawnMissionZombies = shouldSpawnZombies;
         this.infiniteSpawns = infiniteSpawns;
+    }
+
+    public void StopMissionZombieSpawns()
+    {
+        shouldSpawnMissionZombies = false;
     }
 
     private void HandleMissionSpawning()

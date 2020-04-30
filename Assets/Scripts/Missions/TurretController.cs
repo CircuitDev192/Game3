@@ -49,6 +49,8 @@ public class TurretController : MonoBehaviour
         turretCamera.enabled = true;
         turretCamera.gameObject.GetComponent<AudioListener>().enabled = true;
 
+        EventManager.TriggerPlayerCameraChanged(turretCamera);
+
         playerInVehicle = true;
 
         turretLight.enabled = true;

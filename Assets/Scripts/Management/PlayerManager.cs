@@ -43,6 +43,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private AudioClip lastMissionMusic;
     [SerializeField] private AudioClip deathMusic;
     [SerializeField] public float soundMultiplier = 1f;
+    private bool isInLastMission = false;
 
     #endregion
 
@@ -76,12 +77,16 @@ public class PlayerManager : MonoBehaviour
 
     private void PlayerKilled()
     {
-        audioSource.PlayOneShot(deathMusic);
+        if (!isInLastMission)
+        {
+            audioSource.PlayOneShot(deathMusic);
+        }
     }
 
     private void PlayerEnteredMissionVehicle()
     {
         audioSource.PlayOneShot(lastMissionMusic);
+        isInLastMission = true;
     }
 
     private void FlashbangDetonated(Vector3 flashbangPosition, float stunDistance)
@@ -242,19 +247,19 @@ public class PlayerManager : MonoBehaviour
                 break;
             case AmmoType.FRAG:
                 fragGrenades = updatedAmmo;
-                EventManager.TriggerUpdateItemCountUI("Frag Grenade", updatedAmmo + currentAmmo);
+                EventManager.TriggerUpdateItemCountUI("Frag Grenade", updatedAmmo + ((player.GetComponent<WeaponController>().currentWeapon.ammoType == AmmoType.FRAG) ? currentAmmo : 0));
                 break;
             case AmmoType.FLASH:
                 flashbangGrenades = updatedAmmo;
-                EventManager.TriggerUpdateItemCountUI("Flashbang", updatedAmmo + currentAmmo);
+                EventManager.TriggerUpdateItemCountUI("Flashbang", updatedAmmo + ((player.GetComponent<WeaponController>().currentWeapon.ammoType == AmmoType.FLASH) ? currentAmmo : 0));
                 break;
             case AmmoType.MEDKITS:
                 medkits = updatedAmmo;
-                EventManager.TriggerUpdateItemCountUI("Medkit", updatedAmmo + currentAmmo);
+                EventManager.TriggerUpdateItemCountUI("Medkit", updatedAmmo + ((player.GetComponent<WeaponController>().currentWeapon.ammoType == AmmoType.MEDKITS) ? currentAmmo : 0));
                 break;
             case AmmoType.FLARES:
                 flares = updatedAmmo;
-                EventManager.TriggerUpdateItemCountUI("Flare", updatedAmmo + currentAmmo);
+                EventManager.TriggerUpdateItemCountUI("Flare", updatedAmmo + ((player.GetComponent<WeaponController>().currentWeapon.ammoType == AmmoType.FLARES) ? currentAmmo : 0));
                 break;
             case AmmoType.SUPPRESSOR:
                 suppressors = updatedAmmo;

@@ -10,6 +10,7 @@ public class MissionManager : MonoBehaviour
     [SerializeField] public int currentMission;
     [SerializeField] private GameObject[] policeStationLights;
     private bool canTalkToMissionGiver = true;
+    Coroutine waitToTalk = null;
 
     // Start is called before the first frame update
     void Start()
@@ -43,12 +44,12 @@ public class MissionManager : MonoBehaviour
 
     private void PlayerAtMissionGiver()
     {
-        StartCoroutine(WaitForPlayerToTalk());
+        waitToTalk = StartCoroutine(WaitForPlayerToTalk());
     }
 
     private void PlayerLeftMissionGiver()
     {
-        StopCoroutine(WaitForPlayerToTalk());
+        StopCoroutine(waitToTalk);
     }
 
     private void PlayerSpokeToMissionGiver()

@@ -4806,5 +4806,5 @@ MonoBehaviour:
   - {fileID: 1748133655}
   - {fileID: 512424149}
   - {fileID: 97502512}
-  zombiesToSpawn: 25
+  zombiesToSpawn: 12
   shouldSpawnZombiesAtMissionArea: 1

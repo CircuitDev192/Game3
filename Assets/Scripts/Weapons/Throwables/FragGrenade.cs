@@ -69,7 +69,7 @@ public class FragGrenade : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        IDamageAble script = other.transform.gameObject.GetComponent<IDamageAble>();
+        IDamageAble script = other.gameObject.GetComponentInParent<IDamageAble>();
         if (script != null)
         {
             targets.Remove(other.gameObject);

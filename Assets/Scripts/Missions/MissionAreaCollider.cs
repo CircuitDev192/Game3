@@ -11,4 +11,13 @@ public class MissionAreaCollider : MonoBehaviour
             EventManager.TriggerPlayerAtMissionArea();
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            ZombieSpawnManager.instance.StopMissionZombieSpawns();
+            EventManager.TriggerPlayerLeftMissionArea();
+        }
+    }
 }

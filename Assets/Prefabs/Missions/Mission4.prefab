@@ -1103,7 +1103,7 @@ MonoBehaviour:
   - {fileID: 1832367480215621918}
   - {fileID: 1008344043372237343}
   - {fileID: 768420042905726320}
-  zombiesToSpawn: 25
+  zombiesToSpawn: 16
   shouldSpawnZombiesAtMissionArea: 1
 --- !u!1 &9222259074427196814
 GameObject:

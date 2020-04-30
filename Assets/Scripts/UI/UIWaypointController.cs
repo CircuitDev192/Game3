@@ -22,15 +22,15 @@ public class UIWaypointController : MonoBehaviour
         distanceText = GetComponentInChildren<Text>();
         player = PlayerManager.instance.player.transform;
         EventManager.MissionWaypointChanged += MissionWaypointChanged;
-        EventManager.PlayerEnteredMissionVehicle += PlayerEnteredMissionVehicle;
         EventManager.EndMission += EndMission;
         EventManager.StartMission += StartMission;
+        EventManager.PlayerCameraChanged += PlayerCameraChanged;
         cam = Camera.main;
     }
 
-    private void PlayerEnteredMissionVehicle()
+    private void PlayerCameraChanged(Camera newCamera)
     {
-        cam = Camera.main;
+        cam = newCamera;
     }
 
     private void EndMission()
@@ -98,7 +98,7 @@ public class UIWaypointController : MonoBehaviour
     private void OnDestroy()
     {
         EventManager.MissionWaypointChanged -= MissionWaypointChanged;
-        EventManager.PlayerEnteredMissionVehicle -= PlayerEnteredMissionVehicle;
+        EventManager.PlayerCameraChanged -= PlayerCameraChanged;
         EventManager.EndMission -= EndMission;
         EventManager.StartMission -= StartMission;
     }

@@ -89,6 +89,10 @@ public static class EventManager
     public static Action PlayerAtMissionArea;
     public static void TriggerPlayerAtMissionArea() { PlayerAtMissionArea?.Invoke(); }
 
+    // Player left mission area
+    public static Action PlayerLeftMissionArea;
+    public static void TriggerPlayerLeftMissionArea() { PlayerLeftMissionArea?.Invoke(); }
+
     // Player cleared zombie area
     public static Action PlayerClearedArea;
     public static void TriggerPlayerClearedArea() { PlayerClearedArea?.Invoke(); }
@@ -235,6 +239,10 @@ public static class EventManager
     // Player picked up ammo
     public static Action<PlayerManager.AmmoType, int> PlayerPickedUpAmmo;
     public static void TriggerPlayerPickedUpAmmo(PlayerManager.AmmoType ammoType, int addedAmmo) { PlayerPickedUpAmmo?.Invoke(ammoType, addedAmmo); }
+
+    // Player camera changed
+    public static Action<Camera> PlayerCameraChanged;
+    public static void TriggerPlayerCameraChanged(Camera newCamera) { PlayerCameraChanged?.Invoke(newCamera); }
     
     // Update consumable count value
     public static Action<string, int> UpdateItemCountUI;
