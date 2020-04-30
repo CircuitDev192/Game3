@@ -1035,9 +1035,9 @@ MonoBehaviour:
   muzzleFlashLight: {fileID: 1234144635256505500}
   muzzleFlashRenderer: {fileID: 8788508319550784832}
   shotOrigin: {fileID: 3702344488100066579}
-  impactSpark: {fileID: 1083163087648314537, guid: e5a544778598608478e8e1dbb49eb8c6,
+  impactSpark: {fileID: 4959502850054142828, guid: 10be5bd801d74c9438c4af806db4a606,
     type: 3}
-  bloodSplatter: {fileID: 1083163087648314537, guid: ae0a894cec61d9943825c86d9d5b579f,
+  bloodSplatter: {fileID: 2892289106688674239, guid: 8a3ea20717c8ca04080a7d868f6e5fff,
     type: 3}
   weaponRenderer: {fileID: 6132034752448678912}
   flashlightRenderer: {fileID: 6132034752448675000}
