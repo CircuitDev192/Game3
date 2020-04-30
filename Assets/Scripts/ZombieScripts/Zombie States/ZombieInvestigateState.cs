@@ -8,7 +8,6 @@ public class ZombieInvestigateState : ZombieBaseState
     {
         context.zombieNavMeshAgent.enabled = true;
         context.zombieNavMeshAgent.destination = context.soundLocation;
-
         context.zombieAnimator.SetFloat("Speed_f", context.walkSpeed);
     }
 

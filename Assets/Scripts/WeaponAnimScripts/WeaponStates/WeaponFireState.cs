@@ -42,11 +42,11 @@ public class WeaponFireState : WeaponBaseState
 
                 if (context.currentWeapon.equippedSuppressor)
                 {
-                    EventManager.TriggerSoundGenerated(context.currentWeapon.transform.position, context.weapons[context.currentWeaponIndex].audibleDistance * 0.10f);
+                    EventManager.TriggerSoundGenerated(context.currentWeapon.transform.position, context.currentWeapon.audibleDistance * 0.10f);
                 }
                 else
                 {
-                    EventManager.TriggerSoundGenerated(context.currentWeapon.transform.position, context.weapons[context.currentWeaponIndex].audibleDistance);
+                    EventManager.TriggerSoundGenerated(context.currentWeapon.transform.position, context.currentWeapon.audibleDistance);
                 }
 
                 nextShotTime = Time.time + context.currentWeapon.fireRate;
