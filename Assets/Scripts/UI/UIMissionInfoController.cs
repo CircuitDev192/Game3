@@ -30,4 +30,9 @@ public class UIMissionInfoController : MonoBehaviour
         this.missionTitle.text = missionTitle;
         this.missionDescription.text = missionDescription;
     }
+
+    private void OnDestroy()
+    {
+        EventManager.MissionChanged -= MissionChanged;
+    }
 }

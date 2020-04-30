@@ -171,7 +171,10 @@ public class WeaponContext : Context<WeaponContext>
         }
         if (isInPickupRange)
         {
-            EventManager.TriggerPlayerPickedUpAmmo(ammoType, addedAmmo);
+            if (PlayerManager.instance.GetTotalAmmoOfType(ammoType) != PlayerManager.instance.GetMaxAmmoOfType(ammoType))
+            {
+                EventManager.TriggerPlayerPickedUpAmmo(ammoType, addedAmmo);
+            }
         }
     }
 
@@ -216,5 +219,16 @@ public class WeaponContext : Context<WeaponContext>
     private void GameStateChanged(GameState gameState)
     {
         this.gameState = gameState;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.GameStateChanged -= GameStateChanged;
+        EventManager.PlayerCollidedWithPickup -= PlayerCollidedWithPickup;
+        EventManager.PlayerCollidedWithAmmo -= PlayerCollidedWithAmmo;
+        EventManager.PlayerChangedConsumable -= PlayerChangedConsumable;
+        EventManager.PlayerPickedUpSuppressor -= PlayerPickedUpSuppressor;
+        EventManager.SuppressorBroken -= SuppressorBroken;
+        EventManager.PlayerLeftPickup -= PlayerLeftPickup;
     }
 }

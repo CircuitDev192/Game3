@@ -19,6 +19,7 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
     public ZombieDeadState deadState = new ZombieDeadState();
     public ZombieDespawnState despawnState = new ZombieDespawnState();
     public ZombieFleeState fleeState = new ZombieFleeState();
+    public ZombieChargeState chargeState = new ZombieChargeState();
 
     #endregion
 
@@ -32,6 +33,7 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
     public float maximumRunSpeed;
     public float runSpeed;
     public float currentSpeed;
+    public Transform chargeTransform;
 
     // Health generation variables
     public float minimumHealth;
@@ -71,10 +73,12 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
     public AudioClip[] attackSounds;
     public AudioClip[] hurtSounds;
     public AudioClip[] deathSounds;
+    public AudioClip[] footstepSounds;
 
     public float minTimeBetweenSounds;
     public float maxTimeBetweenSounds;
     public float nextSoundTime;
+    public float nextFootstepTime;
 
     public AudioSource audioSource;
 
@@ -95,6 +99,8 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         DisableRagdoll();
 
         EventManager.PlayerKilled += PlayerKilled;
+        EventManager.SoundGenerated += SoundGenerated;
+        EventManager.ZombieCharge += ZombieCharge;
 
         playerTransform = PlayerManager.instance.player.transform;
         currentSpeed = walkSpeed;
@@ -103,11 +109,21 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         damage = Random.Range(minimumDamage, maximumDamage);
         
         nextSoundTime = Time.time + Random.Range(minTimeBetweenSounds, maxTimeBetweenSounds);
-
-        EventManager.SoundGenerated += SoundGenerated;
-
+        nextFootstepTime = Time.time;
+        
         currentState = idleState;
         idleState.EnterState(this);
+    }
+
+    private void ZombieCharge(Transform chargeTransform)
+    {
+        if (currentState == idleState || currentState == patrolState || currentState == investigateState)
+        {
+            this.chargeTransform = chargeTransform;
+            currentState.ExitState(this);
+            currentState = chargeState;
+            currentState.EnterState(this);
+        }
     }
 
     public void Damage(float damage)
@@ -124,7 +140,12 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         else{
             Debug.LogWarning("Played hurt sound.");
             this.PlaySound(hurtSounds);
-            currentState = chaseState;
+            //For the last mission, we dont want the zombies attacking the inactive player object,
+            // so check to make sure the zombie isnt charging first before switching to chase.
+            if (currentState != chargeState)
+            {
+                currentState = chaseState;
+            }
         }
 
         currentState.EnterState(this);
@@ -170,6 +191,8 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
     
     public void PlayTimedSound(ZombieBaseState state)
     {
+        PlayFootStepSound(state);
+
         float distance = Vector3.Distance(this.transform.position, this.playerTransform.position);
         if (distance > this.visionDistance) return;
 
@@ -192,6 +215,17 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         this.nextSoundTime = Time.time + Random.Range(this.minTimeBetweenSounds, this.maxTimeBetweenSounds) * pauseScale;
     }
 
+    public void PlayFootStepSound(ZombieBaseState state)
+    {
+        if (nextFootstepTime > Time.time) return;
+
+        if (state == this.idleState) return;
+
+        PlaySound(footstepSounds);
+
+        nextFootstepTime = Time.time + Mathf.Clamp(1.5f / this.zombieNavMeshAgent.speed, 0.4f, 1f);
+    }
+
     public void PlaySound(AudioClip[] clipArray){
         int index = Random.Range(0, clipArray.Length);
         AudioClip clipToPlay = clipArray[index];
@@ -199,5 +233,12 @@ public abstract class ZombieContext : Context<ZombieContext>, IDamageAble
         audioSource.clip = clipToPlay;
         audioSource.pitch = Random.Range(0.75F, 1.25F);
         audioSource.Play();
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.PlayerKilled -= PlayerKilled;
+        EventManager.SoundGenerated -= SoundGenerated;
+        EventManager.ZombieCharge -= ZombieCharge;
     }
 }

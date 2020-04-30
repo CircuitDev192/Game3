@@ -17,9 +17,17 @@ public static class EventManager
     public static Action UIControlsClicked;
     public static void TriggerUIControlsClicked() { UIControlsClicked?.Invoke(); }
 
-    // Show Controls Menu
+    // Show Settings Menu
+    public static Action UISettingsClicked;
+    public static void TriggerUISettingsClicked() { UISettingsClicked?.Invoke(); }
+
+    // Leave Controls Menu
     public static Action UIControlsBackClicked;
     public static void TriggerUIControlsBackClicked() { UIControlsBackClicked?.Invoke(); }
+
+    // Leave Settings Menu
+    public static Action UISettingsBackClicked;
+    public static void TriggerUISettingsBackClicked() { UISettingsBackClicked?.Invoke(); }
 
     // Should mouse be hidden/locked
     public static Action<bool> MouseShouldHide;
@@ -53,6 +61,18 @@ public static class EventManager
     public static Action<Vector3> MissionWaypointChanged;
     public static void TriggerMissionWaypointChanged(Vector3 missionWaypointPosition) { MissionWaypointChanged?.Invoke(missionWaypointPosition); }
 
+    // Player at mission giver
+    public static Action PlayerAtMissionGiver;
+    public static void TriggerPlayerAtMissionGiver() { PlayerAtMissionGiver?.Invoke(); }
+
+    // Player left mission giver
+    public static Action PlayerLeftMissionGiver;
+    public static void TriggerPlayerLeftMissionGiver() { PlayerLeftMissionGiver?.Invoke(); }
+
+    // Player spoke to mission giver NPC
+    public static Action<string> PlayerSpokeToMissionGiver;
+    public static void TriggerPlayerSpokeToMissionGiver(string npcDialog) { PlayerSpokeToMissionGiver?.Invoke(npcDialog); }
+
     // Mission Completed Event
     public static Action MissionCompleted;
     public static void TriggerMissionCompleted() { MissionCompleted?.Invoke(); }
@@ -61,9 +81,21 @@ public static class EventManager
     public static Action StartMission;
     public static void TriggerStartMission() { StartMission?.Invoke(); }
 
+    // Instantiate Next Mission
+    public static Action InstantiateNextMission;
+    public static void TriggerInstantiateNextMission() { InstantiateNextMission?.Invoke(); }
+
     // Player at mission area
     public static Action PlayerAtMissionArea;
     public static void TriggerPlayerAtMissionArea() { PlayerAtMissionArea?.Invoke(); }
+
+    // Player left mission area
+    public static Action PlayerLeftMissionArea;
+    public static void TriggerPlayerLeftMissionArea() { PlayerLeftMissionArea?.Invoke(); }
+
+    // Player cleared zombie area
+    public static Action PlayerClearedArea;
+    public static void TriggerPlayerClearedArea() { PlayerClearedArea?.Invoke(); }
 
     // Mission Ended
     public static Action EndMission;
@@ -80,6 +112,50 @@ public static class EventManager
     // Player left mission item
     public static Action PlayerLeftMissionItem;
     public static void TriggerPlayerLeftMissionItem() { PlayerLeftMissionItem?.Invoke(); }
+
+    // Player collided with mission vehicle
+    public static Action<string> PlayerCollidedWithMissionVehicle;
+    public static void TriggerPlayerCollidedWithMissionVehicle(string vehicleName) { PlayerCollidedWithMissionVehicle?.Invoke(vehicleName); }
+
+    // Player left mission vehicle
+    public static Action PlayerLeftMissionVehicle;
+    public static void TriggerPlayerLeftMissionVehicle() { PlayerLeftMissionVehicle?.Invoke(); }
+
+    // Player Entered mission vehicle
+    public static Action PlayerEnteredMissionVehicle;
+    public static void TriggerPlayerEnteredMissionVehicle() { PlayerEnteredMissionVehicle?.Invoke(); }
+
+    // Final Mission Instantiated
+    public static Action FinalMissionInstantiated;
+    public static void TriggerFinalMissionInstantiated() { FinalMissionInstantiated?.Invoke(); }
+
+    // Survival Mission Failed
+    public static Action SurvivalMissionFailed;
+    public static void TriggerSurvivalMissionFailed() { SurvivalMissionFailed?.Invoke(); }
+
+    // Disable flood light generator sounds 
+    public static Action DisableFloodLightSounds;
+    public static void TriggerDisableFloodLightSounds() { DisableFloodLightSounds?.Invoke(); }
+
+    // Start Survival Countdown
+    public static Action StartSurvivalCountdown;
+    public static void TriggerStartSurvivalCountdown() { StartSurvivalCountdown?.Invoke(); }
+
+    // Start Helicopter Move
+    public static Action StartHelicopterMove;
+    public static void TriggerStartHelicopterMove() { StartHelicopterMove?.Invoke(); }
+
+    // Trigger Fade to black anim
+    public static Action FadeToBlack;
+    public static void TriggerFadeToBlack() { FadeToBlack?.Invoke(); }
+
+    // Start next credits sequence
+    public static Action StartNextCreditsSequence;
+    public static void TriggerStartNextCreditsSequence() { StartNextCreditsSequence?.Invoke(); }
+
+    // Start credits UI
+    public static Action CreditsUI;
+    public static void TriggerCreditsUI() { CreditsUI?.Invoke(); }
 
     // Game Ended
     public static Action GameEnded;
@@ -163,6 +239,10 @@ public static class EventManager
     // Player picked up ammo
     public static Action<PlayerManager.AmmoType, int> PlayerPickedUpAmmo;
     public static void TriggerPlayerPickedUpAmmo(PlayerManager.AmmoType ammoType, int addedAmmo) { PlayerPickedUpAmmo?.Invoke(ammoType, addedAmmo); }
+
+    // Player camera changed
+    public static Action<Camera> PlayerCameraChanged;
+    public static void TriggerPlayerCameraChanged(Camera newCamera) { PlayerCameraChanged?.Invoke(newCamera); }
     
     // Update consumable count value
     public static Action<string, int> UpdateItemCountUI;
@@ -171,12 +251,20 @@ public static class EventManager
     #endregion
 
     // Zombie killed event
-    public static Action ZombieKilled;
-    public static void TriggerZombieKilled() { ZombieKilled?.Invoke(); }
+    public static Action<GameObject> ZombieKilled;
+    public static void TriggerZombieKilled(GameObject zombie) { ZombieKilled?.Invoke(zombie); }
+
+    // Mission Zombie Spawned
+    public static Action<GameObject> MissionZombieSpawned;
+    public static void TriggerMissionZombieSpawned(GameObject zombie) { MissionZombieSpawned?.Invoke(zombie); }
 
     // Zombie should despawn event
     public static Action<GameObject> zombieShouldDespawn;
-    public static void TriggerZombieShouldDespawn(GameObject zombie) { zombieShouldDespawn?.Invoke(zombie); }    
+    public static void TriggerZombieShouldDespawn(GameObject zombie) { zombieShouldDespawn?.Invoke(zombie); }
+
+    // Zombie charge event
+    public static Action<Transform> ZombieCharge;
+    public static void TriggerZombieCharge(Transform chargeTransform) { ZombieCharge?.Invoke(chargeTransform); }
 
     // Sound Generated Event
     public static Action<Vector3, float> SoundGenerated;

@@ -156,6 +156,8 @@ MonoBehaviour:
   loadMagSound: {fileID: 8300000, guid: 540d449e8c9da694e94203cdcdc72fc4, type: 3}
   cockingSounds:
   - {fileID: 8300000, guid: 540d449e8c9da694e94203cdcdc72fc4, type: 3}
+  flashlightOnSound: {fileID: 0}
+  flashlightOffSound: {fileID: 0}
   roundsInCurrentMag: 1
   currentFireMode: 0
   rockThrown: {fileID: 3310954759231144754, guid: c7f3942c5e371a8458b77dc7a64e096e,
@@ -169,7 +171,8 @@ AudioSource:
   m_GameObject: {fileID: 2140302637969019940}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 82bb022af1fb626409731e7f21f3a6d1,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

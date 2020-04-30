@@ -450,7 +450,7 @@ MeshCollider:
   m_Enabled: 0
   serializedVersion: 3
   m_Convex: 1
-  m_CookingOptions: 30
+  m_CookingOptions: 14
   m_Mesh: {fileID: 43879818416943894, guid: 596b77b1aaf6a1a4281a2205e6f28074, type: 2}
 --- !u!82 &860071866838708420
 AudioSource:
@@ -461,7 +461,8 @@ AudioSource:
   m_GameObject: {fileID: 5717782928319628752}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 82bb022af1fb626409731e7f21f3a6d1,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 0d0640256413f124ea5df50c4ad59fad, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -565,14 +566,14 @@ MonoBehaviour:
   ammoType: 2
   equippedSuppressor: {fileID: 0}
   suppressorFatigue: 5
-  damage: 35
+  damage: 56
   fireRate: 0.56
   roundsPerMag: 15
   range: 100
   impactForce: 70
   fullAuto: 0
   flashlightOn: 0
-  audibleDistance: 100
+  audibleDistance: 45
   weaponAnimation: 1
   meleeType: 0
   fireAnimationStartDelay: 0.09
@@ -593,9 +594,9 @@ MonoBehaviour:
   muzzleFlashLight: {fileID: 1371564489046783635}
   muzzleFlashRenderer: {fileID: 2229509972923727228}
   shotOrigin: {fileID: 6062642860705488287}
-  impactSpark: {fileID: 1083163087648314537, guid: e5a544778598608478e8e1dbb49eb8c6,
+  impactSpark: {fileID: 4959502850054142828, guid: 10be5bd801d74c9438c4af806db4a606,
     type: 3}
-  bloodSplatter: {fileID: 1083163087648314537, guid: ae0a894cec61d9943825c86d9d5b579f,
+  bloodSplatter: {fileID: 2892289106688674239, guid: 8a3ea20717c8ca04080a7d868f6e5fff,
     type: 3}
   weaponRenderer: {fileID: 5717782928321769300}
   flashlightRenderer: {fileID: 5717782928321802992}

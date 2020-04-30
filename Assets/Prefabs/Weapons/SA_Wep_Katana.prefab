@@ -94,7 +94,7 @@ MeshCollider:
   m_Enabled: 0
   serializedVersion: 3
   m_Convex: 1
-  m_CookingOptions: 30
+  m_CookingOptions: 14
   m_Mesh: {fileID: 43211868059199626, guid: cb34a8250e3605c43828e51d8126eb28, type: 2}
 --- !u!114 &-5297264611972941881
 MonoBehaviour:
@@ -110,10 +110,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Katana
   weaponTypeInt: 2
-  ammoType: 7
+  ammoType: 8
   equippedSuppressor: {fileID: 0}
   suppressorFatigue: 0
-  damage: 150
+  damage: 300
   fireRate: 1
   roundsPerMag: 1
   range: 4
@@ -141,9 +141,9 @@ MonoBehaviour:
   muzzleFlashLight: {fileID: 0}
   muzzleFlashRenderer: {fileID: 0}
   shotOrigin: {fileID: 0}
-  impactSpark: {fileID: 1083163087648314537, guid: e5a544778598608478e8e1dbb49eb8c6,
+  impactSpark: {fileID: 4959502850054142828, guid: 10be5bd801d74c9438c4af806db4a606,
     type: 3}
-  bloodSplatter: {fileID: 1083163087648314537, guid: ae0a894cec61d9943825c86d9d5b579f,
+  bloodSplatter: {fileID: 2892289106688674239, guid: 8a3ea20717c8ca04080a7d868f6e5fff,
     type: 3}
   weaponRenderer: {fileID: 3349718103785855749}
   flashlightRenderer: {fileID: 0}
@@ -171,7 +171,8 @@ AudioSource:
   m_GameObject: {fileID: 3349718103788114011}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 82bb022af1fb626409731e7f21f3a6d1,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

@@ -28,7 +28,7 @@ public class FlareController : MonoBehaviour
 
         extinguishRate = maxLumens / extinguishDuration;
 
-        flareEffect.SetInt("spawnRate", 0);
+        //flareEffect.SetInt("spawnRate", 0);
     }
 
     // Update is called once per frame

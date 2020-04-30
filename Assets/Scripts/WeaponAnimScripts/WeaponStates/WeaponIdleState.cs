@@ -35,6 +35,20 @@ public class WeaponIdleState : WeaponBaseState
         // Swap weapon
         if (context.currentScrollDelta != 0) return context.swapState;
 
+        // Swap with number keys (the superior solution)
+        KeyCode[] keys = {
+            KeyCode.Alpha1,
+            KeyCode.Alpha2,
+            KeyCode.Alpha3
+        };
+
+        for(int i = 0; i < keys.Length; i++){
+            if(Input.GetKeyDown(keys[i])){
+                context.currentWeaponIndex = i;
+                return context.swapState;
+            }
+        }
+
         // Swap to consumable
         if (Input.GetKeyDown(KeyCode.G))
         {
@@ -108,7 +122,7 @@ public class WeaponIdleState : WeaponBaseState
         }
 
         // Enable Flashlight
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && context.currentWeaponIndex != 2 && !context.consumableEquipped)
         {
             if (context.flashlightDead) return this;
 

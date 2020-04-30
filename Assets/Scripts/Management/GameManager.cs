@@ -28,6 +28,8 @@ public class GameManager : Context<GameManager>
 
     public static GameManager instance;
 
+    private Camera cam;
+
     [SerializeField] private GameObject[] managerPrefabs;
     private List<GameObject> managers;
     [SerializeField] private GameObject[] weaponPickupPrefabs;
@@ -49,17 +51,20 @@ public class GameManager : Context<GameManager>
             managers.Add(Instantiate(manager, this.transform));
         }
 
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
         InitializeContext();
 
         EventManager.UIResumeClicked += UIResumeClicked;
         EventManager.UIQuitClicked += UIQuitClicked;
         EventManager.PlayerPickedUpWeapon += PlayerPickedUpWeapon;
+        EventManager.GameEnded += GameEnded;
+        EventManager.PlayerKilled += PlayerKilled;
     }
 
     private void Start()
     {
         player = PlayerManager.instance.player;
+        cam = Camera.main;
     }
 
     private void Update()
@@ -71,6 +76,32 @@ public class GameManager : Context<GameManager>
     {
         currentState = playState;
         currentState.EnterState(this);
+    }
+
+    private void GameEnded()
+    {
+        StartCoroutine(EndGameSequence());
+    }
+
+    private void PlayerKilled()
+    {
+        //Player manager also listens to this event to play death music
+        cam.transform.parent = null;
+        StartCoroutine(MoveCamera()); //Will reload the scene when the move is complete
+    }
+
+    IEnumerator MoveCamera()
+    {
+        float timer = 4f;
+        while(timer >= 0)
+        {
+            timer -= Time.deltaTime;
+            cam.transform.LookAt(player.transform);
+            cam.transform.Translate(new Vector3(0, 0.5f, -1f) * 2f * Time.deltaTime, Space.World);
+            yield return null;
+        }
+        yield return new WaitForSeconds(5.5f);
+        LoadSceneSynchronous("Game");
     }
 
     private void PlayerPickedUpWeapon(string previousWeaponName)
@@ -95,6 +126,11 @@ public class GameManager : Context<GameManager>
         sceneToLoad = sceneName;
         AsyncOperation loadOp = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         loadOp.completed += SceneLoadCompleted;
+    }
+
+    public void LoadSceneSynchronous(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
     private void SceneLoadCompleted(AsyncOperation obj)
@@ -132,4 +168,19 @@ public class GameManager : Context<GameManager>
     }
 
     #endregion
+
+    IEnumerator EndGameSequence()
+    {
+        yield return new WaitForSeconds(3f);
+        LoadSceneSynchronous("Ending");
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.UIResumeClicked -= UIResumeClicked;
+        EventManager.UIQuitClicked -= UIQuitClicked;
+        EventManager.PlayerPickedUpWeapon -= PlayerPickedUpWeapon;
+        EventManager.GameEnded -= GameEnded;
+        EventManager.PlayerKilled -= PlayerKilled;
+    }
 }

@@ -10,6 +10,16 @@ public class AmmoPickup : MonoBehaviour
     [SerializeField]
     private bool playerInRange = false;
 
+    private void Start()
+    {
+        EventManager.EndMission += EndMission;
+    }
+
+    private void EndMission()
+    {
+        Destroy(this.gameObject);
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -37,6 +47,7 @@ public class AmmoPickup : MonoBehaviour
             EventManager.PlayerPickedUpAmmo -= PlayerPickedUpAmmo;
             EventManager.TriggerPlayerLeftPickup();
         }
+        EventManager.EndMission -= EndMission;
     }
 
     void PlayerPickedUpAmmo(PlayerManager.AmmoType ammoType, int addedAmmo)

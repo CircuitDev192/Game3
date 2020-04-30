@@ -156,6 +156,8 @@ MonoBehaviour:
   loadMagSound: {fileID: 8300000, guid: 540d449e8c9da694e94203cdcdc72fc4, type: 3}
   cockingSounds:
   - {fileID: 8300000, guid: 540d449e8c9da694e94203cdcdc72fc4, type: 3}
+  flashlightOnSound: {fileID: 0}
+  flashlightOffSound: {fileID: 0}
   roundsInCurrentMag: 1
   currentFireMode: 0
   grenadeThrown: {fileID: 2895562861935675056, guid: 99c8486b38e7b234aa7c39d54ac6aab4,
@@ -169,7 +171,8 @@ AudioSource:
   m_GameObject: {fileID: 4476665866156908118}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 82bb022af1fb626409731e7f21f3a6d1,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

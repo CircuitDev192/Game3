@@ -6,6 +6,10 @@ public abstract class WeaponBaseState : BaseState<WeaponContext>
     {
         if (!context.flashlightOn) return;
 
+        if (context.consumableEquipped) return;
+
+        if (context.currentWeaponIndex == 2) return; //Checks if holding melee weapon.
+
         context.currentFlashlightBattery = Mathf.Clamp(context.currentFlashlightBattery - context.flashlightDrainRate * Time.deltaTime, 0, 100f);
 
         if (context.currentFlashlightBattery == 0f)

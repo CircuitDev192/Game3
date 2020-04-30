@@ -7,7 +7,6 @@ public class ZombiePatrollingState : ZombieBaseState
 {
     public override void EnterState(ZombieContext context)
     {
-        Debug.Log("Zombie entered Patrol state!");
         do
         {
             // Calculate the X and Z values to offset with

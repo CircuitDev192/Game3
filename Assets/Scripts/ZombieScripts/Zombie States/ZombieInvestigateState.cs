@@ -8,7 +8,6 @@ public class ZombieInvestigateState : ZombieBaseState
     {
         context.zombieNavMeshAgent.enabled = true;
         context.zombieNavMeshAgent.destination = context.soundLocation;
-
         context.zombieAnimator.SetFloat("Speed_f", context.walkSpeed);
     }
 
@@ -31,7 +30,7 @@ public class ZombieInvestigateState : ZombieBaseState
         
         context.PlayTimedSound(this);
 
-        if (context.zombieNavMeshAgent.remainingDistance <= context.zombieNavMeshAgent.stoppingDistance) return context.idleState;
+        if (Vector3.Distance(context.zombieNavMeshAgent.destination, context.transform.position) <= context.zombieNavMeshAgent.stoppingDistance) return context.idleState;
 
         if (context.zombieNavMeshAgent.destination != context.soundLocation) context.zombieNavMeshAgent.destination = context.soundLocation;
 

@@ -9,6 +9,7 @@ public class UIPickupInfoController : MonoBehaviour
 {
     [SerializeField] private Text promptText;
     [SerializeField] private Text pickupText;
+    [SerializeField] private Text vehicleEnterText;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,22 @@ public class UIPickupInfoController : MonoBehaviour
         EventManager.PlayerCollidedWithAmmo += PlayerCollidedWithAmmo;
         EventManager.PlayerCollidedWithMissionItem += PlayerCollidedWithMissionItem;
         EventManager.PlayerLeftMissionItem += PlayerLeftMissionItem;
+        EventManager.PlayerCollidedWithMissionVehicle += PlayerCollidedWithMissionVehicle;
+        EventManager.PlayerLeftMissionVehicle += PlayerLeftMissionVehicle;
+
+    }
+
+    private void PlayerLeftMissionVehicle()
+    {
+        vehicleEnterText.gameObject.SetActive(false);
+        pickupText.gameObject.SetActive(false);
+    }
+
+    private void PlayerCollidedWithMissionVehicle(string vehicleName)
+    {
+        vehicleEnterText.gameObject.SetActive(true);
+        pickupText.gameObject.SetActive(true);
+        pickupText.text = vehicleName;
     }
 
     private void PlayerCollidedWithMissionItem(string itemName)
@@ -54,4 +71,14 @@ public class UIPickupInfoController : MonoBehaviour
         pickupText.gameObject.SetActive(false);
     }
 
+    private void OnDestroy()
+    {
+        EventManager.PlayerCollidedWithPickup -= PlayerCollidedWithPickup;
+        EventManager.PlayerLeftPickup -= PlayerLeftPickup;
+        EventManager.PlayerCollidedWithAmmo -= PlayerCollidedWithAmmo;
+        EventManager.PlayerCollidedWithMissionItem -= PlayerCollidedWithMissionItem;
+        EventManager.PlayerLeftMissionItem -= PlayerLeftMissionItem;
+        EventManager.PlayerCollidedWithMissionVehicle -= PlayerCollidedWithMissionVehicle;
+        EventManager.PlayerLeftMissionVehicle -= PlayerLeftMissionVehicle;
+    }
 }

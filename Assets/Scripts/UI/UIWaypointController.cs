@@ -13,7 +13,7 @@ public class UIWaypointController : MonoBehaviour
     private Vector3 target;
     private Camera cam;
 
-    private bool waypointEnabled = false;
+    [SerializeField] private bool waypointEnabled = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,13 @@ public class UIWaypointController : MonoBehaviour
         EventManager.MissionWaypointChanged += MissionWaypointChanged;
         EventManager.EndMission += EndMission;
         EventManager.StartMission += StartMission;
+        EventManager.PlayerCameraChanged += PlayerCameraChanged;
         cam = Camera.main;
+    }
+
+    private void PlayerCameraChanged(Camera newCamera)
+    {
+        cam = newCamera;
     }
 
     private void EndMission()
@@ -87,5 +93,13 @@ public class UIWaypointController : MonoBehaviour
     {
         waypointIcon.enabled = uiEnable;
         distanceText.enabled = uiEnable;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.MissionWaypointChanged -= MissionWaypointChanged;
+        EventManager.PlayerCameraChanged -= PlayerCameraChanged;
+        EventManager.EndMission -= EndMission;
+        EventManager.StartMission -= StartMission;
     }
 }

@@ -321,4 +321,9 @@ public class FirstPersonMovement : MonoBehaviour
     {
         m_MouseLook.SetCursorLock(shouldHide);
     }
+
+    private void OnDestroy()
+    {
+        EventManager.MouseShouldHide -= MouseShouldHide;
+    }
 }

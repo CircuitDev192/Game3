@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,11 +29,32 @@ public class UIPlayerInfoController : MonoBehaviour
 
         EventManager.FlashLightPowerChanged += FlashLightPowerChanged;
         EventManager.SuppressorDurabilityChanged += SuppressorDurabilityChanged;
+
+        EventManager.PlayerEnteredMissionVehicle += PlayerEnteredMissionVehicle;
+    }
+
+    private void PlayerEnteredMissionVehicle()
+    {
+        this.gameObject.SetActive(false);
     }
 
     private void PlayerHealthChanged(float health)
     {
         healthBar.transform.localScale = new Vector3(health / 100f, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.PlayerHealthChanged -= PlayerHealthChanged;
+
+        EventManager.WeaponChanged -= WeaponNameChanged;
+        EventManager.AmmoCountChanged -= RoundsInMagChanged;
+        EventManager.TotalAmmoChanged -= TotalAmmoChanged;
+
+        EventManager.FlashLightPowerChanged -= FlashLightPowerChanged;
+        EventManager.SuppressorDurabilityChanged -= SuppressorDurabilityChanged;
+
+        EventManager.PlayerEnteredMissionVehicle -= PlayerEnteredMissionVehicle;
     }
 
     #region Weapon Information Events
@@ -49,7 +71,8 @@ public class UIPlayerInfoController : MonoBehaviour
 
     private void TotalAmmoChanged(int totalAmmo, PlayerManager.AmmoType ammoType)
     {
-        this.totalAmmo.text = "/" + totalAmmo.ToString("D2");
+        if(PlayerManager.instance.player.GetComponent<WeaponController>().currentWeapon.ammoType == ammoType)
+            this.totalAmmo.text = "/" + totalAmmo.ToString("D2");
     }
 
     #endregion

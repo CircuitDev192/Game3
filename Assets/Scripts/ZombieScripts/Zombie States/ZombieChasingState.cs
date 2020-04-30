@@ -9,7 +9,6 @@ public class ZombieChasingState : ZombieBaseState
 
     public override void EnterState(ZombieContext context)
     {
-        Debug.Log("Zombie entered Chase state!");
         context.zombieNavMeshAgent.enabled = true;
         context.zombieNavMeshAgent.speed = context.runSpeed;
         context.currentTarget = context.playerTransform.position;

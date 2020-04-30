@@ -11,6 +11,7 @@ public class UIManager : Context<UIManager>
     public UIGameState gameState = new UIGameState();
     public UIPauseState pauseState = new UIPauseState();
     public UIControlsState controlsState = new UIControlsState();
+    public UISettingsState settingsState = new UISettingsState();
     public UICreditsState creditsState = new UICreditsState();
 
     #endregion
@@ -18,14 +19,31 @@ public class UIManager : Context<UIManager>
     public GameObject MenuUI;
     public GameObject GameUI;
     public GameObject ControlsUI;
+    public GameObject SettingsUI;
     public GameObject PauseUI;
 
     private void Awake()
     {
         EventManager.GameStateChanged += GameStateChanged;
         EventManager.UIControlsClicked += UIControlsButtonClicked;
+        EventManager.UISettingsClicked += UISettingsButtonClicked;
         EventManager.UIControlsBackClicked += UIControlsButtonBackClicked;
+        EventManager.UISettingsBackClicked += UISettingsButtonBackClicked;
         InitializeContext();
+    }
+
+    private void UISettingsButtonBackClicked()
+    {
+        currentState.ExitState(this);
+        currentState = pauseState;
+        currentState.EnterState(this);
+    }
+
+    private void UISettingsButtonClicked()
+    {
+        currentState.ExitState(this);
+        currentState = settingsState;
+        currentState.EnterState(this);
     }
 
     private void UIControlsButtonClicked()
@@ -76,5 +94,14 @@ public class UIManager : Context<UIManager>
         }
 
         currentState.EnterState(this);
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.GameStateChanged -= GameStateChanged;
+        EventManager.UIControlsClicked -= UIControlsButtonClicked;
+        EventManager.UISettingsClicked -= UISettingsButtonClicked;
+        EventManager.UIControlsBackClicked -= UIControlsButtonBackClicked;
+        EventManager.UISettingsBackClicked -= UISettingsButtonBackClicked;
     }
 }

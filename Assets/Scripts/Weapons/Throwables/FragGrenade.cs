@@ -49,10 +49,13 @@ public class FragGrenade : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        audioSource.pitch = Random.Range(0.75f, 1.25f);
-        audioSource.maxDistance = collisionAudibleDistance * 2;
-        audioSource.PlayOneShot(collisionSounds[Random.Range(0, collisionSounds.Length)], 0.25f * PlayerManager.instance.soundMultiplier);
-        EventManager.TriggerSoundGenerated(this.transform.position, collisionAudibleDistance);
+        if (!other.gameObject.CompareTag("Player"))
+        {
+            audioSource.pitch = Random.Range(0.75f, 1.25f);
+            audioSource.maxDistance = collisionAudibleDistance * 2;
+            audioSource.PlayOneShot(collisionSounds[Random.Range(0, collisionSounds.Length)], 0.25f * PlayerManager.instance.soundMultiplier);
+            EventManager.TriggerSoundGenerated(this.transform.position, collisionAudibleDistance);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -60,17 +63,15 @@ public class FragGrenade : MonoBehaviour
         IDamageAble script = other.gameObject.GetComponentInParent<IDamageAble>();
         if (script != null)
         {
-            Debug.LogError("Target Added to list");
             targets.Add(other.gameObject);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        IDamageAble script = other.transform.gameObject.GetComponent<IDamageAble>();
+        IDamageAble script = other.gameObject.GetComponentInParent<IDamageAble>();
         if (script != null)
         {
-            Debug.LogError("Target removed from list");
             targets.Remove(other.gameObject);
         }
     }

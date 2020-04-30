@@ -62,4 +62,9 @@ public class PlayerAnimFSM : Context<PlayerAnimFSM>, IDamageAble
             currentState.EnterState(this);
         }
     }
+
+    private void OnDestroy()
+    {
+        EventManager.PlayerDamaged -= Damage;
+    }
 }
