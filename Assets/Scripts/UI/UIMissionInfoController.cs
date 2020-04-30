@@ -29,6 +29,7 @@ public class UIMissionInfoController : MonoBehaviour
     {
         this.missionTitle.text = missionTitle;
         this.missionDescription.text = missionDescription;
+        Debug.LogError("Mission Info Change Called");
     }
 
     private void OnDestroy()

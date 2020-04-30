@@ -1076,23 +1076,6 @@ MonoBehaviour:
   missionEndCollider: {fileID: 3227978966284180199}
   missionObjectiveLocation: {fileID: 6478433907372298532}
   spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 4026620079849267315}
   - {fileID: 8276963596260431040}
   - {fileID: 7687279384537063696}
@@ -1103,7 +1086,7 @@ MonoBehaviour:
   - {fileID: 1832367480215621918}
   - {fileID: 1008344043372237343}
   - {fileID: 768420042905726320}
-  zombiesToSpawn: 16
+  zombiesToSpawn: 20
   shouldSpawnZombiesAtMissionArea: 1
 --- !u!1 &9222259074427196814
 GameObject:

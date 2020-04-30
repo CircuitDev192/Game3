@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class StartCollider : MonoBehaviour
 {
+    private bool missionStarted = false;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!missionStarted)
         {
-            EventManager.TriggerStartMission();
+            if (other.CompareTag("Player"))
+            {
+                EventManager.TriggerStartMission();
+                missionStarted = true;
+            }
         }
     }
 }
