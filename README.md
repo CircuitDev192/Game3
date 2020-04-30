@@ -7,7 +7,8 @@ Epicenter takes place in a semi-post apocalyptic world. The island on which the 
 
 Below you will find a video demonstration of gameplay as well as screenshots that show off various menus and items within the game.
 
-## [Video Demonstration](https://drive.google.com/open?id=1TCPK3rS_LwWjWHmt3_8e8Zghg-3NzYvd)
+## [Playable Demo](https://drive.google.com/open?id=1TCPK3rS_LwWjWHmt3_8e8Zghg-3NzYvd)
+## [Video Demonstration](https://youtu.be/mpeQIwJc6cA)
 
 ## Main Menu
 ![](https://github.com/CircuitDev192/Game3/blob/master/Screenshots/1.png)
@@ -35,7 +36,7 @@ Below you will find a video demonstration of gameplay as well as screenshots tha
 ![](https://github.com/CircuitDev192/Game3/blob/master/Screenshots/9.png)
 ### Flare
 ![](https://github.com/CircuitDev192/Game3/blob/master/Screenshots/10.png)
-### Recovering Transciever
+### Recovering Transceiver
 ![](https://github.com/CircuitDev192/Game3/blob/master/Screenshots/11.png)
 ### Returning to Base
 ![](https://github.com/CircuitDev192/Game3/blob/master/Screenshots/13.png)
